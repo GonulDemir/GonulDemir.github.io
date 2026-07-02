@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gonul Demir | Senior Electronics R&D & Product Engineer</title>
   <meta name="description" content="Gonul Demir - Senior Electronics R&D & Product Engineer specializing in hardware design, optoelectronics, sensor systems and EMC/EMI." />
-  <title>Gonul Demir | Electronics R&D & Product Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <a class="logo" href="#top">Gonul Demir</a>
+  <div class="site-bg"></div>
+  <header class="nav">
+    <a class="brand" href="#top">Gonul Demir</a>
     <nav>
       <a href="#about">About</a>
       <a href="#expertise">Expertise</a>
@@ -21,79 +25,89 @@
 
   <main id="top">
     <section class="hero">
-      <div class="hero-content">
-        <p class="eyebrow">Hardware • Optoelectronics • Sensor Systems • EMC/EMI</p>
-        <h1>Turning physical signals into reliable electronic products.</h1>
-        <p class="hero-text">Senior Electronics R&D & Product Engineer with 15+ years of experience developing sensor systems, optoelectronic products and electronic hardware from concept to production.</p>
+      <div class="hero-copy">
+        <p class="eyebrow">Hardware • Optoelectronics • Sensors • EMC/EMI</p>
+        <h1>Turning physical phenomena into reliable electronic products.</h1>
+        <p class="lead">Senior Electronics R&D & Product Engineer with 15+ years of experience developing sensor systems, optoelectronic products and electronic hardware from concept to certified, manufacturable systems.</p>
         <div class="hero-actions">
-          <a class="button primary" href="#projects">View Projects</a>
-          <a class="button secondary" href="#articles">Read Articles</a>
+          <a class="btn primary" href="#articles">View Technical Articles</a>
+          <a class="btn secondary" href="#contact">Contact</a>
         </div>
       </div>
-      <div class="hero-card">
-        <span>Focus Areas</span>
-        <h2>Optoelectronic sensing, EMC-aware hardware design and certified product development.</h2>
+      <div class="hero-card" aria-label="Professional focus card">
+        <div class="orb"></div>
+        <h2>Engineering Focus</h2>
+        <ul>
+          <li>Hardware Design</li>
+          <li>Optoelectronic Sensor Systems</li>
+          <li>EMC/EMI Compliance</li>
+          <li>Product Certification</li>
+        </ul>
       </div>
     </section>
 
-    <section id="about" class="section two-column">
+    <section class="stats" aria-label="Career highlights">
+      <div><strong>15+</strong><span>Years Experience</span></div>
+      <div><strong>8</strong><span>Beam Detector Variants</span></div>
+      <div><strong>20%</strong><span>Range Improvement</span></div>
+      <div><strong>20%</strong><span>Cost Reduction</span></div>
+    </section>
+
+    <section id="about" class="section two-col">
       <div>
-        <p class="section-label">About</p>
-        <h2>Electronics R&D with a product mindset.</h2>
+        <p class="section-kicker">About</p>
+        <h2>Electronics R&D experience across industrial, safety and defense-related applications.</h2>
       </div>
-      <p>I design electronic products that transform physical phenomena into reliable, manufacturable and certifiable systems. My work combines hardware design, optical sensing technologies, EMC/EMI compliance, product certification, production support and technical documentation across industrial, life-safety and defense-related applications.</p>
+      <p>I develop electronic products where electronics, optics, mechanics, manufacturing and regulatory requirements intersect. My work includes beam detectors, flame detectors, optical and magnetic encoders, ToF-based sensors, elevator safety systems, production test equipment and certification support.</p>
     </section>
 
     <section id="expertise" class="section">
-      <p class="section-label">Expertise</p>
-      <h2>Core engineering areas</h2>
+      <p class="section-kicker">Expertise</p>
+      <h2>Core Technical Areas</h2>
       <div class="grid cards">
-        <article><h3>Hardware Design</h3><p>Analog, digital and mixed-signal electronic hardware from feasibility to validation.</p></article>
+        <article><h3>Hardware Design</h3><p>Analog/digital electronics, PCB design, mixed-signal systems and product-level validation.</p></article>
         <article><h3>Optoelectronics</h3><p>Beam detection, flame detection, optical encoders, ToF sensors and optical sensing systems.</p></article>
-        <article><h3>EMC / EMI</h3><p>EMC-aware design, troubleshooting, pre-compliance testing and certification support.</p></article>
-        <article><h3>Sensor Systems</h3><p>Industrial, elevator, safety and defense-related sensing products.</p></article>
-        <article><h3>Product Development</h3><p>Prototype development, verification, documentation and manufacturing transfer.</p></article>
-        <article><h3>Certification</h3><p>Experience with product qualification, CE, LPCB, TSE and EMC compliance processes.</p></article>
+        <article><h3>EMC / EMI</h3><p>EMC troubleshooting, compliance-oriented design, laboratory validation and product qualification.</p></article>
+        <article><h3>Certification</h3><p>Experience with product qualification, documentation and international market readiness.</p></article>
       </div>
     </section>
 
     <section id="projects" class="section">
-      <p class="section-label">Projects</p>
-      <h2>Selected product experience</h2>
-      <div class="project-list">
-        <article><strong>Beam Detection Systems</strong><span>Hardware and optical design for certified fire detection products.</span></article>
-        <article><strong>Flame Detectors</strong><span>Optoelectronic sensing and product development for life-safety applications.</span></article>
-        <article><strong>Optical & Magnetic Encoders</strong><span>Encoder technologies for industrial, elevator and defense applications.</span></article>
-        <article><strong>ToF Approach Sensor</strong><span>Escalator approach sensor based on ST Time-of-Flight technology.</span></article>
-        <article><strong>Elevator Safety Systems</strong><span>Door detection and proximity sensing hardware for safety-critical environments.</span></article>
-        <article><strong>Production Test Equipment</strong><span>Light meters, motor-driven angle measurement systems and automated test fixtures.</span></article>
+      <p class="section-kicker">Selected Projects</p>
+      <h2>Products and systems I have worked on</h2>
+      <div class="grid project-grid">
+        <article class="project"><span>01</span><h3>Beam Detection Systems</h3><p>Hardware and optoelectronic design from feasibility to production readiness.</p></article>
+        <article class="project"><span>02</span><h3>Flame Detector Electronics</h3><p>Sensor-based detection hardware for safety-critical fire detection applications.</p></article>
+        <article class="project"><span>03</span><h3>Encoder Systems</h3><p>Optical and magnetic encoders for industrial, elevator and defense applications.</p></article>
+        <article class="project"><span>04</span><h3>ToF Sensor Solutions</h3><p>Approach sensing and proximity detection using Time-of-Flight technology.</p></article>
       </div>
     </section>
 
     <section id="articles" class="section">
-      <p class="section-label">Technical Articles</p>
+      <p class="section-kicker">Technical Articles</p>
       <h2>Engineering notes and articles</h2>
-      <div class="grid articles">
-        <article><h3>How Scientific Images Are Created</h3><p>Optics, filters, detectors and image processing behind modern space telescopes.</p><a href="#">Coming soon</a></article>
-        <article><h3>Detector Performance in Astronomy</h3><p>Quantum efficiency, dark current, read noise and signal-to-noise ratio.</p><a href="#">Coming soon</a></article>
-        <article><h3>EMC Design Notes</h3><p>Practical design observations from EMC/EMI testing and troubleshooting.</p><a href="#">Coming soon</a></article>
+      <div class="article-list">
+        <a href="#"><span>Optoelectronics</span> How James Webb Creates Scientific Images</a>
+        <a href="#"><span>Detectors</span> CCD vs CMOS in Scientific Imaging</a>
+        <a href="#"><span>EMC</span> Practical EMC Considerations in Product Design</a>
+        <a href="#"><span>Sensors</span> Turning Light into Measurable Information</a>
       </div>
     </section>
 
     <section id="contact" class="section contact">
-      <p class="section-label">Contact</p>
+      <p class="section-kicker">Contact</p>
       <h2>Let’s connect</h2>
-      <p>Interested in hardware design, optoelectronics, sensor systems, EMC/EMI and product engineering collaborations.</p>
-      <div class="contact-links">
-        <a href="mailto:gonulbiteker@gmail.com">Email</a>
+      <p>Open to international opportunities in hardware design, optoelectronics, sensor systems and electronics R&D.</p>
+      <div class="links">
         <a href="https://www.linkedin.com/in/gonul-demir-49413433/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/GonulDemir" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:gonulbiteker@gmail.com">Email</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>© 2026 Gonul Demir. Electronics R&D & Product Engineering.</p>
+    <p>© 2026 Gonul Demir. Electronics R&D • Hardware Design • Optoelectronics.</p>
   </footer>
 </body>
 </html>
