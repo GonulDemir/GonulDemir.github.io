@@ -1,0 +1,134 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div class="space-y-4 mb-8">
+  <!-- Search Input Bar -->
+  <div class="relative">
+    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+    </div>
+    <input
+      type="text"
+      id="search-input"
+      placeholder={t('articles.searchPlaceholder')}
+      class="w-full pl-10 pr-4 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-accent transition-all shadow-sm"
+    />
+  </div>
+
+  <!-- Category & Subcategory Filter Buttons -->
+  <div class="flex flex-wrap items-center gap-2 text-xs">
+    <button
+      type="button"
+      class="filter-btn active px-3 py-1.5 rounded-lg bg-brand-accent text-white font-medium transition-colors"
+      data-filter="all"
+    >
+      {t('articles.filterAll')}
+    </button>
+    <button
+      type="button"
+      class="filter-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 font-medium transition-colors"
+      data-filter="optoelectronics-optics"
+    >
+      {t('cat.optoelectronics-optics')}
+    </button>
+    <button
+      type="button"
+      class="filter-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 font-medium transition-colors"
+      data-filter="emc-noise-management"
+    >
+      {t('cat.emc-noise-management')}
+    </button>
+  </div>
+</div>
+
+<script>
+  function setupSearchAndFilter() {
+    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const articles = document.querySelectorAll('article[data-category]');
+    const noResults = document.getElementById('no-results');
+
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    // Check URL search params for initial filter
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryParam = urlParams.get('category');
+    const subcategoryParam = urlParams.get('subcategory');
+
+    if (categoryParam) activeFilter = categoryParam;
+    if (subcategoryParam) activeFilter = subcategoryParam;
+
+    function applyFilters() {
+      let visibleCount = 0;
+
+      articles.forEach((article) => {
+        const cat = article.getAttribute('data-category');
+        const subcat = article.getAttribute('data-subcategory');
+        const title = article.getAttribute('data-title') || '';
+        const desc = article.getAttribute('data-description') || '';
+
+        const matchesCategory =
+          activeFilter === 'all' || cat === activeFilter || subcat === activeFilter;
+
+        const matchesSearch =
+          searchQuery === '' ||
+          title.includes(searchQuery) ||
+          desc.includes(searchQuery);
+
+        if (matchesCategory && matchesSearch) {
+          (article as HTMLElement).style.display = 'flex';
+          visibleCount++;
+        } else {
+          (article as HTMLElement).style.display = 'none';
+        }
+      });
+
+      if (noResults) {
+        if (visibleCount === 0) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
+        }
+      }
+
+      // Update button active state
+      filterButtons.forEach((btn) => {
+        const filterVal = btn.getAttribute('data-filter');
+        if (filterVal === activeFilter) {
+          btn.classList.add('bg-brand-accent', 'text-white', 'active');
+          btn.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-slate-300');
+        } else {
+          btn.classList.remove('bg-brand-accent', 'text-white', 'active');
+          btn.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-slate-300');
+        }
+      });
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = (e.target as HTMLInputElement).value.toLowerCase().trim();
+        applyFilters();
+      });
+    }
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filterVal = btn.getAttribute('data-filter') || 'all';
+        activeFilter = filterVal;
+        applyFilters();
+      });
+    });
+
+    applyFilters();
+  }
+
+  setupSearchAndFilter();
+  document.addEventListener('astro:after-swap', setupSearchAndFilter);
+</script>

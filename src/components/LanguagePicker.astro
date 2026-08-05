@@ -1,0 +1,17 @@
+---
+import { getLangFromUrl, getSwitchLanguageUrl } from '../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const targetLang = currentLang === 'tr' ? 'en' : 'tr';
+const targetUrl = getSwitchLanguageUrl(Astro.url, targetLang);
+---
+
+<a
+  href={targetUrl}
+  class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-md border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors uppercase tracking-wider"
+  title={currentLang === 'tr' ? 'Switch to English' : 'Türkçe\'ye Geç'}
+>
+  <span class={currentLang === 'tr' ? 'font-bold text-brand-accent' : 'opacity-60'}>TR</span>
+  <span class="text-slate-400">/</span>
+  <span class={currentLang === 'en' ? 'font-bold text-brand-accent' : 'opacity-60'}>EN</span>
+</a>

@@ -1,0 +1,56 @@
+---
+title: "Endüstriyel Robotik Sistemlerde Topraklama ve Kablolama Mimarisi"
+description: "Motor sürücülerinin fırçasız (BLDC) gürültülerini kontrol kartlarından izole etme, Yıldız Topraklama ve Diferansiyel İletim teknikleri."
+pubDate: 2026-08-01
+lang: "tr"
+category: "emc-noise-management"
+subcategory: "robotics-emc"
+featured: false
+readingTime: 6
+---
+
+Endüstriyel robotlarda güç elektroniği (BLDC/PMSM motor sürücüleri) ile hassas sensör devreleri (Enkoder, IMU, CAN-Bus) aynı fiziksel şasiyi paylaşır. Güç hatlarındaki anahtarlama gürültülerinin ($di/dt$) sinyal hatlarına indüklenmesini önlemek hayati önem taşır.
+
+## 1. Ortak Mod Gürültüsü ve Toprak Döngüsü (Ground Loop)
+
+İki farklı nokta arasındaki toprak potansiyel farkı $\Delta V_G$ ortak mod gürültüsüne yol açar:
+
+$$V_{error} = I_{ground} \cdot Z_{ground}$$
+
+Toprak döngüsünü kırmak için optokuplör veya dijital izolatör (Adum1200) ile izolasyon barajı oluşturulur.
+
+---
+
+## 2. Yıldız Topraklama Şeması (Star Grounding)
+
+```text
+    +-------------------+
+    |   Şebeke Güç      |
+    |   Beslemesi (SMPS)|
+    +---------+---------+
+              |
+              v (Yıldız Noktası)
+    +---------+---------+
+    |                   |
+    v                   v
++-------+           +-------+
+| Güç   |           | Sinyal|
+| Katı  |           | Katı  |
++-------+           +-------+
+```
+
+---
+
+## 3. Python ile CAN-Bus Hata Oranı (BER) Analizi
+
+```python
+def calculate_can_bus_margin(voltage_diff, noise_rms):
+    """
+    CAN-Bus Diferansiyel Gerilim Marjı Hesabı
+    """
+    recessive_min = 1.5 # Volts
+    dominant_min = 2.0  # Volts
+
+    snr = 20 * np.log10(voltage_diff / noise_rms)
+    return snr
+```

@@ -1,0 +1,20 @@
+---
+title: "Grounding and Cabling Architecture in Industrial Robotics"
+description: "Isolating high-current BLDC motor drive switching noise from micro-controller boards using Star Grounding and Differential Signalling."
+pubDate: 2026-08-01
+lang: "en"
+category: "emc-noise-management"
+subcategory: "robotics-emc"
+featured: false
+readingTime: 6
+---
+
+Industrial robots share a single metal chassis between high-power motor drivers and sensitive sensors (encoders, IMUs, CAN-Bus). Isolating switching noise ($di/dt$) is critical to prevent system resets.
+
+## 1. Common Mode Noise & Ground Loops
+
+Ground potential differences $\Delta V_G$ create common mode noise:
+
+$$V_{error} = I_{ground} \cdot Z_{ground}$$
+
+Digital isolators (e.g. ADuM1200) or optocouplers effectively break ground loops.

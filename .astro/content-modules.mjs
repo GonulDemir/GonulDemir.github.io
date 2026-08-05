@@ -1,0 +1,11 @@
+
+export default new Map([
+["src/content/blog/en/biomedical-optical-sensors.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fen%2Fbiomedical-optical-sensors.mdx&astroContentModuleFlag=true")],
+["src/content/blog/en/emc-pcb-shielding-techniques.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fen%2Femc-pcb-shielding-techniques.mdx&astroContentModuleFlag=true")],
+["src/content/blog/en/optoelectronic-optical-system-design.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fen%2Foptoelectronic-optical-system-design.mdx&astroContentModuleFlag=true")],
+["src/content/blog/en/robotics-grounding-emc.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fen%2Frobotics-grounding-emc.mdx&astroContentModuleFlag=true")],
+["src/content/blog/tr/biyomedikal-optik-sensorler.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Ftr%2Fbiyomedikal-optik-sensorler.mdx&astroContentModuleFlag=true")],
+["src/content/blog/tr/emc-pcb-ekranlama-teknikleri.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Ftr%2Femc-pcb-ekranlama-teknikleri.mdx&astroContentModuleFlag=true")],
+["src/content/blog/tr/robotik-sistemlerde-topraklama.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Ftr%2Frobotik-sistemlerde-topraklama.mdx&astroContentModuleFlag=true")],
+["src/content/blog/tr/optoelektronik-optik-sistem-tasarimi.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Ftr%2Foptoelektronik-optik-sistem-tasarimi.mdx&astroContentModuleFlag=true")]]);
+		

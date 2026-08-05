@@ -1,0 +1,82 @@
+---
+title: "Optoelektronik Sistemlerde Optik Odaklama ve Fotonik Duyarlılık Analizi"
+description: "Yüksek hassasiyetli optik algılayıcılarda odak uzaklığı hesabı, Rayleigh kriteri ve kuantum verimliliği denklemlerinin C++ simülasyonu ile analizi."
+pubDate: 2026-07-15
+lang: "tr"
+category: "optoelectronics-optics"
+subcategory: "optical-system-design"
+featured: true
+readingTime: 6
+---
+
+Optoelektronik Sistem Tasarımında, ışığın fotodetektör yüzeyine en az kayıpla ve maksimum sinyal/gürültü oranı (SNR) ile odaklanması en kritik aşamadır.
+
+## 1. Optik Odaklama ve Kuantum Verimliliği
+
+Bir fotodiyot yüzeyine düşen optik güç $P_{opt}$ ile üretilen fotoakım $I_{ph}$ arasındaki ilişki kuantum verimliliği ($\eta$) ve dalga boyu ($\lambda$) ile ifade edilir:
+
+$$I_{ph} = \frac{\eta \cdot q \cdot \lambda}{h \cdot c} \cdot P_{opt}$$
+
+Burada:
+- $\eta$: Fotodiyot Kuantum Verimliliği
+- $q$: Elektron yükü ($1.602 \times 10^{-19} \text{ C}$)
+- $h$: Planck sabiti ($6.626 \times 10^{-34} \text{ J}\cdot\text{s}$)
+- $c$: Işık hızı ($3 \times 10^8 \text{ m/s}$)
+
+### Rayleigh Kırınım Limiti
+Mercik sisteminin ayırma gücü Rayleigh Kırınım Kriteri ile belirlenir:
+
+$$\theta = 1.22 \frac{\lambda}{D}$$
+
+$D$ mercek çapı olmak üzere, kırınım sınırındaki spot çapı $d_{spot}$ hesabı:
+
+$$d_{spot} = 2.44 \cdot \lambda \cdot f/\#$$
+
+---
+
+## 2. C++ Simülasyon Kodu
+
+Aşağıdaki C++ kod parçacığı, verilen dalga boyu ve f-numarası ($f/\#$) parametrelerine göre spot çapını ve oluşan fotoakımı modellemektedir:
+
+```cpp
+#include <iostream>
+#include <cmath>
+
+class OptoelectronicSensor {
+private:
+    const double h = 6.626e-34; // Planck
+    const double c = 3.0e8;     // Speed of light
+    const double q = 1.602e-19; // Electron charge
+
+public:
+    double calculatePhotoCurrent(double powerWatts, double lambdaMeters, double quantumEfficiency) {
+        return (quantumEfficiency * q * lambdaMeters / (h * c)) * powerWatts;
+    }
+
+    double calculateSpotDiameter(double lambdaMeters, double fNumber) {
+        return 2.44 * lambdaMeters * fNumber;
+    }
+};
+
+int main() {
+    OptoelectronicSensor sensor;
+    double lambda = 850e-9; // 850 nm IR Laser
+    double fNum = 2.8;
+    double power = 1e-6;    // 1 uW Optical Power
+    double qe = 0.85;       // %85 QE
+
+    double current = sensor.calculatePhotoCurrent(power, lambda, qe);
+    double spotSize = sensor.calculateSpotDiameter(lambda, fNum);
+
+    std::cout << "Optik Fotoakım: " << current * 1e6 << " uA" << std::endl;
+    std::cout << "Diffraction Spot Size: " << spotSize * 1e6 << " um" << std::endl;
+    return 0;
+}
+```
+
+---
+
+## 3. Sonuçlar ve Ar-Ge Tavsiyeleri
+
+1. **Parazitik Kapasite:** Fotodiyot yüzey alanının arttırılması $d_{spot}$ hizalamasını kolaylaştırsa da parazitik kapasiteyi $C_{j}$ arttırarak bant genişliğini daraltır.
+2. **Transempedans Yükselteç (TIA):** Düşük gürültülü TIA ön katlarında JFET veya CMOS entegreler tercih edilmelidir.

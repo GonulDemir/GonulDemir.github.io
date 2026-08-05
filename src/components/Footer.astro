@@ -1,0 +1,91 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const currentYear = new Date().getFullYear();
+
+const homePath = `/${lang}/`;
+const aboutPath = lang === 'tr' ? `/${lang}/hakkimda` : `/${lang}/about`;
+const articlesPath = lang === 'tr' ? `/${lang}/makaleler` : `/${lang}/articles`;
+const projectsPath = lang === 'tr' ? `/${lang}/projeler` : `/${lang}/projects`;
+const contactPath = lang === 'tr' ? `/${lang}/iletisim` : `/${lang}/contact`;
+---
+
+<footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 py-12 transition-colors">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      
+      <!-- Column 1: Bio -->
+      <div class="md:col-span-2 space-y-3">
+        <a href={homePath} class="text-lg font-bold text-slate-900 dark:text-white hover:text-brand-accent transition-colors">
+          Gönül Demir
+        </a>
+        <p class="text-xs font-semibold text-brand-accent dark:text-blue-400">
+          Senior Electronics R&D & Product Engineer
+        </p>
+        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
+          {t('hero.bio')}
+        </p>
+      </div>
+
+      <!-- Column 2: Quick Links -->
+      <div class="space-y-2">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+          {lang === 'tr' ? 'Hızlı Bağlantılar' : 'Quick Links'}
+        </h3>
+        <ul class="space-y-1.5 text-xs text-slate-600 dark:text-slate-400">
+          <li><a href={homePath} class="hover:text-brand-accent transition-colors">{t('nav.home')}</a></li>
+          <li><a href={aboutPath} class="hover:text-brand-accent transition-colors">{t('nav.about')}</a></li>
+          <li><a href={articlesPath} class="hover:text-brand-accent transition-colors">{t('nav.articles')}</a></li>
+          <li><a href={projectsPath} class="hover:text-brand-accent transition-colors">{t('nav.projects')}</a></li>
+          <li><a href={contactPath} class="hover:text-brand-accent transition-colors">{t('nav.contact')}</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Social & Contact -->
+      <div class="space-y-2">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+          {lang === 'tr' ? 'Bağlantılar' : 'Connect'}
+        </h3>
+        <div class="flex flex-col space-y-2 text-xs text-slate-600 dark:text-slate-400">
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 hover:text-brand-accent transition-colors"
+          >
+            <svg class="w-4 h-4 fill-current text-[#0a66c2]" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.74a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24z"/></svg>
+            <span>LinkedIn</span>
+          </a>
+
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 hover:text-brand-accent transition-colors"
+          >
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span>GitHub</span>
+          </a>
+
+          <a
+            href="mailto:gonul.demir@example.com"
+            class="inline-flex items-center gap-2 hover:text-brand-accent transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <span>gonul.demir@example.com</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+      <p>© {currentYear} Gönül Demir. {t('footer.rights')}</p>
+      <p class="mt-2 md:mt-0 font-mono text-[11px]">
+        Built with Astro 7 & Tailwind CSS • Serverless & High-Performance
+      </p>
+    </div>
+  </div>
+</footer>

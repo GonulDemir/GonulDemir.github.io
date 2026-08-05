@@ -1,0 +1,96 @@
+{
+  "$ref": "#/definitions/blog",
+  "definitions": {
+    "blog": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "pubDate": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "updatedDate": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "lang": {
+          "type": "string",
+          "enum": [
+            "tr",
+            "en"
+          ]
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "optoelectronics-optics",
+            "emc-noise-management"
+          ]
+        },
+        "subcategory": {
+          "type": "string",
+          "enum": [
+            "optical-system-design",
+            "astronomy-space",
+            "sensor-applications",
+            "pcb-design-shielding",
+            "grounding-cabling",
+            "robotics-emc"
+          ]
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "readingTime": {
+          "type": "number"
+        },
+        "ogImage": {
+          "type": "string"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "pubDate",
+        "lang",
+        "category",
+        "subcategory"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
