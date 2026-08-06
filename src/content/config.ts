@@ -5,24 +5,27 @@ const blogCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    pubDate: z.date(),
-    updatedDate: z.date().optional(),
-    lang: z.enum(['tr', 'en']),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    createdDate: z.string().optional(),
+    author: z.string().optional(),
     category: z.enum([
-      'optoelectronics-optics',
-      'emc-noise-management'
+      'analog-design-power-electronics',
+      'astronomy-astrophysics-space-science',
+      'bio-inspired-sensors-robotics',
+      'electromagnetic-compatibility',
+      'optical-sensing-system-design',
+      'product-verification-certification',
+      'free-zone'
     ]),
-    subcategory: z.enum([
-      'optical-system-design',
-      'astronomy-space',
-      'sensor-applications',
-      'pcb-design-shielding',
-      'grounding-cabling',
-      'robotics-emc'
-    ]),
+    subcategory: z.string().optional(),
     featured: z.boolean().default(false),
     readingTime: z.number().optional(),
     ogImage: z.string().optional(),
+    heroImage: z.string().optional(),
+    sourceUrl: z.string().optional(),
+    language: z.string().optional(),
+    draft: z.boolean().optional(),
   }),
 });
 
@@ -31,8 +34,8 @@ const projectCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    pubDate: z.date(),
-    lang: z.enum(['tr', 'en']),
+    pubDate: z.coerce.date(),
+    lang: z.string().optional(),
     technologies: z.array(z.string()),
     featured: z.boolean().default(false),
     externalUrl: z.string().url().optional(),

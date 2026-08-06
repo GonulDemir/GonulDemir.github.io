@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations('en');
+let projects: any[] = [];
+try {
+  projects = await getCollection('projects');
+} catch (e) {
+  projects = [];
+}
+const sortedProjects = projects.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="R&D Projects & Products | Gönül Demir">
+  <div class="max-w-4xl mx-auto space-y-8">
+    <div class="border-b border-slate-200 dark:border-slate-800 pb-6">
+      <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-2">
+        {t('projects.title')}
+      </h1>
+      <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+        {t('projects.subtitle')}
+      </p>
+    </div>
+
+    {sortedProjects.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {sortedProjects.map((project) => (
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            technologies={project.data.technologies}
+            externalUrl={project.data.externalUrl}
+            pubDate={project.data.pubDate}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="py-16 text-center bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-xl p-8">
+        <svg class="w-12 h-12 mx-auto text-slate-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+        </svg>
+        <p class="text-base font-semibold text-slate-900 dark:text-white mb-1">New Projects Coming Soon</p>
+        <p class="text-xs text-slate-500 dark:text-slate-400">Technical project documentation and hardware showcases are currently being prepared.</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>

@@ -1,0 +1,444 @@
+---
+title: 'Optical Sensing System Design – Part 1 of a 5-Part Series'
+description: 'Why This Series Exists'
+pubDate: '2025-12-03'
+createdDate: '2025-12-03'
+author: 'Gönül Demir'
+category: 'Optical Sensing System Design'
+language: 'en'
+draft: false
+sourceUrl: 'https://www.linkedin.com/pulse/optical-sensing-system-design-part-1-5-part-series-gonul-demir-0dhhf'
+---
+
+**Why This Series Exists**
+
+My career in R&D—spanning more than fourteen years—has taken me through a wide range of optical sensing projects. I’ve worked with light in many forms: absorbed, scattered, transmitted, reflected, refracted. And every time, I found myself fascinated by the same simple truth:
+
+**Light always has something to say; we just need to learn how to read it.**
+
+Over the years, I also noticed that many talented engineers hesitate when it comes to optical sensing. Not because they lack skill, but because the topic is often presented in a way that feels overly academic or fragmented.
+
+This series aims to bring clarity. My intention is to share the practical foundations of optical sensing—the version we use in real engineering work—while keeping the explanations accessible and structured.
+
+### Series Outline
+
+This series will run over five weeks, each focusing on a different essential stage of optical sensing system design.
+
+**Week 1**
+
+- Application domains
+- Wavelength selection
+
+**Week 2**
+
+- Selecting the light source (LED, Laser)
+- Selecting the detector (Photodiode, Phototransistor)
+- Choosing the final emitter and receiver components
+
+**Week 3**
+
+- Defining optical requirements
+- Designing the transmitter circuitry
+
+**Week 4 & Week 5**
+
+- Designing the receiver circuitry
+
+I hope you enjoy reading this series.
+
+Let’s begin.
+
+## 2. Overview of Optical Interaction Principles
+
+Optical sensing systems extract information based on how light interacts with an object. Every object in the real world handles light differently:
+
+- Some absorb it
+- Some reflect it
+- Some scatter it
+- Some transmit it
+- Some refract it
+
+This leads to a fundamental rule in optical sensing:
+
+**Emit (or collect) light → measure its interaction → convert the measurement into a decision.**
+
+Below are the key physical behaviors used in optical sensing, along with real industrial applications.
+
+### 2.1. Absorption
+
+Certain wavelengths of light are absorbed by materials at different rates. This is heavily used in medical devices, food analysis, and quality inspection systems.
+
+### Example: Pulse Oximeter
+
+- 660 nm and 940 nm light pass through the finger.
+- Oxygenated hemoglobin absorbs these wavelengths differently.
+- The sensor measures the absorption ratio and calculates oxygen saturation.
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 1](https://media.licdn.com/dms/image/v2/D4D12AQEKxSrBFnQXaA/article-inline_image-shrink_1000_1488/B4DZrmN3tJGwAU-/0/1764798987530?e=1787788800&v=beta&t=4e-UnpsZQE3371vRKqDd9o7GBzR18rpKEWI5NYjH1Pk)
+
+### 2.2. Reflection (Back Reflection)
+
+An object’s color, brightness, and surface texture affect how much light it reflects. Diffuse sensors and color-recognition systems operate using this principle.
+
+### Example: Diffuse Sensor
+
+Light hits the surface → returns depending on surface properties → the sensor decides “object present / not present.”
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 2](https://media.licdn.com/dms/image/v2/D4D12AQEHE3hWouQMtA/article-inline_image-shrink_1000_1488/B4DZrmN9qMJMAQ-/0/1764799012475?e=1787788800&v=beta&t=rXOgB4j03CCabm1_WGi5krxaRR_KEwoRg7-ZQtqmL9o)
+
+### 2.3. Scattering
+
+Smoke, fog, and airborne particles scatter light. Smoke detectors and particle-measurement instruments use this effect.
+
+### Example: Optical Smoke Detector
+
+An LED illuminates the chamber → smoke scatters the light → scattered light reaches the photodiode → increasing intensity triggers the alarm.
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 3](https://media.licdn.com/dms/image/v2/D4D12AQHUnwaKe3KoPQ/article-inline_image-shrink_1500_2232/B4DZrmOCaxIAAY-/0/1764799031603?e=1787788800&v=beta&t=1iN40IDHfyOb0N2NY2XZpo37CsmAHj-phzyTnNUzHEw)
+
+### 2.4. Interruption / Occlusion
+
+The emitter and receiver face each other; when an object blocks the beam, light is interrupted. This is the basis of door sensors, turnstiles, and safety barriers.
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 4](https://media.licdn.com/dms/image/v2/D4D12AQEVe_TGkKMYsQ/article-inline_image-shrink_1500_2232/B4DZrmOGfzKIAU-/0/1764799048583?e=1787788800&v=beta&t=NbpGLvrMnTaqmrxMSNr6VSCfZk21a26pWCi4Ve-m-o4)
+
+### 2.5. Transmission
+
+In transmission-based sensing, the amount of light passing through a material is measured. Changes in smoke, gas concentration, or liquid properties can be detected this way.
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 5](https://media.licdn.com/dms/image/v2/D4D12AQG6-b17-LctaQ/article-inline_image-shrink_400_744/B4DZrmOLuvG0AY-/0/1764799070012?e=1787788800&v=beta&t=MAumJEqkK7E9k4ffCk4Nv_pI1hYc0C4KBxQtr9K156k)
+
+### 2.6. Refraction and Optical Density
+
+Liquids and transparent materials refract light. Changes in refraction angle can reveal liquid level, foam presence, or density variations.
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 6](https://media.licdn.com/dms/image/v2/D4D12AQGChjqNB-GnxQ/article-inline_image-shrink_1000_1488/B4DZrmOQGCGwAU-/0/1764799087889?e=1787788800&v=beta&t=-Bb49dvxYcY8Cb-cwRCS2gcM5Cs1yH8WyIjV48tDN1A)
+
+### 2.7. Time of Flight (ToF)
+
+Light is emitted, hits a target, and the return time is measured. Distance is calculated from the round-trip time.
+
+### Example: Foam Detection in Coffee Machines
+
+As foam rises, the measured distance decreases → the system can control foam formation.
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 7](https://media.licdn.com/dms/image/v2/D4D12AQEQzxI1d1cGrQ/article-inline_image-shrink_400_744/B4DZrmOW2MKIAY-/0/1764799115285?e=1787788800&v=beta&t=h3JcyQ13Y96bwg9gaKwb2wJ_FEHJCp5I8b2s65_p8Ro)
+
+### 2.8. Speckle Pattern (Laser Roughness Measurement)
+
+When a laser hits a rough surface, it produces a random speckle pattern. This pattern serves as an optical signature for surface roughness.
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 8](https://media.licdn.com/dms/image/v2/D4D12AQHGrSr3dpgGZw/article-inline_image-shrink_1500_2232/B4DZrmOh5BG4AU-/0/1764799160697?e=1787788800&v=beta&t=qy3xywa8g7HZPtd5w_9vmHlrwBN1JUCHLY-cJrt-XyQ)
+
+### 2.9. Spectral Signature
+
+Every material has a unique optical signature at certain wavelengths—such as the UV/IR signature of flames, NIR reflection differences between plastic types, or spectral distinctions between rice and stones.
+
+These unique signatures allow optical systems to identify and classify materials.
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 9](https://media.licdn.com/dms/image/v2/D4D12AQHvWCf59Qun1A/article-inline_image-shrink_1500_2232/B4DZrmOoc1J4AU-/0/1764799187259?e=1787788800&v=beta&t=GTUw1ktkvJbO2u4aRn72C_ngYq7FCOQiPzBym10SOs4)
+
+### 2.10. Diffraction and Pattern Analysis
+
+When light passes through a slit or edge, it creates diffraction patterns. These patterns reveal detailed geometric information about the surface or structure.
+
+### Example: Precision Surface Measurement
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 10](https://media.licdn.com/dms/image/v2/D4D12AQG3S9k8N-HG_g/article-inline_image-shrink_1500_2232/B4DZrmOt8IGsAU-/0/1764799209989?e=1787788800&v=beta&t=SmRB8qyhGtUucii1ZT2ytk0ZIktufWfh3pmdEafgdoI)
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 11](https://media.licdn.com/dms/image/v2/D4D12AQGKHIbCFbJVQQ/article-inline_image-shrink_400_744/B4DZrmOxBgGwAg-/0/1764799222598?e=1787788800&v=beta&t=s8lAjSVV7F8tA6pJnQ0YWSLL2Bq0SDVDefbJaZFrc4E)
+
+## 3. The Spectrum of Sensing – Why Wavelength Matters
+
+*"Light is the oldest messenger in nature." — Albert Einstein*
+
+Optical sensing is essentially the process of reading this message. However, what the light tells us depends entirely on **the wavelength we observe it in.**
+
+As explained in David Attenborough’s *Life in Color* documentary, many herbivores perceive orange as a shade of green. Therefore, a tiger appears bright to us but blends into the background for a deer.
+
+This demonstrates a fundamental truth:
+
+**The same object can produce entirely different realities at different wavelengths.**
+
+This is why wavelength selection is one of the most critical decisions in any optical sensing project.
+
+### Wavelength = Energy
+
+(The Physics That Determines What Light Reveals)\*\*
+
+As wavelength decreases, energy increases; as wavelength increases, energy decreases:
+
+- **Short wavelengths (UV–VIS–NIR)** → high energy → object details become more pronounced
+- **Long wavelengths (Mid-IR–LWIR)** → lower energy → background noise increases, making separation more difficult
+
+**Examples:**
+
+- **LWIR band:** Since almost everything—including humans—emits thermal radiation in this region, the target signal must be separated from a highly active background. This is why **thermal imaging is inherently complex**.
+- **Mid-IR band:** Only gas molecules produce sharp absorption peaks in this wavelength range, allowing **NDIR gas sensors** to operate with very high accuracy.
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 12](https://media.licdn.com/dms/image/v2/D4D12AQGq08Bx49I3cQ/article-inline_image-shrink_1500_2232/B4DZrmPyfbHsAU-/0/1764799491134?e=1787788800&v=beta&t=6fgST640C-0EO8M9I5nrJ6nhOlWIFIOuZ4bjB-wEyW8)
+
+## 3.1. Detailed Examination of Wavelength Regions
+
+### 3.1.1. Ultraviolet – UV (180–400 nm)
+
+Used in fluorescence, contamination inspection, and flame detection. UV light is high-energy and reveals features invisible under visible light.
+
+### 1) Leak Detection Using Fluorescent Dye
+
+Fluorescent dye glows bright green/blue under UV illumination.
+
+**Applications:**
+
+- HVAC and refrigeration systems
+- Hydraulic line leak detection
+- Automotive fluid inspection
+
+**Block Diagram:****UV LED → Surface → Fluorescence → Optical Filter → Photodiode / Camera**
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 13](https://media.licdn.com/dms/image/v2/D4D12AQH1fV7R70Bwow/article-inline_image-shrink_1000_1488/B4DZrmQE14J4AQ-/0/1764799565935?e=1787788800&v=beta&t=K80ZdYKO8Rdoxu-QB4Bv7zdigXgEE8o9q8D9jG2dW9I)
+
+### 2) UV Marker / Security Ink Readin
+
+Invisible UV-reactive ink becomes visible when illuminated with UV light.
+
+**Applications:**
+
+- Banknote authentication
+- Logistics package verification
+- Pharmaceutical packaging security
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 14](https://media.licdn.com/dms/image/v2/D4D12AQGq1FuPKxFAzA/article-inline_image-shrink_1500_2232/B4DZrmQLv4G8AU-/0/1764799594802?e=1787788800&v=beta&t=5XOqVM2LirFJFtvpft8iGcyp5A8jx6JNy9JJ-EitMhE)
+
+### 3) UV Flame Detection (180–260 nm)
+
+Flames emit natural UV radiation in this band. Solar influence is minimal → very low false alarm rate.
+
+**Applications:** refineries, natural gas systems, paint curing ovens.
+
+**Block Diagram:****Flame → Band-Pass Filter → UV Photodiode → Amplifier → Alarm**
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 15](https://media.licdn.com/dms/image/v2/D4D12AQF3T-g_yvpLIg/article-inline_image-shrink_1000_1488/B4DZrmQS9eKEAQ-/0/1764799623625?e=1787788800&v=beta&t=UKVWaYmzZZ3u7f8dBQ43SlrjqEIeYjk3eVPWZXcYRP0)
+
+## 3.1.2. Visible Spectrum (400–700 nm)
+
+The primary band for color, contrast, printing, and surface inspection. This is the same band the human eye perceives, and it is widely used in industrial automation.
+
+### 1) Color Detection and Classification
+
+Color information is obtained using white/RGB LEDs and photodiode arrays.
+
+**Applications:**
+
+- Food sorting
+- Plastic classification
+- Label verification
+- Textile inspection
+
+**Block Diagram:****LED → Object → Reflection → Color Sensor → Digital Analysis**
+
+### 2) Contrast Sensors (Black–White Detection)
+
+Essential in printing and labeling processes.
+
+**Applications:**
+
+- Label cutting and alignment
+- Barcode/marker detection
+- Paper processing
+
+**Block Diagram:****LED → Surface → Reflection → Photodiode → Thresholding → Output**
+
+## 3.1.3. NIR – Near Infrared (700–1100 nm)
+
+A band that penetrates the internal structure of organic materials. Unlike visible light, NIR enters fruits, plants, food products, and biological tissues.
+
+### 1) Fruit Ripeness Detection
+
+Chemical changes related to ripeness are clearly detectable in NIR.
+
+**Applications:** apples, mangos, avocados; internal defect detection.
+
+**Block Diagram:****NIR LED → Fruit → Absorption → NIR Photodiode → Spectral Analysis**
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 16](https://media.licdn.com/dms/image/v2/D4D12AQH_xXrYU6QSZw/article-inline_image-shrink_1500_2232/B4DZrmQnHoIEAU-/0/1764799706390?e=1787788800&v=beta&t=yMODOOLPG58jKyzhbxZYwwSa1IbLs3dvwMwelMHRArc)
+
+### 2) Biological Tissue Detection (Medical / Laboratory Applications)
+
+Blood, skin, and biological tissues transmit and absorb NIR light at different rates. With NIR illumination, the following can be achieved:
+
+- Vein detection
+- Subdermal bruise/bleeding visualization
+- Non-invasive measurements
+- Tissue oxygenation analysis
+
+**Block Diagram:****NIR LED → Tissue → Transmitted/Scattered Light → Photodiode → Tissue Analysis**
+
+### 3) Industrial Material Separation (Paper / Textile / Organic vs. Inorganic)
+
+Organic materials reflect NIR light differently, enabling automated classification processes such as:
+
+- Textile sorting
+- Recycling line separation
+- Paper coating inspection
+
+**Block Diagram:****NIR Illumination → Surface → Spectral Response → Classification**
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 17](https://media.licdn.com/dms/image/v2/D4D12AQEMPchhvC3Ztw/article-inline_image-shrink_1500_2232/B4DZrmSvyzGsAU-/0/1764800266278?e=1787788800&v=beta&t=fAq5CF9hHeOgPLz8QfJcNCFLTgfe6Gw8bWc0gISg28E)
+
+## 3.1.4. SWIR – Short Wave Infrared (1.0–2.5 µm)
+
+SWIR is powerful because it distinguishes materials that look identical in visible and NIR bands. Chemical composition differences, moisture content, and subsurface features become clearly visible in SWIR.
+
+Below is a summary of the most characteristic SWIR applications:
+
+### 1) Plastic Type Identification (PET – PVC – PE – PP)
+
+Plastics that appear identical in visible and NIR bands exhibit completely different reflection signatures in SWIR.
+
+**Where is it used?**
+
+- Recycling facilities
+- Granule/plastic quality inspection lines
+
+**Block Diagram:****SWIR LED → Plastic → InGaAs Sensor → Spectral Separation**
+
+### 2) Subsurface Defect Detection
+
+SWIR makes certain materials appear semi-transparent. This enables visibility of:
+
+- Coating-under cracks
+- Air bubbles inside plastics
+- Composite delamination
+
+**Block Diagram:****SWIR Illumination → Material → Camera → Defect Map**
+
+### 3) Foreign Object Detection in Food
+
+Chemical structures separate more sharply in SWIR, allowing detection of:
+
+- Stones mixed with rice
+- Plastic/wood fragments inside food products
+
+**Block Diagram:****SWIR Light → Product → Reflectance → Classification**
+
+## 3.1.5. Mid-IR (3–5 µm)
+
+The “fingerprint region” for gas molecules. Many gases have strong and highly specific absorption lines in this band. This makes Mid-IR uniquely suited for gas detection.
+
+### 1) NDIR Gas Sensors (CO₂ – CH₄ – CO – SF₆)
+
+Each gas absorbs a very specific wavelength in the Mid-IR region:
+
+- CO₂ → **4.26 µm**
+- CH₄ → **3.3 µm**
+- CO → **4.7 µm**
+
+This is why NDIR systems are simple yet extremely effective.
+
+**Block Diagram:****IR Source → Gas Chamber → Band-Pass Filter → Thermopile → Absorption Measurement**
+
+**Where is it used?**
+
+- Ventilation / Indoor Air Quality
+- Industrial gas leak detection
+- Biogas / natural gas systems
+- CO₂ monitoring in enclosed spaces
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 18](https://media.licdn.com/dms/image/v2/D4D12AQH6AkbbN7CZDg/article-inline_image-shrink_1500_2232/B4DZrmT_1xHsAY-/0/1764800593779?e=1787788800&v=beta&t=D4P8UCjKRZrNfyfnD5dqz800ks0OPvIWWNZkjlb7l5I)
+
+### 2) Flame Spectrum Analysis (IR Flame Detector – MWIR)
+
+In some critical environments, UV alone is not sufficient. Flames exhibit strong, distinctive IR emissions in the 3–5 µm band, making Mid-IR flame detectors highly reliable.
+
+**Advantages:**
+
+- No influence from sunlight
+- Very low false alarm rate
+- Flame type and combustion characteristics can be analyzed
+
+**Block Diagram:****Flame Emission → IR Filter (3–5 µm) → Pyroelectric Sensor → Decision Logic**
+
+### 3) Chemical Substance Analysis via IR Spectroscopy
+
+Molecules absorb light at their vibration frequencies in the Mid-IR region. This makes it the most reliable band for chemical identification.
+
+**Applications:**
+
+- Oil/lubricant quality analysis
+- Paper–plastic identity verification
+- Compact laboratory FTIR systems
+
+**Block Diagram:****IR Source → Sample → Absorption Spectrum → Analysis**
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 19](https://media.licdn.com/dms/image/v2/D4D12AQHifyEasoyhZA/article-inline_image-shrink_1000_1488/B4DZrmUKfsG4AQ-/0/1764800637661?e=1787788800&v=beta&t=35BGNMrj0CrqfFh1CUqva_OYhOj-6p3q5k-ElxUEVJ4)
+
+## 3.1.6. LWIR – Long Wave Infrared (8–14 µm)
+
+The **thermal sensing band**.
+
+In this range, all objects emit their own thermal radiation—so LWIR sensors work **passively** (no illumination is required).
+
+While visible/NIR/SWIR imaging relies on reflected light, **LWIR directly observes the temperature of the object**.
+
+### 1) Thermal Cameras (Microbolometer Sensors)
+
+Special microbolometer arrays are used in this band. Each pixel heats up according to incoming IR energy → its resistance changes → temperature information is produced.
+
+**Where is it used?**
+
+- Machine fault diagnostics
+- Electrical panel temperature monitoring
+- Building insulation analysis
+- Human/mammal detection (security systems)
+
+**Block Diagram:****Thermal Radiation → LWIR Lens → Microbolometer → Readout Electronics → Thermal Image**
+
+### 2) Temperature Distribution and Hotspot Detection
+
+Because LWIR can resolve temperature differences at **millikelvin** levels, it can detect:
+
+- Bearing overheating
+- Hot cable junctions
+- MOSFET overload in inverters
+- Cell-level heat imbalance in battery packs
+
+![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 20](https://media.licdn.com/dms/image/v2/D4D12AQEHPZBY9ZaoPg/article-inline_image-shrink_1500_2232/B4DZrmUfp1GQAU-/0/1764800725152?e=1787788800&v=beta&t=KF34KckvID6blHJNnpnaWDn8jHicSZP6Bx98MVE5--Q)
+
+### 3) Human / Living Being Detection (Security, Rescue Operations)
+
+The human body emits strong IR radiation in the **9–13 µm** band. This makes people visible even in darkness, smoke, or fog.
+
+**Applications:**
+
+- Search and rescue (detecting survivors under rubble)
+- Night-time security cameras
+- Wildlife/forest fire rescue monitoring
+- Military thermal imaging systems
+
+**Block Diagram:****Body Heat → IR Lens → Sensor Array → Contour/Heat Map → Detection**
+
+## Summary
+
+As we have seen in this section, wavelength is not merely a matter of “color.” It fully determines how a sensor perceives the world, what information it can extract, and which objects it can detect under different conditions.
+
+The same object appears as:
+
+- Contamination under **UV**
+- Color and texture under **Visible**
+- Internal structure under **NIR**
+- Material differentiation under **SWIR**
+- Gas absorption signature under **Mid-IR**
+- Heat distribution under **LWIR**
+
+Therefore, the very first question in optical system design is always:
+
+**“What exactly do I want to observe, and at which wavelength does this information become visible?”**
+
+## Closing
+
+In this part, we explored the spectrum domain that forms the foundation of optical sensing. We saw that each wavelength band reveals a completely different layer of reality.
+
+If there is a detail you are curious about, a situation you have encountered in your own project, or a concept you would like me to clarify further, feel free to share your questions in the comments. I will be happy to respond to each one.
+
+We will continue next week. See you in the next section.

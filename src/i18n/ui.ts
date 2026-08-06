@@ -1,59 +1,16 @@
 export const languages = {
-  tr: 'Türkçe',
   en: 'English',
 };
 
-export const defaultLang = 'tr';
+export const defaultLang = 'en';
 
 export const ui = {
-  tr: {
-    'nav.home': 'Ana Sayfa',
-    'nav.about': 'Hakkımda',
-    'nav.articles': 'Makaleler',
-    'nav.projects': 'Projeler',
-    'nav.contact': 'İletişim',
-    'hero.title': 'Gönül Demir',
-    'hero.subtitle': 'Senior Electronics R&D & Product Engineer',
-    'hero.bio': '15 yılı aşkın Elektronik Ar-Ge tecrübesiyle donanım tasarımı, sensör sistemleri, optoelektronik ve EMC/EMI gürültü yönetimi üzerine yüksek performanslı çözümler ve yenilikçi ürünler geliştiriyorum.',
-    'hero.downloadCV': 'CV İndir (PDF)',
-    'hero.featuredProjects': 'Öne Çıkan Projeler',
-    'hero.latestArticles': 'Son Makaleler',
-    'hero.viewAllProjects': 'Tüm Projeleri İncele',
-    'hero.viewAllArticles': 'Tüm Makaleleri Oku',
-    'articles.title': 'Teknik Makaleler & Ar-Ge Notları',
-    'articles.subtitle': 'Optoelektronik, PCB tasarımı, EMC gürültü bastırma ve sensör teknolojileri üzerine teknik incelemeler.',
-    'articles.searchPlaceholder': 'Makalelerde ara (başlık, içerik)...',
-    'articles.filterAll': 'Tüm Kategoriler',
-    'articles.noResults': 'Arama kriterlerine uygun makale bulunamadı.',
-    'articles.readTime': 'dakika okuma',
-    'articles.shareLinkedIn': 'LinkedIn\'de Paylaş',
-    'articles.relatedArticles': 'İlgili Makaleler',
-    'projects.title': 'Ar-Ge Projeleri & Ürünler',
-    'projects.subtitle': 'Endüstriyel, medikal ve savunma odaklı elektronik donanım ve sistem tasarımları.',
-    'projects.viewProject': 'Projeyi İncele',
-    'about.title': 'Hakkımda & Özgeçmiş',
-    'about.experience': '15+ Yıllık Ar-Ge Yolculuğu',
-    'about.expertise': 'Uzmanlık Alanları',
-    'contact.title': 'İletişim & İş Birliği',
-    'contact.subtitle': 'Proje danışmanlığı, Ar-Ge iş birlikleri ve teknik sorularınız için doğrudan iletişime geçebilirsiniz.',
-    'contact.email': 'E-posta Gönder',
-    'footer.rights': 'Tüm Hakları Saklıdır.',
-    
-    // Categories & Subcategories
-    'cat.optoelectronics-optics': 'Optoelektronik & Optik',
-    'cat.emc-noise-management': 'EMC & Gürültü Yönetimi',
-    'subcat.optical-system-design': 'Optik Sistem Tasarımı',
-    'subcat.astronomy-space': 'Astronomi & Uzay',
-    'subcat.sensor-applications': 'Sensör Uygulamaları',
-    'subcat.pcb-design-shielding': 'PCB Tasarımı & Ekranlama',
-    'subcat.grounding-cabling': 'Topraklama & Kablolama',
-    'subcat.robotics-emc': 'Robotik & EMC',
-  },
   en: {
     'nav.home': 'Home',
     'nav.about': 'About',
     'nav.articles': 'Articles',
     'nav.projects': 'Projects',
+    'nav.freezone': 'Free Zone',
     'nav.contact': 'Contact',
     'hero.title': 'Gönül Demir',
     'hero.subtitle': 'Senior Electronics R&D & Product Engineer',
@@ -64,7 +21,7 @@ export const ui = {
     'hero.viewAllProjects': 'View All Projects',
     'hero.viewAllArticles': 'View All Articles',
     'articles.title': 'Technical Articles & R&D Notes',
-    'articles.subtitle': 'Technical insights on optoelectronics, PCB design, EMC noise suppression, and sensor technologies.',
+    'articles.subtitle': 'Technical insights on optical sensing, power electronics, EMC, astronomy instrumentation, and product verification.',
     'articles.searchPlaceholder': 'Search articles (title, content)...',
     'articles.filterAll': 'All Categories',
     'articles.noResults': 'No articles found matching your criteria.',
@@ -82,25 +39,18 @@ export const ui = {
     'contact.email': 'Send Email',
     'footer.rights': 'All Rights Reserved.',
 
-    // Categories & Subcategories
-    'cat.optoelectronics-optics': 'Optoelectronics & Optics',
-    'cat.emc-noise-management': 'EMC & Noise Management',
-    'subcat.optical-system-design': 'Optical System Design',
-    'subcat.astronomy-space': 'Astronomy & Space',
-    'subcat.sensor-applications': 'Sensor Applications',
-    'subcat.pcb-design-shielding': 'PCB Design & Shielding',
-    'subcat.grounding-cabling': 'Grounding & Cabling',
-    'subcat.robotics-emc': 'Robotics & EMC',
+    // Categories
+    'cat.optical-sensing-system-design': 'Optical Sensing System Design',
+    'cat.electromagnetic-compatibility': 'Electromagnetic Compatibility',
+    'cat.analog-design-power-electronics': 'Analog Design & Power Electronics',
+    'cat.astronomy-astrophysics-space-science': 'Astronomy, Astrophysics & Space Science',
+    'cat.product-verification-certification': 'Product Verification & Certification',
+    'cat.bio-inspired-sensors-robotics': 'Bio-Inspired Sensors & Robotics',
+    'cat.free-zone': 'Free Zone',
   },
 } as const;
 
 export const routes = {
-  tr: {
-    'about': 'hakkimda',
-    'articles': 'makaleler',
-    'projects': 'projeler',
-    'contact': 'iletisim',
-  },
   en: {
     'about': 'about',
     'articles': 'articles',

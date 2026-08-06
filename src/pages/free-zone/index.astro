@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog', (post) => post.data.category === 'free-zone');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Free Zone | Art, Travel & Creative Musings | Gönül Demir">
+  <div class="max-w-4xl mx-auto space-y-10">
+    
+    <!-- Hero Header Banner -->
+    <div class="relative overflow-hidden bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-rose-500/10 border border-amber-200/60 dark:border-amber-900/40 rounded-2xl p-6 sm:p-10 space-y-3">
+      <div class="flex items-center gap-2">
+        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-500 text-white shadow-sm">
+          Free Zone
+        </span>
+        <span class="text-xs text-amber-700 dark:text-amber-300 font-medium">Creative Sandbox</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        Art, Travel & Personal Musings
+      </h1>
+
+      <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+        Welcome to my personal sandbox outside of engineering. Here you will find original oil paintings, visual sketches, travel journals, photo logs, and reflections on cinema, literature, and culture.
+      </p>
+    </div>
+
+    <!-- Posts Grid -->
+    {sortedPosts.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {sortedPosts.map((post) => (
+          <article class="group relative flex flex-col bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-6 shadow-sm hover:shadow-md hover:border-amber-500/50 transition-all duration-200">
+            <div class="flex items-center gap-2 text-xs mb-3">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200/50 dark:border-amber-800/50">
+                Free Zone
+              </span>
+              <span class="text-slate-300 dark:text-slate-600 ml-auto">•</span>
+              <time datetime={post.data.pubDate.toISOString()} class="text-xs text-slate-500 dark:text-slate-400">
+                {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' }).format(post.data.pubDate)}
+              </time>
+            </div>
+
+            <h2 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors mb-2 line-clamp-2">
+              <a href={`/free-zone/${post.slug}`} class="focus:outline-none">
+                <span class="absolute inset-0" aria-hidden="true"></span>
+                {post.data.title}
+              </a>
+            </h2>
+
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 line-clamp-3">
+              {post.data.description}
+            </p>
+
+            <div class="mt-auto flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700/40 text-xs text-slate-500 dark:text-slate-400">
+              <span>{post.data.readingTime || 3} min read</span>
+              <span class="inline-flex items-center font-medium text-amber-600 dark:text-amber-400 group-hover:translate-x-1 transition-transform">
+                Explore
+                <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="py-16 text-center bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-xl p-8">
+        <p class="text-base font-semibold text-slate-900 dark:text-white mb-1">No Free Zone Posts Yet</p>
+        <p class="text-xs text-slate-500 dark:text-slate-400">Artworks, travel notes, and reviews will be published here soon.</p>
+      </div>
+    )}
+
+  </div>
+</BaseLayout>

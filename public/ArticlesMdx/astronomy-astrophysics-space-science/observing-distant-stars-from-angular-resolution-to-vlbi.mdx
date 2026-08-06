@@ -1,0 +1,168 @@
+---
+title: 'OBSERVING DISTANT STARS: FROM ANGULAR RESOLUTION TO VLBI'
+description: 'When we look at the sky, stars appear merely as bright points. However, in astronomy, the fundamental objective is not simply to see these points, but to resolve their physical structure.'
+pubDate: '2026-02-18'
+createdDate: '2026-02-18'
+author: 'Gönül Demir'
+category: 'Astronomy, Astrophysics & Space Science'
+language: 'en'
+draft: false
+heroImage: 'https://media.licdn.com/mediaD4D12AQHCF6fjFufb1A'
+sourceUrl: 'https://www.linkedin.com/pulse/observing-distant-stars-from-angular-resolution-vlbi-gonul-demir-kwm7f'
+---
+
+### 1. Introduction
+
+When we look at the sky, stars appear merely as bright points. However, in astronomy, the fundamental objective is not simply to see these points, but to resolve their physical structure.
+
+Is a star truly a single source? Does it possess a measurable angular diameter? Can the components of a close binary system be separated?
+
+All of these questions are directly related to the **angular resolution** of the observing system.
+
+### 2. Angular Resolution and the Diffraction Limit
+
+The angular resolution of a telescope is determined by the fundamental laws of wave optics. When an electromagnetic wave passes through a finite aperture, it undergoes diffraction. As a result, even an ideal point source does not appear as a mathematical point in the image plane, but rather as an intensity distribution consisting of a central bright maximum surrounded by weaker concentric rings.
+
+For a circular aperture, this pattern is known as the **Airy pattern** [1][2].
+
+Two point sources are considered resolvable when the central maximum of one coincides with the first minimum of the other. This condition is described by the **Rayleigh criterion**:
+
+![OBSERVING DISTANT STARS: FROM ANGULAR RESOLUTION TO VLBI - figure 1](https://media.licdn.com/dms/image/v2/D4D12AQEPY4jPWcD2vw/article-inline_image-shrink_1000_1488/B4DZxwkxGmIUAU-/0/1771415212869?e=1787788800&v=beta&t=5lFGxpPsbG_w3hRt9EbVhNmTG9IyQPIzpWH0lyavnhA)
+
+where: λ represents the wavelength, D represents the aperture diameter.
+
+According to this relation, angular resolution is directly proportional to wavelength and inversely proportional to aperture size [1][2].
+
+![Diffraction though a circular apeture, showing the central bright maximum ans the Airy disk](https://media.licdn.com/dms/image/v2/D4D12AQHZyxuQ6ogoHA/article-inline_image-shrink_1000_1488/B4DZxwk6wJGkAQ-/0/1771415252785?e=1787788800&v=beta&t=law4JIYLspLEqYZVp_Lk2xPjJXw2en2Vef5TCmo7BMI)
+
+*Diffraction though a circular apeture, showing the central bright maximum ans the Airy disk*
+
+![Rayleigh's criterion showing how images can become un-resolvable if the angular separaiton is too small](https://media.licdn.com/dms/image/v2/D4D12AQEavz25e_kT7A/article-inline_image-shrink_1500_2232/B4DZxwlYKqHIAU-/0/1771415373704?e=1787788800&v=beta&t=9OA5ZTIlLWQreLIV8mqCZCjOyjqRskma07veatOqwps)
+
+*Rayleigh's criterion showing how images can become un-resolvable if the angular separaiton is too small*
+
+*Source :*[*http://www.alevelphysicsnotes.com/astrophysics/telescopes.php*](http://www.alevelphysicsnotes.com/astrophysics/telescopes.php)
+
+For a visual and conceptual explanation of **Rayleigh criterion**: [https://www.youtube.com/watch?v=F_ziAe4s2xs](https://www.youtube.com/watch?v=F_ziAe4s2xs)
+
+### 3. Why Should We Use Radio Waves?
+
+A Sun-like star located at a distance of 10 parsecs has an angular diameter of approximately 1 milliarcsecond [3]. Measuring such scales requires extremely high angular resolution.
+
+In principle, one might attempt to improve resolution simply by observing at shorter wavelengths. However, astronomical observations must be conducted in the spectral region where the relevant physical processes emit radiation.
+
+Many critical astrophysical phenomena are accessible only at radio wavelengths [4]:
+
+- Maser emission regions (H₂O, OH, SiO masers)
+- Radio flares from magnetically active stars
+- Molecular gas in star-forming regions
+- Stellar winds and ionized plasma environments
+
+These processes are either invisible at optical wavelengths or governed by different emission mechanisms.
+
+Therefore, radio observations are not optional; they are dictated by the physics of the source.
+
+### 4. The Challenge of Observing at Radio Wavelengths
+
+In principle, shorter wavelengths produce smaller angular separations. Therefore, optical telescopes provide higher angular resolution than radio telescopes of the same aperture.
+
+However, observations must be conducted in the spectral region in which the relevant physical processes emit radiation.
+
+Circumstellar plasma structures, maser emission regions, and magnetically active stars emit strongly at radio frequencies [4]. Consequently, it is not possible to arbitrarily reduce the wavelength to improve resolution if the physical information of interest is carried at radio wavelengths.
+
+In radio astronomy, typical wavelengths are on the order of centimeters. For example, in X-band observations:
+
+## λ≈3 cm
+
+This value is approximately one hundred thousand times larger than optical wavelengths. According to the Rayleigh relation, this significantly limits angular resolution.
+
+A Sun-like star at a distance of 10 parsecs has an angular diameter of approximately 1 milliarcsecond [3], a scale well below the diffraction limit of a single-aperture telescope.
+
+### 5. Interferometry: Increasing the Effective Aperture
+
+Constructing a single telescope with a diameter of several kilometers is not practical. Instead, the idea of operating two or more spatially separated antennas together has been developed. This approach is known as **interferometry**. Interferometry is based on combining the phase information of electromagnetic waves received at different locations, effectively increasing the aperture to the scale of the separation between antennas [5].
+
+When a plane wavSchematic view of a delay measurement in phase-referencing astrometry. Here, for simplicity, an array with two stations is shown. The baseline vector and source directions are indicated by lines. In relative astrometry, the target and adjacent reference sources are observed (nearly) at the same time so delay errors can be effectively canceled in the relative measurement. For relative radio astrometry, the dominant error sources are generally uncompensated propagation delays in troposphere and/or ionosphere.e arriving from a distant star reaches two different antennas, a **geometric delay** arises between them:
+
+![OBSERVING DISTANT STARS: FROM ANGULAR RESOLUTION TO VLBI - figure 4](https://media.licdn.com/dms/image/v2/D4D12AQH-m_s0ZNNrsA/article-inline_image-shrink_1500_2232/B4DZxwpjKpHwAU-/0/1771416466503?e=1787788800&v=beta&t=gs8R2o7Vt6gOoagayQNQRGSFh96zywf4_Yy1EtF5pYs)
+
+where
+
+- **b**is the baseline vector between the antennas,
+- **s** is the unit vector pointing toward the source (the star),
+- **c** is the speed of light.
+
+This geometric delay is not measured directly as a simple time difference. Instead, the interferometer measures the corresponding **phase difference** between the received signals.
+
+When the signals from the two antennas are correlated, the system behaves as though it possesses a single aperture equal in size to the baseline separation, without physically constructing a large dish [5].
+
+In this case, the angular resolution can be written approximately as
+
+θ≈B/λ
+
+where **B=∣b∣** is the baseline length between the antennas.
+
+If milliarcsecond-level resolution is required, the baseline must extend to thousands of kilometers.
+
+![Source : Reid,m.j &Honma, M(2014). Microarcsecond Radio Astrometry. Annuel Review of Astronomy and Astropysics,](https://media.licdn.com/dms/image/v2/D4D12AQEN9F5PwfxTaw/article-inline_image-shrink_1500_2232/B4DZxwo5z6KEAU-/0/1771416297736?e=1787788800&v=beta&t=IbBBjqylm2QLwdmHIa08KaplSm4UIJLoWWImrt668bI)
+
+*Source : Reid,m.j &Honma, M(2014). Microarcsecond Radio Astrometry. Annuel Review of Astronomy and Astropysics,*
+
+Schematic view of a delay measurement in phase-referencing astrometry. Here, for simplicity, an array with two stations is shown. The baseline vector and source directions are indicated by lines. In relative astrometry, the target and adjacent reference sources are observed (nearly) at the same time so delay errors can be effectively canceled in the relative measurement. For relative radio astrometry, the dominant error sources are generally uncompensated propagation delays in troposphere and/or ionosphere.
+
+### 6. Very Long Baseline Interferometry (VLBI)
+
+When baseline lengths extend to continental scales, the method is known as **Very Long Baseline Interferometry (VLBI)** [5][6].
+
+VLBI achieves milliarcsecond and even microarcsecond resolution [6], enabling:
+
+- Direct measurement of stellar angular diameters
+- Resolution of close binary systems
+- Mapping of maser regions with extreme precision
+- High-accuracy parallax determination [4][6]
+
+In VLBI, the primary observable is not a direct image, but complex visibility values corresponding to spatial Fourier components of the brightness distribution [5].
+
+As baseline length increases, visibility amplitude decreases, allowing inference of the source's angular size: [https://geodesy.science/item/vlbi/](https://geodesy.science/item/vlbi/)
+
+![Source :https://geodesy.science/item/vbli](https://media.licdn.com/dms/image/v2/D4D12AQHP_HM29kiF4g/article-inline_image-shrink_1000_1488/B4DZxwvJ0dG8AY-/0/1771417936187?e=1787788800&v=beta&t=q-V1HrwxIeVwvvMsOoDFsdvHqKHY8v4jV8jtYfUJBPg)
+
+*Source :https://geodesy.science/item/vbli*
+
+For a visual and conceptual explanation of interferometry and VLBI, you can watch the following video: [7][8]
+
+### 7. Technical Constraints
+
+Long baselines require extreme phase stability. The troposphere and ionosphere introduce additional delays that must be modeled and corrected [5].
+
+The interstellar medium can cause scattering and phase fluctuations at lower frequencies [4].
+
+Time synchronization between antennas must be maintained at the picosecond level using hydrogen maser atomic clocks [5].
+
+Earth’s rotation improves spatial frequency coverage, which is why VLBI observations are typically conducted over extended periods.
+
+### 🐈 8. Conclusion
+
+In this article, we explored how distant stars—appearing to us as mere points of light in the sky—can be understood as physical structures with measurable properties. We examined the fundamental limits imposed by diffraction, the resolution constraints inherent to long radio wavelengths, and the physical processes that stellar radiation undergoes before reaching our instruments. Cosmic dust, interstellar plasma, atmospheric delays, and instrumental noise all contribute to the complexity of the measurement process.
+
+While a single telescope is insufficient at these angular scales, interferometry enables geographically distributed antennas to operate as a unified system, effectively extending the aperture to the length of the baseline. Antennas positioned across continents independently record the same incoming wavefront, synchronized by atomic time standards. At first, these recordings appear partial and locally distorted, shaped by environmental and instrumental effects. However, through phase preservation and correlation, the common astronomical component emerges.
+
+Distance, propagation effects, and wavelength limitations do not disappear; instead, they are modeled, calibrated, and accounted for through long-duration observations and precise synchronization. When antennas separated by vast distances operate in temporal coherence, independently recorded measurements converge into a single physically meaningful description. In this way, what appears as a simple point of light becomes a measurable and intelligible structure.
+
+### 9. References
+
+[1] Born & Wolf (1999)
+
+[2] Goodman (2015)
+
+[3] Prša et al. (2016)
+
+[4] Wilson et al. (2013)
+
+[5] Thompson, Moran & Swenson (2017)
+
+[6] Reid & Honma (2014)
+
+[7] [**https://www.youtube.com/watch?v=Q1bSDnuIPbo&t=8s**](https://www.youtube.com/watch?v=Q1bSDnuIPbo&t=8s)
+
+[8] [**https://www.youtube.com/watch?v=Y8rAHTvpJbk**](https://www.youtube.com/watch?v=Y8rAHTvpJbk)

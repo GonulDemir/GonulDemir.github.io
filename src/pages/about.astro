@@ -1,0 +1,279 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About & Resume | Gönül Demir">
+  <div class="max-w-4xl mx-auto space-y-12">
+    
+    <!-- Page Header & Professional Summary -->
+    <div class="border-b border-slate-200 dark:border-slate-800 pb-8 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Gönül Demir
+          </h1>
+          <p class="text-base sm:text-lg font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 dark:from-blue-400 dark:via-indigo-400 dark:to-cyan-400 bg-clip-text text-transparent mt-1">
+            Research & Development Engineer | Hardware, Sensors & EMC
+          </p>
+        </div>
+
+        <a
+          href="/cv-gonul-demir-en.pdf"
+          target="_blank"
+          download
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-sm font-semibold rounded-xl shadow-md shadow-blue-500/20 hover:shadow-blue-500/35 transition-all shrink-0"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 01-2-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <span>Download Resume (PDF)</span>
+        </a>
+      </div>
+
+      <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed pt-2">
+        Resourceful and innovative R&D Engineer with over a decade of experience designing advanced electronic security systems, optical sensors, encoders, and embedded hardware in the Istanbul tech sector. Specialized in optimizing cutting-edge sensor technologies to enhance system functionality, reliability, and market competitiveness while navigating complex regulatory certification processes (EMI/EMC, TSE, LPCB, CE, LVD) in high-noise operational environments.
+      </p>
+    </div>
+
+    <!-- Areas of Expertise -->
+    <div class="space-y-6">
+      <h2 class="text-2xl font-bold text-slate-900 dark:text-white">
+        Areas of Expertise
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <!-- Expertise 1 -->
+        <div class="bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 rounded-xl p-5 shadow-sm hover:border-brand-accent/50 transition-colors">
+          <div class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-brand-accent dark:text-blue-400 flex items-center justify-center mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1.5">Electronic Security Systems</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            High-performance optical beam detectors, flame detectors, intrusion alarms, access control systems, and industrial elevator/escalator safety detection modules.
+          </p>
+        </div>
+
+        <!-- Expertise 2 -->
+        <div class="bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 rounded-xl p-5 shadow-sm hover:border-brand-accent/50 transition-colors">
+          <div class="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1.5">Optical Engineering & Sensors</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            Infrared optics design, ST Time-of-Flight (TOF) sensor integration, proximity detection, photodiode transimpedance amplifiers, and retroreflector optics.
+          </p>
+        </div>
+
+        <!-- Expertise 3 -->
+        <div class="bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 rounded-xl p-5 shadow-sm hover:border-brand-accent/50 transition-colors">
+          <div class="w-10 h-10 rounded-lg bg-cyan-50 dark:bg-cyan-950/60 text-cyan-600 dark:text-cyan-400 flex items-center justify-center mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1.5">Encoders & Motion Control</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            Magnetic & optical incremental encoders, wheel encoders, and compact contactless sensing architectures for civilian and defense sector demands.
+          </p>
+        </div>
+
+        <!-- Expertise 4 -->
+        <div class="bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 rounded-xl p-5 shadow-sm hover:border-brand-accent/50 transition-colors">
+          <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1.5">Electromagnetic Compatibility</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            EMI/EMC mitigation in high-noise industrial environments, shield grounding, Faraday slot analysis, surge/ESD protection, and CISPR/EN compliance.
+          </p>
+        </div>
+
+        <!-- Expertise 5 -->
+        <div class="bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 rounded-xl p-5 shadow-sm hover:border-brand-accent/50 transition-colors">
+          <div class="w-10 h-10 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1.5">Hardware & Circuit Design</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            Altium Designer multi-layer PCB design, RS422 differential line drivers with 24V/200mA short-circuit protection, and embedded C firmware flow.
+          </p>
+        </div>
+
+        <!-- Expertise 6 -->
+        <div class="bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 rounded-xl p-5 shadow-sm hover:border-brand-accent/50 transition-colors">
+          <div class="w-10 h-10 rounded-lg bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1.5">Certification & Quality Control</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            LPCB, TSE, CE, LVD & EMC product certification execution. Custom production test equipment design (accelerometers, light meters, motor drivers).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Professional Experience Timeline -->
+    <div class="space-y-6">
+      <h2 class="text-2xl font-bold text-slate-900 dark:text-white">
+        Professional Experience
+      </h2>
+
+      <div class="relative border-l-2 border-slate-200 dark:border-slate-800 pl-6 space-y-10">
+        
+        <!-- Experience Item 1: Teknim -->
+        <div class="relative group">
+          <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-brand-accent border-4 border-white dark:border-slate-900 shadow-sm"></div>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">
+                Senior Research & Development Engineer
+              </h3>
+              <p class="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                Teknim Electronic • Istanbul, Turkey
+              </p>
+            </div>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-blue-50 dark:bg-blue-950/60 text-brand-accent dark:text-blue-400 border border-blue-200/50 dark:border-blue-800/50">
+              2022 – 2024
+            </span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+            Designed and developed innovative commercial alarm and access control hardware architectures to strengthen market competitiveness.
+          </p>
+
+          <ul class="space-y-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 list-disc pl-4">
+            <li>Developed a completely new high-performance optical beam detector achieving a <strong>2.4x range improvement</strong> over local competitors.</li>
+            <li>Achieved a <strong>20% range advantage</strong> over the closest global competitor in long-distance optical fire detection.</li>
+            <li>Reduced production BOM costs by <strong>30%</strong> through advanced optical lens alignment and electronic circuit design optimizations.</li>
+            <li>Established new engineering design baselines for company-wide product strategy and customer safety expectations.</li>
+          </ul>
+        </div>
+
+        <!-- Experience Item 2: Fenac -->
+        <div class="relative group">
+          <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 border-4 border-white dark:border-slate-900 shadow-sm"></div>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-indigo-500 transition-colors">
+                Research & Development Engineer
+              </h3>
+              <p class="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                Fenac Encoders & Sensors • Istanbul, Turkey
+              </p>
+            </div>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200/50 dark:border-indigo-800/50">
+              2017 – 2022
+            </span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+            Engineered cutting-edge sensor solutions integrating hardware, firmware, and optics for both civilian industrial automation and defense applications.
+          </p>
+
+          <ul class="space-y-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 list-disc pl-4">
+            <li><strong>Proximity Detectors & Encoders:</strong> Designed magnetic and optical incremental encoders, wheel encoders, and compact contactless rotary solutions.</li>
+            <li><strong>Elevator & Escalator Safety:</strong> Developed an advanced door detection system and escalator approach sensors leveraging ST Time-of-Flight (TOF) optical distance sensors.</li>
+            <li><strong>Hardware Protection:</strong> Designed differential line driver circuits with robust short-circuit protection for RS422 and 24V/200mA industrial environments.</li>
+            <li><strong>EMC Engineering:</strong> Solved critical EMI/EMC challenges in high-noise industrial and military operating conditions to boost system reliability.</li>
+          </ul>
+        </div>
+
+        <!-- Experience Item 3: Mavili -->
+        <div class="relative group">
+          <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-cyan-500 border-4 border-white dark:border-slate-900 shadow-sm"></div>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-cyan-500 transition-colors">
+                Research & Development Engineer
+              </h3>
+              <p class="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                Mavili Electric Electronic • Istanbul, Turkey
+              </p>
+            </div>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-cyan-50 dark:bg-cyan-950/60 text-cyan-600 dark:text-cyan-400 border border-cyan-200/50 dark:border-cyan-800/50">
+              2011 – 2016
+            </span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+            Led optical design, electronic hardware engineering, and international certification processes for industrial fire detection products.
+          </p>
+
+          <ul class="space-y-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 list-disc pl-4">
+            <li><strong>Beam Detector Certification:</strong> Executed optical design, hardware development, and EMI/EMC, TSE, and LPCB certifications for 6 Beam Detector models.</li>
+            <li><strong>Flame Detector System:</strong> Completed end-to-end design and development for 4 Flame Detector models up to working prototypes.</li>
+            <li><strong>Production Test Automation:</strong> Designed specialized production test jigs including accelerometers, light meters, heat sensors, and motor drivers, reducing test durations by <strong>15%</strong> and defect rates by <strong>10%</strong>.</li>
+          </ul>
+        </div>
+
+        <!-- Experience Item 4: Freelance / Purchasing -->
+        <div class="relative group">
+          <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-600 border-4 border-white dark:border-slate-900"></div>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1">
+            <div>
+              <h3 class="text-base font-bold text-slate-900 dark:text-white">
+                Prior Design & Purchasing Management
+              </h3>
+              <p class="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                Inovenso Consulting R&D Machinery • Soypak Electronic
+              </p>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Provided freelance R&D hardware design consultancy for electrospinning machinery and managed technical electronic component purchasing operations.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Education & Training Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+      <!-- Education -->
+      <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-xl p-6 space-y-4">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-brand-accent dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+          </svg>
+          <h2 class="text-lg font-bold text-slate-900 dark:text-white">Education</h2>
+        </div>
+
+        <div class="space-y-4 text-xs sm:text-sm">
+          <div>
+            <h3 class="font-bold text-slate-900 dark:text-white">Bachelor of Electrical Engineering</h3>
+            <p class="text-slate-500 dark:text-slate-400">Uludağ University • Bursa, Turkey</p>
+          </div>
+          <div class="pt-2 border-t border-slate-200/60 dark:border-slate-700/40">
+            <h3 class="font-bold text-slate-900 dark:text-white">Erasmus Program – Electronic Engineering</h3>
+            <p class="text-slate-500 dark:text-slate-400">Università degli Studi di Salerno • Salerno, Italy</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Professional Seminars & Training -->
+      <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-xl p-6 space-y-4">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-brand-accent dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+          </svg>
+          <h2 class="text-lg font-bold text-slate-900 dark:text-white">Seminars & Training</h2>
+        </div>
+
+        <ul class="space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent dark:text-blue-400 font-bold">•</span>
+            <span><strong>Würth Elektronik:</strong> Electromagnetic Compatibility Design & Power EMI Compliance Issues Seminar</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent dark:text-blue-400 font-bold">•</span>
+            <span><strong>Agile Scrum Master:</strong> R&D Project & Product Management Training</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent dark:text-blue-400 font-bold">•</span>
+            <span><strong>Leadership & Communication:</strong> Persuasion, Diction & Team Resource Management Training</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>

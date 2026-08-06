@@ -2,7 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import ShareLinkedIn from '../components/ShareLinkedIn.astro';
 import ArticleCard from '../components/ArticleCard.astro';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
 import { getCollection } from 'astro:content';
 
 interface Props {
@@ -10,17 +10,16 @@ interface Props {
   description: string;
   pubDate: Date;
   category: string;
-  subcategory: string;
+  subcategory?: string;
   readingTime?: number;
   slug: string;
 }
 
 const { title, description, pubDate, category, subcategory, readingTime = 5, slug } = Astro.props;
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const t = useTranslations('en');
 
-const formattedDate = new Intl.DateTimeFormat(lang === 'tr' ? 'tr-TR' : 'en-US', {
+const formattedDate = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric'
@@ -28,16 +27,16 @@ const formattedDate = new Intl.DateTimeFormat(lang === 'tr' ? 'tr-TR' : 'en-US',
 
 const pageUrl = Astro.url.href;
 
-// Fetch related articles (same language, excluding current)
-const allPosts = await getCollection('blog', (post) => post.data.lang === lang);
+// Fetch related articles (excluding current)
+const allPosts = await getCollection('blog');
 const currentCleanSlug = slug.replace(/^(tr|en)\//, '');
 const relatedPosts = allPosts
-  .filter((post) => post.slug.replace(/^(tr|en)\//, '') !== currentCleanSlug && (post.data.category === category || post.data.subcategory === subcategory))
+  .filter((post) => post.slug.replace(/^(tr|en)\//, '') !== currentCleanSlug && post.data.category === category)
   .slice(0, 2);
 
 const categoryKey = `cat.${category}` as any;
-const subcategoryKey = `subcat.${subcategory}` as any;
-const backPath = lang === 'tr' ? `/${lang}/makaleler` : `/${lang}/articles`;
+const categoryLabel = t(categoryKey) || category;
+const backPath = '/articles';
 ---
 
 <BaseLayout title={`${title} | Gönül Demir`} description={description} articleDate={pubDate}>
@@ -57,11 +56,13 @@ const backPath = lang === 'tr' ? `/${lang}/makaleler` : `/${lang}/articles`;
     <header class="mb-10 pb-8 border-b border-slate-200 dark:border-slate-800">
       <div class="flex items-center gap-2 mb-4 flex-wrap">
         <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-brand-accent dark:text-blue-300 border border-blue-200/50 dark:border-blue-800/50">
-          {t(categoryKey)}
+          {categoryLabel}
         </span>
-        <span class="inline-flex items-center px-2.5 py-1 rounded text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
-          {t(subcategoryKey)}
-        </span>
+        {subcategory && (
+          <span class="inline-flex items-center px-2.5 py-1 rounded text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+            {subcategory}
+          </span>
+        )}
       </div>
 
       <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-4">

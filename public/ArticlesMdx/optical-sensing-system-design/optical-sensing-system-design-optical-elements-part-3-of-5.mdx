@@ -1,0 +1,248 @@
+---
+title: 'Optical Sensing System Design – Optical Elements (Part 3 of 5)'
+description: 'This work forms the third part of a planned five-part series on optical sensing system design, examining the fundamental building blocks of such systems from an engineering and application-oriented...'
+pubDate: '2026-01-16'
+createdDate: '2026-01-16'
+author: 'Gönül Demir'
+category: 'Optical Sensing System Design'
+language: 'en'
+draft: false
+heroImage: 'https://media.licdn.com/mediaD4D12AQHQrJOBwRUCDw'
+sourceUrl: 'https://www.linkedin.com/pulse/optical-sensing-system-design-elements-part-3-5-gonul-demir-acdrf'
+---
+
+## Introduction
+
+This work forms the third part of a planned five-part series on optical sensing system design, examining the fundamental building blocks of such systems from an engineering and application-oriented perspective.
+
+Although my formal academic background is not directly rooted in optics, optical elements that guide and manipulate light have long been of particular interest to me, leading naturally toward optoelectronics and practical optical system design. Given the breadth of the subject, this work focuses specifically on lenses, one of the most fundamental optical elements, while other components will be addressed in subsequent parts of the series.
+
+To enhance clarity and accessibility, the discussion is supported by visual illustrations and selected video resources. Alongside theoretical considerations, practical insights gained from working with real optical systems are also shared.
+
+## What Is an Optical Lens?
+
+Optical lenses are refractive optical elements designed to **focus or diverge light**. They may consist of a single optical element or multiple elements combined into a compound lens system.
+
+The primary function of a lens is to control the direction and spatial distribution of light rays in order to achieve the desired imaging or light-transmission conditions.
+
+## Basic Terminology
+
+### 1. Divergence
+
+Divergence describes how rapidly a light beam spreads angularly after leaving its source. As the beam propagates, its diameter increases; the larger the divergence, the faster this expansion occurs.
+
+- High divergence → optical power density decreases rapidly with distance
+- Collimation quality is directly related to divergence
+- Long focal-length lenses reduce divergence, while short focal-length lenses increase it.
+
+![Optical Sensing System Design – Optical Elements (Part 3 of 5) - figure 1](https://media.licdn.com/dms/image/v2/D4D12AQFVoWTDE7Pqkg/article-inline_image-shrink_1500_2232/B4DZvHQO5DJwAU-/0/1768574480561?e=1787788800&v=beta&t=dW52-p523IzKQmPTyY44RdgaH4ZPiZkYasjUo4Qr5cM)
+
+### 2. Numerical Aperture (NA)
+
+The **numerical aperture (NA)** is a fundamental optical parameter that defines how much light a lens can collect and over what range of angles. It plays a critical role in laser collimation, light collection, and resolution calculations.
+
+![Optical Sensing System Design – Optical Elements (Part 3 of 5) - figure 2](https://media.licdn.com/dms/image/v2/D4D12AQGmm3AB4p1CIA/article-inline_image-shrink_400_744/B4DZvHF5_WJkAc-/0/1768571773301?e=1787788800&v=beta&t=UNPspofgLxPsQF7pmZeK5A2gKaw02Rn-cQfToIqn8iY)
+
+Lenses with a high numerical aperture enable higher light intensity and smaller spot sizes. However, this also increases the risk of optical aberrations and makes system design more sensitive and challenging.
+
+![Optical Sensing System Design – Optical Elements (Part 3 of 5) - figure 3](https://media.licdn.com/dms/image/v2/D4D12AQFa8Ar_ILcYyg/article-inline_image-shrink_1000_1488/B4DZvHGjQmI0AQ-/0/1768571942554?e=1787788800&v=beta&t=Q4A8_w5MEiFCrQ_y-ATJxEy-oUHNmzj9bSY7EQP6gsg)
+
+### 3. Diopters
+
+The optical power of a lens increases as its focal length decreases. The **diopter** is a numerical representation of this relationship:
+
+- 1 diopter → focal length of 1 m
+- 2 diopters → focal length of 0.5 m
+- 5 diopters → focal length of 0.2 m
+
+### 4.Field of View (FOV)
+
+The **field of view (FOV)** defines the physical area that can be observed or imaged by a lens system.
+
+### 5. Working Distance (WD)
+
+The **working distance (WD)** is the distance between the lens and the object plane in an optical system. It specifies how far the object must be from the lens in order to achieve sharp focus.
+
+![Optical Sensing System Design – Optical Elements (Part 3 of 5) - figure 4](https://media.licdn.com/dms/image/v2/D4D12AQFc2yVm9WU4oA/article-inline_image-shrink_400_744/B4DZvHG9.ZJsAc-/0/1768572051837?e=1787788800&v=beta&t=dHXEIM6PH4dRXpKkxWBF8-LwqMxm7CJv2OOyyUC6rIk)
+
+### 6. Effective Focal Length (EFL)
+
+- Represents the true optical power of the lens
+- Measured from the principal plane
+- The primary focal length used in optical system design
+
+### 7. Back Focal Length (BFL)
+
+- Distance from the rear surface of the lens to the focal point
+- Critical for sensor placement
+- EFL ≠ BFL for thick lenses
+
+![Optical Sensing System Design – Optical Elements (Part 3 of 5) - figure 5](https://media.licdn.com/dms/image/v2/D4D12AQFYiPhCZxrUsg/article-inline_image-shrink_1500_2232/B4DZvHL9vMI0AU-/0/1768573361582?e=1787788800&v=beta&t=wDkKB-imjcLVELIh66WRATuX0EZW3k7Fh0aygwqdf-c)
+
+Lens focal length is generally specified as EFL. To determine sensor placement, the BFL value must be used.
+
+Focal length is wavelength-dependent; the operating wavelength must always be considered when positioning the sensor.
+
+You can use the following link for calculations. I also recommend you check out many useful pieces of information.
+
+[https://www.edmundoptics.com/knowledge-center/?Query=&CategoryId=&Filters=techTool](https://www.edmundoptics.com/knowledge-center/?Query=&CategoryId=&Filters=techTool)
+
+The following video resources are provided to support the discussion and offer additional visual insight into lens behavior and design principles.
+
+[https://www.youtube.com/watch?v=37H5jJmHh2Y](https://www.youtube.com/watch?v=37H5jJmHh2Y)
+
+### Optical Aberrations
+
+### Spherical Aberration
+
+Rays passing through the edges of a spherical lens do not focus at the same point as rays passing through the center. This reduces image sharpness and becomes more pronounced at high numerical apertures.
+
+### Chromatic Aberration
+
+In single-material lenses, different wavelengths refract by different amounts. As a result, blue and red light focus at different points.
+
+These effects limit the suitability of simple spherical lenses in high-precision applications.
+
+The video below explains aberration very well and also why Canon lenses are so good.
+
+[https://www.youtube.com/watch?v=EL9J3Km6wxI](https://www.youtube.com/watch?v=EL9J3Km6wxI)
+
+![Optical Sensing System Design – Optical Elements (Part 3 of 5) - figure 6](https://media.licdn.com/dms/image/v2/D4D12AQF8S5UuoDp0Yw/article-inline_image-shrink_1500_2232/B4DZvHMhlXJoAU-/0/1768573508719?e=1787788800&v=beta&t=8LEITNhIhoo1NpE81X6OpZvjGtEgU4oK-w5BHA0Xzl8)
+
+### Spherical Lenses: The Fundamental Building Blocks of Optics
+
+Spherical lenses are optical elements whose refracting surfaces are portions of a sphere. In these lenses, the surface curvature does not vary with distance from the optical axis; in other words, it remains constant at every point.
+
+This simple geometric structure has made spherical lenses some of the oldest and most widely used components in optical design.
+
+### Principle of Operation
+
+Spherical lenses redirect light by refracting it at their surfaces in accordance with Snell’s law. The curvature of the lens and the refractive index of the material together cause the light to:
+
+- **converge** (focusing behavior), or
+- **diverge** (diverging behavior).
+
+This process is entirely explained by **geometrical optics**.
+
+**Subtypes of Spherical Lenses and Their Usage Rationale**
+
+In optical design, the direction from which light enters a lens is of great importance. For this reason, spherical lenses are divided into different subtypes based on their surface geometries:
+
+### Spherical Lens Types
+
+### 1. Plano-Convex Lenses
+
+Plano-convex lenses have one flat surface and one convex surface. When collimated light enters through the flat surface and exits through the convex surface:
+
+- Minimal refraction occurs at the first surface
+- The main refraction happens at a single spherical surface
+- The difference between marginal and central rays is reduced
+
+This configuration minimizes spherical aberration in collimation-to-focus applications. When used in the reverse direction, spherical aberration increases significantly. Therefore, performance strongly depends on the direction of light propagation.
+
+![Optical Sensing System Design – Optical Elements (Part 3 of 5) - figure 7](https://media.licdn.com/dms/image/v2/D4D12AQH_7EDe_fuk_w/article-inline_image-shrink_1500_2232/B4DZvHMvCZG0AU-/0/1768573563470?e=1787788800&v=beta&t=MUdVcgjvhAl2rLgDK-vl9cGKMmqvR9J1O4DAw6St6us)
+
+### 2. Bi-Convex Lenses
+
+Bi-convex lenses have two outward-curving surfaces and focus parallel rays to a single focal point. Their symmetrical geometry distributes refraction evenly across both surfaces, making them suitable for systems where object and image distances are similar.
+
+They are widely used in cameras and microscopes. However, for collimated light and high-NA applications, bi-convex lenses may introduce increased spherical aberration compared to alternative geometries.
+
+### 3. Bi-Concave Lenses
+
+Bi-concave lenses have two inward-curving surfaces and a negative focal length. They cause parallel light rays to diverge, behaving as if the light originates from a virtual focal point.
+
+These lenses are commonly used for beam expansion, divergence control, and optical path compensation in laser systems, projection systems, and optical communication modules.
+
+![Optical Sensing System Design – Optical Elements (Part 3 of 5) - figure 8](https://media.licdn.com/dms/image/v2/D4D12AQF3GXQ1MwLM7g/article-inline_image-shrink_1000_1488/B4DZvHM6wcKAAQ-/0/1768573611643?e=1787788800&v=beta&t=UhiHp8hkxSYe72-dMgeDPz0lIAf3dc_by-G-zD1s1qc)
+
+### 4. Plano-Concave Lenses
+
+Plano-concave lenses consist of one flat surface and one concave surface. They diverge incoming parallel light and are used for beam expansion, divergence control, optical correction, and signal routing in fiber-optic systems.
+
+![Optical Sensing System Design – Optical Elements (Part 3 of 5) - figure 9](https://media.licdn.com/dms/image/v2/D4D12AQHd6w7mXt3oaw/article-inline_image-shrink_1500_2232/B4DZvHPBt4HwAU-/0/1768574164986?e=1787788800&v=beta&t=o6-F8TZH97JWRma9i1MmO50w1JtzkYhKuE9vxaVfLzY)
+
+## Inherent Limitations of Spherical Lenses: Aberrations
+
+The most fundamental disadvantage of spherical lenses is optical aberrations, which are a direct consequence of their surface geometry.
+
+## Special Lens
+
+### 1. Aspheric Lenses
+
+Aspheric lenses have at least one non-spherical surface. Unlike spherical lenses, their curvature varies with distance from the optical axis, allowing central and marginal rays to focus at the same point.
+
+As a result, aspheric lenses provide:
+
+- Reduced aberrations
+- Smaller spot sizes
+- Higher resolution
+
+They are widely used in laser collimation, fiber coupling, and high-NA optical systems
+
+![Optical Sensing System Design – Optical Elements (Part 3 of 5) - figure 10](https://media.licdn.com/dms/image/v2/D4D12AQGP1NxWxut52g/article-inline_image-shrink_1000_1488/B4DZvHPMJSJgAQ-/0/1768574207916?e=1787788800&v=beta&t=s7sJv5L9FpwCLThSkpign1UKyydAKEkcGwdYIICsyDM)
+
+Supplementary video materials are provided below for further reference.
+
+[https://www.youtube.com/watch?v=twMMPwKdWMc](https://www.youtube.com/watch?v=twMMPwKdWMc)
+
+[https://www.youtube.com/shorts/4KxPaf3GFrw](https://www.youtube.com/shorts/4KxPaf3GFrw)
+
+### 2. Fresnel Lenses
+
+A Fresnel lens preserves the focusing power of a conventional lens while significantly reducing thickness and weight. This is achieved by dividing the lens surface into concentric stepped rings, each acting as a small prism.
+
+### Advantages
+
+- Lightweight and thin structure
+- Suitable for large-aperture systems
+- Efficient for illumination and light collection
+
+### Disadvantages
+
+- Diffraction effects and surface artifacts
+- Limited image quality
+
+Fresnel lenses are preferred for light-guiding applications rather than high-quality imaging.
+
+![Optical Sensing System Design – Optical Elements (Part 3 of 5) - figure 11](https://media.licdn.com/dms/image/v2/D4D12AQHMD_8mHJ1H7w/article-inline_image-shrink_1000_1488/B4DZvHRFC3KYAQ-/0/1768574702418?e=1787788800&v=beta&t=Ojt6m5Fs_VcCQSt7e8YGHtBJwPYdcC7e_TegQpz-B8Y)
+
+### 3. Achromatic Lenses
+
+Achromatic lenses are multi-element lenses, typically consisting of one positive and one negative element made from different glass types. By exploiting differences in dispersion, two wavelengths are brought to the same focal point, significantly reducing chromatic aberration.
+
+They are essential in white-light imaging systems.
+
+A supplementary video illustrating Fresnel lenses is provided below.
+
+[https://www.youtube.com/watch?v=pNOGMfmti4w](https://www.youtube.com/watch?v=pNOGMfmti4w)
+
+![Optical Sensing System Design – Optical Elements (Part 3 of 5) - figure 12](https://media.licdn.com/dms/image/v2/D4D12AQFLU4PfLRx7zA/article-inline_image-shrink_400_744/B4DZvHRQkKJwAc-/0/1768574749902?e=1787788800&v=beta&t=gtHsCZJy0S5fqlP8T-tZibkS_yGnJ4dj9uGOBeQfAlw)
+
+I'm including an explanatory video about achromatic lenses at the following link:
+
+[https://www.youtube.com/watch?v=uloNSzBIaKU](https://www.youtube.com/watch?v=uloNSzBIaKU)
+
+### Example Application: Light Collimation
+
+At the end of this article, I briefly touch on the concept of collimation, often referred to in practice as “sending light to infinity.” The video below provides a clear, hands-on summary of the key concepts discussed throughout the article.
+
+From my own experience, I’ve observed that functional collimation setups can be built using Thorlabs components even without advanced optical design expertise. In this sense, the technical resources offered by manufacturers such as Edmund Optics and Thorlabs are extremely valuable references for creating simple yet effective optical designs.
+
+The term “infinity” here does not represent a physical ideal, but rather light that is collimated within acceptable divergence limits for practical applications. The main objective in such systems is to select the smallest possible divergence angle based on the transmission distance and the target illumination area. This approach allows the beam to propagate in a more controlled manner over distance, leading to more efficient and predictable illumination.
+
+[https://www.youtube.com/watch?v=z_n7GKdTt0Q&t=41s](https://www.youtube.com/watch?v=z_n7GKdTt0Q&t=41s)
+
+### Conclusion
+
+This work examined commonly used lens types in optical sensing systems, emphasizing their operating principles, advantages, and practical implications. In practice, lens geometry and placement often exert a greater influence on overall system performance than theoretical calculations alone.
+
+While selecting an appropriate lens is essential, proper implementation and integration ultimately determine the achievable system performance.
+
+🐈‍⬛Finally, I would like to thank the lenses that helped shape my perspective.
+
+**Reference Sources**
+
+- CLZ Optics, *Why Do Plano-Convex Lenses Reduce Spherical Aberration?*[https://www.clzoptics.com/news/why-do-plano-convex-lenses-reduce-spherical-aberration.html](https://www.clzoptics.com/news/why-do-plano-convex-lenses-reduce-spherical-aberration.html)
+- Thorlabs, *Optical Systems* Technical Overview [https://www.thorlabs.com/optical-systems](https://www.thorlabs.com/optical-systems)
+- Edmund Optics, *Knowledge Center*[https://www.edmundoptics.com/knowledge-center](https://www.edmundoptics.com/knowledge-center)

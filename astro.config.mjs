@@ -8,14 +8,6 @@ import rehypeKatex from 'rehype-katex';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://gonuldemir.com',
-  i18n: {
-    defaultLocale: 'tr',
-    locales: ['tr', 'en'],
-    routing: {
-      prefixDefaultLocale: true,
-      redirectToDefaultLocale: true
-    }
-  },
   integrations: [
     tailwind({
       applyBaseStyles: false

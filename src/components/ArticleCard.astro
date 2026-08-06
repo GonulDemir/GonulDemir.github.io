@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
 
 interface Props {
   title: string;
@@ -7,43 +7,43 @@ interface Props {
   pubDate: Date;
   slug: string;
   category: string;
-  subcategory: string;
+  subcategory?: string;
   readingTime?: number;
 }
 
 const { title, description, pubDate, slug, category, subcategory, readingTime = 5 } = Astro.props;
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const t = useTranslations('en');
 
-const formattedDate = new Intl.DateTimeFormat(lang === 'tr' ? 'tr-TR' : 'en-US', {
+const formattedDate = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
   month: 'short',
   day: 'numeric'
 }).format(pubDate);
 
 const cleanSlug = slug.replace(/^(tr|en)\//, '');
-const articleUrl = lang === 'tr' ? `/${lang}/makaleler/${cleanSlug}` : `/${lang}/articles/${cleanSlug}`;
+const articleUrl = `/articles/${cleanSlug}`;
 const categoryKey = `cat.${category}` as any;
-const subcategoryKey = `subcat.${subcategory}` as any;
+const categoryLabel = t(categoryKey) || category;
 ---
 
 <article
   class="group relative flex flex-col bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-6 shadow-sm hover:shadow-md hover:border-brand-accent/50 dark:hover:border-brand-accent/50 transition-all duration-200"
   data-category={category}
-  data-subcategory={subcategory}
+  data-subcategory={subcategory || ''}
   data-title={title.toLowerCase()}
   data-description={description.toLowerCase()}
 >
   <div class="flex items-center gap-2 text-xs mb-3 flex-wrap">
     <!-- Category Badge -->
     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-brand-accent dark:text-blue-300 border border-blue-200/50 dark:border-blue-800/50">
-      {t(categoryKey)}
+      {categoryLabel}
     </span>
-    <!-- Subcategory Badge -->
-    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300">
-      {t(subcategoryKey)}
-    </span>
+    {subcategory && (
+      <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300">
+        {subcategory}
+      </span>
+    )}
     <span class="text-slate-300 dark:text-slate-600 ml-auto">•</span>
     <time datetime={pubDate.toISOString()} class="text-xs text-slate-500 dark:text-slate-400">
       {formattedDate}
@@ -70,7 +70,7 @@ const subcategoryKey = `subcat.${subcategory}` as any;
     </span>
 
     <span class="inline-flex items-center font-medium text-brand-accent dark:text-blue-400 group-hover:translate-x-1 transition-transform">
-      {lang === 'tr' ? 'Oku' : 'Read'}
+      Read
       <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
       </svg>

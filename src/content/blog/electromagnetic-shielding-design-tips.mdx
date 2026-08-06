@@ -1,0 +1,193 @@
+---
+title: Electromagnetic Shielding Design Tips
+description: At the beginning of 2026, I am starting with a topic that I have wanted
+  to write about for a long time. In order to maintain continuity in the subject,
+  it will be beneficial to review my articles...
+pubDate: '2026-01-09'
+createdDate: '2026-01-09'
+author: Gönül Demir
+category: electromagnetic-compatibility
+language: en
+draft: false
+heroImage: https://media.licdn.com/mediaD4D12AQHP1oQXFCNUkw
+sourceUrl: https://www.linkedin.com/pulse/electromagnetic-shielding-design-tips-gonul-demir-iqt7f
+---
+
+
+At the beginning of 2026, I am starting with a topic that I have wanted to write about for a long time. In order to maintain continuity in the subject, it will be beneficial to review my articles titled **“The Effect of Slots and Openings in a Faraday Cage on EMC”** and **“Honeycomb-Like Solutions for EMC”** before this article.
+
+I wanted to share what I have learned about electromagnetic shielding design without overwhelming the reader with complex concepts and by using as plain a language as possible.
+
+### 1. Definition of Electromagnetic Shielding
+
+Shielding is a physical barrier consisting of conductive or magnetic materials placed between two environments in order to prevent the transfer of electromagnetic fields from one region to another.
+
+In electronic circuits, shielding is applied for two main purposes: to limit the electromagnetic energy emitted by an interference source from propagating to the external environment,
+
+![Electromagnetic Shielding Design Tips - figure 1](https://media.licdn.com/dms/image/v2/D4D12AQFrVy8pvFmgEw/article-inline_image-shrink_400_744/B4DZuiGNC6LkAY-/0/1767951094343?e=1787788800&v=beta&t=KxEPIeWqCWbGSmUVHfxL32vOjOPu-3QJERqlXbcw-TE)
+
+And to prevent noise coming from the external environment from reaching sensitive circuits.
+
+![Electromagnetic Shielding Design Tips - figure 2](https://media.licdn.com/dms/image/v2/D4D12AQH61lYIQqt9ZA/article-inline_image-shrink_400_744/B4DZuiGVvEJMAY-/0/1767951130054?e=1787788800&v=beta&t=w6LlQrHfP9y5kuH27sSJcx1i3SxsiQQ8NlXpPT0kTuk)
+
+In other words, shielding is one of the most fundamental methods used in combating electromagnetic interference (EMI). It is preferred either to contain noise at its source or to protect the receiver.
+
+So, what is the noise referred to here? The fundamental cause of noise is the uncontrolled propagation of the electric field (E) and magnetic field (H) components generated in circuits. These two fields always exist together; however, they do not always have the same intensity, and which component is dominant directly determines the shielding method to be applied.
+
+### 2. Why Does the Electric Field (E) Occur?
+
+The electric field arises from the voltage difference between two points. As the voltage level increases, and especially when the voltage changes rapidly, the propagation of the electric field into the surrounding environment becomes more pronounced.
+
+Simply stated:
+
+High voltage → strong electric field
+
+Everyday examples:
+
+- RF transmitters
+- Antenna terminals
+- High-speed digital lines
+
+In such structures, due to the rapid change in voltage, the electric field can easily spread into the surroundings.
+
+### 3. Why Does the Magnetic Field (H) Occur?
+
+The magnetic field is generated as a result of current flowing through a conductor. As the current level increases, the strength of the magnetic field also increases.
+
+Simply:
+
+High current → strong magnetic field
+
+Everyday examples:
+
+- Transformers
+- Motor windings
+- Power inductors
+
+In these applications, the magnetic field becomes dominant due to current density.
+
+### 4. Near Field and Far Field
+
+The field surrounding an electromagnetic source is examined in two regions—near field and far field—depending on the distance from the source.
+
+### Near Field
+
+This is the region very close to the source (r &lt; λ / 2π). In this region, since the electric and magnetic fields have not yet formed a complete electromagnetic wave, they can behave independently of each other.
+
+Examples:
+
+- 1 kHz → λ ≈ 300 km → near-field boundary ≈ 47 km
+- 1 GHz → λ ≈ 0.3 m → near-field boundary ≈ 4.7 cm
+
+As the frequency decreases, it is observed that the near-field region becomes significantly wider. Therefore, when shielding in the near field, it is essential to consider which field component (E or H) is dominant.
+
+### Far Field
+
+When the distance from the source exceeds r &gt; λ / 2π, the electric and magnetic fields transform into a plane wave propagating together. In this region, the E/H ratio is constant and approximately 377 Ω.
+
+In the far field, the electric and magnetic field components are attenuated simultaneously.
+
+The difference between the near field and the far field can be likened to standing right next to a loudspeaker versus standing at the other end of a room. When standing right next to the speaker, the bass vibrations and direction of the sound are perceived separately, whereas as one moves farther away, the sound is perceived as a single whole. Similarly, when very close to an electromagnetic source, the electric and magnetic fields may behave independently, but once sufficiently far from the source, these fields become a single electromagnetic wave propagating together.
+
+### 5. Shielding of Electric and Magnetic Fields
+
+### Electric Field
+
+In electric field shielding, the key determining material property is relative conductivity (σᵣ). Metals with high conductivity effectively reflect the electric field by accumulating charge on their surface. For this reason, even a thin conductive layer can provide strong shielding at high frequencies.
+
+### Magnetic Field
+
+Shielding magnetic fields is more difficult compared to electric fields. Especially at low frequencies, relative magnetic permeability (μᵣ) plays a critical role in magnetic field shielding. Materials with high permeability attract magnetic flux onto themselves, preventing the field from reaching the protected region.
+
+This situation typically occurs in:
+
+- Transformers, motors (50–60 Hz applications)
+
+As frequency increases, the magnetic field also begins to concentrate toward the surface. In this case, both magnetic permeability and conductivity become effective together, and the performance of metal shields improves.
+
+### 6. Relative Conductivity and Relative Permeability Values of Different Materials
+
+![Electromagnetic Shielding Design Tips - figure 3](https://media.licdn.com/dms/image/v2/D4D12AQEjfaSkVgG11A/article-inline_image-shrink_1500_2232/B4DZuiMFQUKgAY-/0/1767952635500?e=1787788800&v=beta&t=BLQvYK84b4vz_Nrz4gvLK4WAlOUhkBX51VNIc5djYKQ)
+
+### What Is Mu-Metal?
+
+Mu-metal is a special alloy containing a high proportion of nickel (75–80%) and iron, with very high magnetic permeability.
+
+It can effectively guide weak and low-frequency magnetic fields; however, since it enters saturation quickly, it is not preferred on its own in strong fields.
+
+It is generally used as an inner layer in multilayer shielding structures.
+
+### 7. Shielding Effectiveness
+
+Shielding effectiveness expresses the extent to which an electromagnetic shield attenuates unwanted fields. This attenuation does not occur through a single mechanism, but rather through the combined action of multiple physical effects.
+
+**Reflection:** Due to impedance mismatch, a portion of the electromagnetic wave is reflected back from the surface of the shield. This mechanism is particularly effective for electric fields and high-frequency fields.
+
+**Absorption:** Field components that enter the shield are attenuated while propagating through the material due to conductive and magnetic losses. This effect is directly related to the concept of skin depth.
+
+**Magnetic flux guidance:** Especially at low frequencies, magnetic fields are guided through materials with high magnetic permeability and diverted away from the protected region. In this case, the goal is not to “eliminate” the field, but to reroute it through an alternative path.
+
+![Electromagnetic Shielding Design Tips - figure 4](https://media.licdn.com/dms/image/v2/D4D12AQECr1rwThHlQA/article-inline_image-shrink_1500_2232/B4DZuiMYnGH4AU-/0/1767952714948?e=1787788800&v=beta&t=yQtNyCWr1LLS1dPlYRoxFr0115JhaVnr6hYbjf75w7o)
+
+### Skin Depth (δ) Concept
+
+Skin depth (δ) refers to the characteristic depth at which an electromagnetic field can penetrate into a conductive material and at which the field strength drops to approximately 37% (1/e) of its value at the surface.
+
+![Electromagnetic Shielding Design Tips - figure 5](https://media.licdn.com/dms/image/v2/D4D12AQGINFO4D1WUlA/article-inline_image-shrink_400_744/B4DZuiMpCgJMAY-/0/1767952781913?e=1787788800&v=beta&t=P8pX0JIzFVcGb3u7DiT7pKtAMEfQsYzzFRlJxUHZXjc)
+
+### Skin Depth for Different Material
+
+![Electromagnetic Shielding Design Tips - figure 6](https://media.licdn.com/dms/image/v2/D4D12AQGz_C9Cnc4_rw/article-inline_image-shrink_1000_1488/B4DZuiONKoLkAQ-/0/1767953192007?e=1787788800&v=beta&t=ESCOgw9LnMcOYoL-HT3Wlz5tNDLYfjPmRXbBGsRX0GI)
+
+These values show the following: as frequency increases, skin depth decreases rapidly, and at high frequencies even a thin shield provides high absorption loss. At low frequencies, however, absorption is weak.
+
+Magnetic saturation refers to the condition in which a magnetic shielding material can no longer carry additional magnetic flux. Beyond this point, the effective magnetic permeability of the material decreases rapidly, and accordingly, the shielding performance is significantly reduced. In the graph below, you can observe the magnetic saturation behavior of different ferromagnetic materials.
+
+![Electromagnetic Shielding Design Tips - figure 7](https://media.licdn.com/dms/image/v2/D4D12AQHIXEDwAo5KXA/article-inline_image-shrink_400_744/B4DZuiObZ_HwAY-/0/1767953250548?e=1787788800&v=beta&t=EWq8jH9vgYK0cTr59iRNkENnUvak54LJOlifIRyuOok)
+
+### 8.1 Indicators of Saturation
+
+In the case of magnetic saturation, the following indications are observed in practice:
+
+- No significant reduction in EMI level is observed despite increasing the shield thickness.
+- The shield is effective only in weak magnetic fields and loses its effectiveness in strong fields.
+- As the shield is placed closer to the source, the shielding performance rapidly decreases.
+
+These indications suggest that the problem originates from material saturation rather than geometric leakage.
+
+### 8.2 Methods for Dealing with Saturation
+
+The following approaches are used to reduce the risk of magnetic saturation and to increase shielding effectiveness:
+
+- Multilayer shield structures
+- Use of materials with high saturation tolerance in the first layer close to the source
+- Preference for materials with high magnetic permeability in the inner layers
+- Reducing magnetic flux density by leaving gaps between layers
+
+This approach delays saturation and increases overall shielding effectiveness by distributing the magnetic flux among the layers.
+
+![Electromagnetic Shielding Design Tips - figure 8](https://media.licdn.com/dms/image/v2/D4D12AQHWE-VdeqSvWw/article-inline_image-shrink_400_744/B4DZuiO_.qJMAc-/0/1767953400367?e=1787788800&v=beta&t=XdXTQCuIZEeBao3SVBVzAAQH4E9pjJWuOB4lncLQVZo)
+
+![Electromagnetic Shielding Design Tips - figure 9](https://media.licdn.com/dms/image/v2/D4D12AQGD3bF26lhGhw/article-inline_image-shrink_1000_1488/B4DZuiPIiUI4AQ-/0/1767953437436?e=1787788800&v=beta&t=KV4eLnOeniQbqNWfd0rLltpDqdO3ykkCbz5AioxzNXk)
+
+### 9. Effect of Geometry
+
+Shielding effectiveness depends not only on material properties but also on the geometry of the shield. In particular, sharp corners can cause magnetic flux to concentrate in these regions, creating local saturation zones and negatively affecting shielding performance.
+
+The effects of slots and openings on EMC are not discussed in detail in this article. For this topic, it is recommended to review the relevant articles previously published.
+
+### 10. Summary
+
+In this article, I addressed the electromagnetic shielding approach starting from the question, “What are we protecting first, and from what?” Whether the electric field or the magnetic field is dominant in the region to be protected, and whether the relationship between the source and the receiver corresponds to the near field or the far field, are the fundamental factors that determine the correct shielding method.
+
+In addition, I aimed to show that material selection is not limited solely to conductivity, and that depending on frequency, magnetic permeability, shield thickness, and geometry play roles that are at least as critical as material selection itself. In short, this article approaches the electromagnetic shield not as a “metal box that cures all problems,” but as an engineering tool that must be designed under the right conditions and with the right approach.
+
+### References
+
+Henry W. Ott, *Noise Reduction Techniques in Electronic Systems*
+
+### Useful Videos
+
+- [**https://www.youtube.com/watch?v=l8x8n9Ithac**](https://www.youtube.com/watch?v=l8x8n9Ithac)
+- [**https://www.youtube.com/watch?v=XoVW7CRR5JY**](https://www.youtube.com/watch?v=XoVW7CRR5JY)
+- [**https://www.youtube.com/watch?v=2U1o66bs_Qg&t=3s**](https://www.youtube.com/watch?v=2U1o66bs_Qg&t=3s)

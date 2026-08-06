@@ -1,0 +1,436 @@
+---
+title: 'Where to Start with CE, EMC, LVD and RoHS in Electronic Products ?'
+description: 'Fundamentals of CE + EMC/EMI Certification**'
+pubDate: '2025-11-28'
+createdDate: '2025-11-28'
+author: 'Gönül Demir'
+category: 'Product Verification and Certification'
+language: 'en'
+draft: false
+sourceUrl: 'https://www.linkedin.com/pulse/where-start-ce-emc-lvd-rohs-electronic-products-gonul-demir-2r2yf'
+---
+
+![Where to Start with CE, EMC, LVD and RoHS in Electronic Products ? - figure 1](https://media.licdn.com/dms/image/v2/D4D12AQEs31jFCq1IDw/article-inline_image-shrink_1500_2232/B4DZrLoYe.GwAY-/0/1764352954714?e=1787788800&v=beta&t=qDlPXdQvxkVCgO58HeaGPU_NrpS9_f_4ZDV3lcRwSVg)
+
+## \*\*How Do We Prepare a Product for the Market?
+
+Fundamentals of CE + EMC/EMI Certification\*\*
+
+Hello,
+
+I have been working as an R&D engineer for nearly 14 years, mainly in hardware design, testing, product development, prototyping, and certification processes.
+
+During this period, I had the chance to observe the real problems products face — not only in design but also in laboratories and in the field.
+
+Recently, through the EMC/EMI Design Course by Dario Fresu, which I am still attending, I have been deepening my knowledge and compiling my notes regularly.
+
+I now want to turn this accumulated knowledge into a series of articles.
+
+The main goal of this series is to present a roadmap especially for engineers and teams who are new to product development or preparing to bring a product to market.
+
+This first series will last for a total of 3 weeks and will be built around certification, standards, and testing. To reach as many people as possible, I will publish my articles both in Turkish and English.
+
+So this section will focus mainly on understanding **what** we need to do and **why**.
+
+In the next series, I will address EMC Design tips.
+
+## 1. Why Does Certification Exist?
+
+Designing an electronic product means making it work. But bringing a product to the market is a much greater responsibility.
+
+Every product that enters the market must guarantee three things:
+
+1. It must not harm the user (safety)
+2. It must not disturb other devices and must not be affected by them (EMC)
+3. It must meet the legal requirements of the market (compliance)
+
+Certification exists exactly at the intersection of these three needs.
+
+*(A working product ≠ A market-ready product)*
+
+A product “working” and a product “being ready for market” are not the same thing.
+
+A device may work perfectly in the laboratory but:
+
+- It may freeze in the field due to interference
+- It may cause electric shock to the user
+- It may cause fire
+- It may disrupt communication of other devices
+- It may shut down due to mains disturbances
+- It may malfunction under RF interference
+
+None of these risks can be evaluated by checking whether the product “works.”
+
+That is why compliance tests are performed:
+
+- Is the product safe? (LVD)
+- Does the product disturb the environment? (EMC – Emission)
+- Is the product disturbed by the environment? (EMC – Immunity)
+- Does the product meet the legal requirements of the relevant market? (CE, FCC, etc.)
+
+**The simplest explanation of certification:** Certification is the process of proving that the product will operate safely in the real world.
+
+## 2. What Does the CE Mark Actually Mean?
+
+CE is **not** a quality mark.
+
+CE is **not** a “European approval.”
+
+A laboratory certificate is also **not** CE.
+
+CE simply states:
+
+**“This product complies with all relevant European directives.”**
+
+These directives include:
+
+⚡ EMC Directive
+
+🔌 LVD – Low Voltage Directive
+
+📡 RED – Radio Equipment Directive
+
+♻️ RoHS
+
+⚙️ Machinery Directive
+
+🧸 Toy Directive
+
+Depending on the type of product, one or more directives may apply.
+
+And the critical point:
+
+**The CE mark is applied by the manufacturer.** But to apply it, the manufacturer must keep the technical evidence in the file.
+
+## 3. ♻️ What Is RoHS?
+
+RoHS is a European Union directive that limits hazardous substances used in electronic products.
+
+It is a mandatory part of CE marking.
+
+### 3.a Purpose of RoHS
+
+Ensuring that the product does not contain chemicals harmful to health or the environment.
+
+### 3.b 🚫 Which Substances Are Restricted?
+
+A total of 10 substances are restricted:
+
+- Lead (Pb) – 1000 ppm
+- Mercury (Hg) – 1000 ppm
+- Cadmium (Cd) – 100 ppm
+- Cr6+ – 1000 ppm
+- PBB / PBDE – 1000 ppm
+- DEHP, BBP, DBP, DIBP – 1000 ppm
+
+### 3.c 🔬 How Is RoHS Tested?
+
+1. **XRF Screening (Fast preliminary check)** 📌 Fast, surface analysis, pre-screening
+2. **Chemical analysis – IEC 62321 (Definitive test)** 📌 Sample is dissolved and laboratory chemical analysis performed.
+
+### 3.c 📁 Where Is RoHS Mandatory?
+
+RoHS is mandatory for all electronic products sold in the EU:
+
+· 📶 IoT devices
+
+· 💡 Lighting
+
+· 🔋 Power supplies
+
+· 🏭 Industrial devices
+
+(Some exemptions may apply for military/medical devices.)
+
+### 3.d ❗ What RoHS Is NOT
+
+❌ Not an electrical test ❌ Not an EMC or LVD test ❌ Not a performance test
+
+✔ It only checks **material chemistry**.
+
+## 4. EMC and EMI: Two Very Confused Concepts
+
+- **EMI (Electromagnetic interference)** → the problem itself
+- **EMC (Electromagnetic compatibility)** → the science of managing this problem
+
+A device:
+
+- Disturbs the environment → emits EMI
+- Is disturbed by the environment → receives EMI
+- Neither disturbs nor is disturbed → compliant with EMC
+
+Therefore, EMC has two parts:
+
+✔ **Emission** (Radiated / Conducted Emissions) Noise emitted by the device.
+
+✔ **Immunity** (Resistance / Endurance) The device’s resistance to external interference.
+
+Failing EMC tests is one of the most expensive mistakes in the market.
+
+## 5. What Is the LVD (Low Voltage Directive) For?
+
+LVD tests evaluate all key points related to user safety, such as:
+
+⚡ Electric shock
+
+🔒 Insulation fault
+
+🔌 Leakage current
+
+🌡️ Overheating
+
+🔥 Fire risk
+
+🛠️ Abnormal operating conditions
+
+The purpose of these tests:
+
+To protect the user, the product, and the environment.
+
+LVD tests do **not** measure a device’s performance. They are purely **safety tests**.
+
+EMC and LVD are **not** performance tests and do **not** measure device performance.
+
+Meaning:
+
+· 🎯 Sensitivity
+
+· ⚡ Speed
+
+· ✔️ Accuracy
+
+· 📊 Measurement quality
+
+· 🔋 Efficiency
+
+· 💻 Software functions
+
+None of these are the subject of LVD/EMC.
+
+EMC and LVD ask only:
+
+- “Is this product operating safely?”
+- “Is this product compatible with other devices?”
+
+Performance testing → a completely different domain.
+
+## 6. Where Should I Get Certification and Why Does It Differ by Country?
+
+When designing a product, one of the first questions is: **“Where should I get the certification?”**
+
+The answer is simpler than it seems: You must obtain the certification required by the country in which you will sell the product.
+
+And yes, certifications differ from country to country.
+
+### Why?
+
+1️⃣ **Each country has its own safety law.** Standards are the technical counterpart of national safety laws. Law differs → standard differs.
+
+2️⃣ **EMC and RF environments are not the same.** Countries have different:
+
+· 🔌 Grid structures · 📡 RF band regulations · 🏭 Industrial density
+
+So emission and immunity limits vary.
+
+3️⃣ **Trade policies play a role.** Countries set their own standards to protect their laboratories and industries.
+
+Therefore we have systems such as:
+
+· 🇪🇺 CE (EN/IEC) · 🇺🇸 FCC + UL · 🇨🇳 CCC · 🇯🇵 PSE / VCCI · 🇰🇷 KC
+
+## 6.1 What Determines Which Certification We Must Obtain?
+
+The most confusing question:
+
+**“Which certification does my product need?”**
+
+The answer is determined by **three simple criteria**. If you answer these correctly, the certification path becomes clear.
+
+### 1️⃣ In Which Country Will You Sell the Product?
+
+(The primary determinant of certification)
+
+Each country uses its own certification system. The same device may require entirely different tests depending on the market.
+
+### Frequently Used Global Systems
+
+🇪🇺 **European Union + Türkiye** 🔖 Certificate: CE 📘 Standards: EN / IEC
+
+🇺🇸 **USA** 🔖 Certificate: FCC (EMC/EMI) + UL (Safety) 📘 Standards: CFR 47, UL Standards
+
+🇨🇦 **Canada** 🔖 Certificate: ISED + cUL 📘 Standards: ICES, RSS
+
+🇬🇧 **United Kingdom** 🔖 Certificate: UKCA 📘 Standards: BS EN
+
+🇨🇳 **China** 🔖 Certificate: CCC 📘 Standards: GB / GB-T
+
+🇯🇵 **Japan** 🔖 Certificate: PSE (Safety) + VCCI (EMC) 📘 Standards: JIS
+
+🇰🇷 **South Korea** 🔖 Certificate: KC 📘 Standards: KN / KS
+
+🇦🇺🇳🇿 **Australia & New Zealand** 🔖 Certificate: RCM 📘 Standards: AS/NZS
+
+🇮🇳 **India** 🔖 Certificate: BIS 📘 Standards: IS
+
+### Same device → Different rules depending on country
+
+➡ You cannot enter Europe without CE ➡ You cannot enter the USA without FCC ➡ You cannot enter China without CCC
+
+## 2️⃣ What Type of Device Is It?
+
+(The product family → determines the EN/IEC standard)
+
+This step determines **80% of the required tests**.
+
+### Common device categories & standards
+
+🖥 **IT / Multimedia / IoT Devices** Standard: EN 55032 (EMC), EN 55035 (Immunity), EN 62368-1 (Safety)
+
+🔧 **Measurement / Control Devices** Standard: EN 61326-1 (EMC), CISPR 11 (Emission), EN 61010-1 (Safety)
+
+🏠 **Household Electrical Appliances** Standard: EN 55014-1/-2 (EMC), EN 60335-1 (Safety)
+
+💡 **Lighting Equipment** Standard: EN 55015 (EMC), EN 60598 (Safety)
+
+⚙️ **Industrial Electronics** Standard: EN 61000-6-2 (Immunity), EN 61000-6-4 (Emission)
+
+📡 **RF / Wireless Communication Devices** Standard: EN 300 328, EN 301 489 series, EN 300 220
+
+## 6.2 Where Do We Check Standards?
+
+Selecting the correct standard is not enough — You must check the **latest version** from an official source.
+
+### 🌍 1) Europe (CE – EN Standards)
+
+✔ **CENELEC**[https://standards.cencenelec.eu](https://standards.cencenelec.eu)
+
+✔ **ETSI – Wireless / RED Standards**[https://www.etsi.org/standards](https://www.etsi.org/standards)
+
+✔ **TSE – Turkish Standards**[https://www.tse.org.tr/belgelendirme-hizmetleri/](https://www.tse.org.tr/belgelendirme-hizmetleri/)
+
+### 🇺🇸 2) USA (FCC + UL)
+
+✔ **FCC EMC / RF Standards**[https://www.ecfr.gov/current/title-47](https://www.ecfr.gov/current/title-47)
+
+✔ **UL Safety Standards**[https://www.shopulstandards.com](https://www.shopulstandards.com)
+
+### General Rules
+
+· RoHS → Mandatory for all electronics sold in the EU · Conducted + Radiated → Mandatory for most products under EMC · Flicker + Harmonics → Only for 220V mains products · LVD → Applied to 50–1000VAC / 75–1500VDC · RED → Required for WiFi / Bluetooth / LoRa / GSM devices
+
+## 🔵 1) WiFi IoT Sensor (5V)
+
+📑 **Directives:** EMC • RED • RoHS ❓ **Why?** — WiFi → RED required — 5V → LVD not applicable
+
+🧪 **Tests:** 📡 CE / RE ⚡ ESD 🌩️ EFT 🔌 Surge 📶 RF Immunity 📡 RF Power & Spurious ♻️ RoHS
+
+## 🟣 2) Industrial Modbus Gateway (24V)
+
+📑 **Directives:** EMC • RoHS ❓ **Why?** — Industrial environment → high EMC immunity — 24V → No LVD
+
+🧪 **Tests:** 📡 CE / RE ⚡ ESD 🌩️ EFT 🔌 Surge 📶 RF Immunity 🧲 Magnetic Field Immunity ♻️ RoHS
+
+## 🟡 3) 220V LED Street Luminaire
+
+📑 **Directives:** EMC • LVD • RoHS ❓ **Why?** — 220V → LVD safety — Mains connection → Harmonics & Flicker
+
+🧪 **Tests:** 📡 CE / RE ⚙️ Harmonic (EN 61000-3-2) 💡 Flicker (EN 61000-3-3) ⚡ ESD 🌩️ EFT 🔌 Surge 🔋 Hi-Pot 🔥 Glow-wire ♻️ RoHS
+
+---
+
+## 🔴 4) Bluetooth Headset (Battery Powered)
+
+📑 **Directives:** EMC • RED • RoHS ❓ **Why?** — Bluetooth → RED — Battery powered → No LVD
+
+🧪 **Tests:** 📡 CE / RE ⚡ ESD 🌩️ EFT 📶 RF Immunity 📡 RF Power & Spurious ♻️ RoHS
+
+---
+
+## \*\*6.3 🏁 Where Do We Apply for Certification?
+
+Where Are Tests Performed?\*\*
+
+Let’s clarify this first:
+
+🎯 **There is no such thing as an institution that “issues a CE certificate.”**
+
+CE is **not** a certificate given by an organization. CE is declared by the manufacturer. (DoC = Declaration of Conformity)
+
+The process is:
+
+1. Perform tests at an accredited laboratory
+2. Obtain the test reports
+3. Prepare your technical file
+4. Issue your own CE Declaration (DoC)
+
+Done.
+
+⛔ There is **no CE-issuing institution**. Only for RF products (RED), a Notified Body may be required.
+
+## 6.4 🧪 Where Are Tests Performed?
+
+For EMC, LVD, and RED tests to be officially valid, they must be performed in:
+
+⭐ **An accredited laboratory**
+
+## 6.5 🏛 What Is an Accredited Laboratory?
+
+Accreditation means that the laboratory is officially approved by an internationally recognized body to perform these tests.
+
+The globally accepted system:
+
+👉 **ISO/IEC 17025 Accreditation**
+
+In Türkiye, this accreditation is issued by:
+
+🇹🇷 **TÜRKAK (Turkish Accreditation Agency)**[https://www.turkak.org.tr/](https://www.turkak.org.tr/)
+
+In Europe:
+
+🇪🇺 **EA – European Accreditation**[https://european-accreditation.org](https://european-accreditation.org)
+
+Globally:
+
+🌍 **ILAC – International Laboratory Accreditation Cooperation**[https://ilac.org](https://ilac.org)
+
+**Rule:** If a lab has ILAC/EA/TÜRKAK accreditation → its results are accepted **worldwide**.
+
+---
+
+## 6.6 🌍 Are Tests Performed in Türkiye Valid in Europe?
+
+✔ Yes, **100% valid.**
+
+Condition: The laboratory must be TÜRKAK-accredited and TÜRKAK must be a member of ILAC-MRA (it is).
+
+An accredited test report issued in Türkiye is accepted in: Germany, France, Netherlands, Italy — all EU countries.
+
+No need for additional European testing.
+
+## 6.7 🔍 How Do We Find Accredited Laboratories?
+
+🇹🇷 **TÜRKİYE — TÜRKAK Accredited Lab List** (Official list of labs performing EMC, LVD, RF) [https://www.turkak.org.tr/kapsam/deney-laboratuvarlari/](https://www.turkak.org.tr/kapsam/deney-laboratuvarlari/)
+
+Search with keywords such as: · “EMC” · “Electrical Safety” · “LVD” · “RADIO” · “ISO 17025”
+
+🇪🇺 **EUROPE — EA Accredited Lab List**[https://european-accreditation.org/accredited-bodies/](https://european-accreditation.org/accredited-bodies/)
+
+🌍 **WORLD — ILAC Search**[https://ilac.org/signatory-search/](https://ilac.org/signatory-search/)
+
+## 6.8 CE Certification Process – Summary
+
+You are not *receiving* a CE certificate from an authority. You **declare CE yourself**.
+
+But in order to make this declaration, you must have the **required tests and documentation** completed.
+
+The following **five steps apply to every product**:
+
+![Where to Start with CE, EMC, LVD and RoHS in Electronic Products ? - figure 2](https://media.licdn.com/dms/image/v2/D4D12AQHuccL42Ibjnw/article-inline_image-shrink_1500_2232/B4DZrLqR3gJAAU-/0/1764353460195?e=1787788800&v=beta&t=CrZ_Jkx-lXAMqcfIpG89xPLbx5O1gD99f3pkoqQyEcI)
+
+## Conclusion
+
+This week we clarified why an electronic product must undergo certification before entering the market, what CE–EMC–EMI–LVD–RoHS mean, and why certification systems differ between countries.
+
+Next week, we will examine **EMC and LVD tests** more closely — the core topics of compliance.
+
+See you soon.

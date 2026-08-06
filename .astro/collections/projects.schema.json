@@ -27,11 +27,7 @@
           ]
         },
         "lang": {
-          "type": "string",
-          "enum": [
-            "tr",
-            "en"
-          ]
+          "type": "string"
         },
         "technologies": {
           "type": "array",
@@ -55,7 +51,6 @@
         "title",
         "description",
         "pubDate",
-        "lang",
         "technologies"
       ],
       "additionalProperties": false

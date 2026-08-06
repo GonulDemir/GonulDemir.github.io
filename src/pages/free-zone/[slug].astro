@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareLinkedIn from '../../components/ShareLinkedIn.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', (post) => post.data.category === 'free-zone');
+  return posts.map((post) => {
+    const cleanSlug = post.slug.replace(/^(en|tr)\//, '');
+    return {
+      params: { slug: cleanSlug },
+      props: { post, cleanSlug },
+    };
+  });
+}
+
+const { post, cleanSlug } = Astro.props;
+const { Content } = await post.render();
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}).format(post.data.pubDate);
+
+const pageUrl = Astro.url.href;
+---
+
+<BaseLayout title={`${post.data.title} | Free Zone | Gönül Demir`} description={post.data.description} articleDate={post.data.pubDate}>
+  <article class="max-w-4xl mx-auto">
+    <!-- Back to Free Zone Link -->
+    <a
+      href="/free-zone"
+      class="inline-flex items-center gap-1.5 text-xs font-medium text-amber-600 dark:text-amber-400 hover:underline transition-colors mb-8"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Back to Free Zone
+    </a>
+
+    <!-- Header Header -->
+    <header class="mb-10 pb-8 border-b border-slate-200 dark:border-slate-800">
+      <div class="flex items-center gap-2 mb-4 flex-wrap">
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200/50 dark:border-amber-800/50">
+          Free Zone
+        </span>
+      </div>
+
+      <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
+        {post.data.title}
+      </h1>
+
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+        {post.data.description}
+      </p>
+
+      <div class="flex flex-wrap items-center justify-between gap-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+        <div class="flex items-center gap-4">
+          <time datetime={post.data.pubDate.toISOString()}>
+            {formattedDate}
+          </time>
+          <span>•</span>
+          <span>{post.data.readingTime || 3} min read</span>
+        </div>
+
+        <ShareLinkedIn title={post.data.title} url={pageUrl} />
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="prose prose-slate dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-amber-600 dark:prose-a:text-amber-400 prose-img:rounded-xl">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

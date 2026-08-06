@@ -1,0 +1,106 @@
+---
+title: 'Telescopes That Learned to Ignore the Atmosphere'
+description: 'Recently, while observing the night sky with my amateur telescope, I noticed something interesting.'
+pubDate: '2026-06-19'
+createdDate: '2026-06-19'
+author: 'Gönül Demir'
+category: 'Astronomy, Astrophysics & Space Science'
+language: 'en'
+draft: false
+heroImage: 'https://media.licdn.com/mediaD4D12AQH4WdHYTI3BLA'
+sourceUrl: 'https://www.linkedin.com/pulse/telescopes-learned-ignore-atmosphere-gonul-demir-98cmf'
+---
+
+Recently, while observing the night sky with my amateur telescope, I noticed something interesting.
+
+On some nights, the image is remarkably sharp, while on others, stars seem to shimmer constantly and the view becomes noticeably blurred. Curious about the reason, I started digging deeper and came across a fascinating technology used in modern astronomy:
+
+## Adaptive Optics.
+
+### The Problem Isn't the Telescope — It's the Atmosphere
+
+The twinkling of stars we see at night is not actually caused by the stars themselves.
+
+Temperature variations and air currents in Earth's atmosphere continuously distort the path of incoming light. As a result, the image reaching the telescope becomes blurred.
+
+This affects not only amateur telescopes but also some of the largest observatories in the world.
+
+So how do giant ground-based telescopes overcome this problem?
+
+![Telescopes That Learned to Ignore the Atmosphere - figure 1](https://media.licdn.com/dms/image/v2/D4D12AQHcIvYasGGVaQ/article-inline_image-shrink_1000_1488/B4DZ7gc1PmI0AI-/0/1781882115593?e=1787184000&v=beta&t=do8MsYzdNsgKzGT2__4v5Pxnp1zGNf7tzAKf8rfp5-Y)
+
+### What Does a Wavefront Sensor Do?
+
+The first step is measuring how much the atmosphere is distorting the incoming light.
+
+For this task, astronomers use a **Wavefront Sensor**.
+
+One of the most common approaches is the **Shack-Hartmann Wavefront Sensor**, which uses an array of tiny lenses. If the incoming wavefront were perfectly flat, each lens would focus the light into the center of its corresponding detector region.
+
+However, atmospheric turbulence bends the light, causing these spots to shift from their expected positions.
+
+By measuring these tiny displacements, the system can determine exactly how the atmosphere is distorting the incoming wavefront.
+
+In simple terms, the sensor answers the question:
+
+*"How is the atmosphere distorting the image right now?"*
+
+![Telescopes That Learned to Ignore the Atmosphere - figure 2](https://media.licdn.com/dms/image/v2/D4D12AQGeoAp7PqhJYQ/article-inline_image-shrink_1500_2232/B4DZ7gpyBjIIAQ-/0/1781885510645?e=1787184000&v=beta&t=7CvYn8Xib9g2rDhJVprG5a3r__u1w4xqA3arlnRYYB0)
+
+The incoming wavefront (W) passes through a microlens array (MA), which divides the light into multiple sub-apertures. Each microlens focuses light onto the CCD detector below. If the wavefront is perfectly flat, all focal spots appear at their expected positions. Atmospheric turbulence tilts different portions of the wavefront, causing these spots to shift. By measuring these tiny displacements, the system reconstructs the wavefront and determines how the atmosphere is distorting the incoming light.
+
+### Shape-Shifting Mirrors
+
+Once the distortion is measured, it must be corrected.
+
+This is where a **Deformable Mirror** comes into play.
+
+Behind the mirror are hundreds or even thousands of actuators that continuously adjust its shape.
+
+If the atmosphere bends the light in one direction, the mirror applies the opposite correction.
+
+This process happens hundreds or even thousands of times every second.
+
+To achieve this, the cameras used in adaptive optics systems must provide:
+
+✔ High frame rates
+
+✔ Extremely low read noise
+
+✔ High sensitivity under very low light conditions
+
+Scientific cameras such as the Hamamatsu ORCA-Fusion series are examples of imaging systems designed for these demanding applications.
+
+![Telescopes That Learned to Ignore the Atmosphere - figure 3](https://media.licdn.com/dms/image/v2/D4D12AQHugeqJpH4Nlg/article-inline_image-shrink_1000_1488/B4DZ7gwT9kHEAI-/0/1781887222468?e=1787184000&v=beta&t=-ovPw6CB8rOAUSfIex3LMX6QUTkYKu0io9F6pF20NBA)
+
+At first glance, the diagram may look complex, but the idea is surprisingly simple. Light from a star is distorted by atmospheric turbulence before entering the telescope. A beam splitter directs a small portion of this light to the wavefront sensor, which measures the distortion. The real-time controller calculates the required correction and sends commands to the wavefront corrector (deformable mirror). The corrected wavefront is then directed to the scientific camera, producing a much sharper image. This process is repeated continuously, often hundreds or thousands of times per second.
+
+### Why Do Telescopes Fire Lasers Into the Sky?
+
+For adaptive optics to work, a bright reference star is needed.
+
+But what if there isn't one close to the object being observed?
+
+In that case, astronomers create their own.
+
+Powerful lasers are projected into a sodium layer approximately 90 km above Earth. The sodium atoms begin to glow, creating an artificial star that can be used as a reference by the wavefront sensor.
+
+The first time I saw photos of these laser systems, they looked like something from a science-fiction movie.
+
+In reality, they are not illuminating space—they are measuring the atmosphere.
+
+![Telescopes That Learned to Ignore the Atmosphere - figure 4](https://media.licdn.com/dms/image/v2/D4D12AQF83EKlC7XY5Q/article-inline_image-shrink_1500_2232/B4DZ7gxhnPGkAQ-/0/1781887540295?e=1787184000&v=beta&t=oGuamuBtRy5JwjsOpH0uKlqfqIAWuv0kAF3xTGSDhTw)
+
+Unlike natural guide stars, these artificial stars can be created almost anywhere in the sky. By tracking them, the adaptive optics system measures atmospheric turbulence and continuously updates the correction applied by the deformable mirror.
+
+Further Reading
+
+• ESO – Adaptive Optics Overview
+
+• ESO – Four Laser Guide Star Facility
+
+• Hamamatsu Photonics – Adaptive Optics Applications
+
+• Subaru Telescope – Adaptive Optics System
+
+• Tyson, R.K. – Principles of Adaptive Optics

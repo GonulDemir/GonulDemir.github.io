@@ -1,15 +1,15 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const t = useTranslations('en');
 const currentYear = new Date().getFullYear();
 
-const homePath = `/${lang}/`;
-const aboutPath = lang === 'tr' ? `/${lang}/hakkimda` : `/${lang}/about`;
-const articlesPath = lang === 'tr' ? `/${lang}/makaleler` : `/${lang}/articles`;
-const projectsPath = lang === 'tr' ? `/${lang}/projeler` : `/${lang}/projects`;
-const contactPath = lang === 'tr' ? `/${lang}/iletisim` : `/${lang}/contact`;
+const homePath = '/';
+const aboutPath = '/about';
+const articlesPath = '/articles';
+const projectsPath = '/projects';
+const freezonePath = '/free-zone';
+const contactPath = '/contact';
 ---
 
 <footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 py-12 transition-colors">
@@ -32,13 +32,14 @@ const contactPath = lang === 'tr' ? `/${lang}/iletisim` : `/${lang}/contact`;
       <!-- Column 2: Quick Links -->
       <div class="space-y-2">
         <h3 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
-          {lang === 'tr' ? 'Hızlı Bağlantılar' : 'Quick Links'}
+          Quick Links
         </h3>
         <ul class="space-y-1.5 text-xs text-slate-600 dark:text-slate-400">
           <li><a href={homePath} class="hover:text-brand-accent transition-colors">{t('nav.home')}</a></li>
           <li><a href={aboutPath} class="hover:text-brand-accent transition-colors">{t('nav.about')}</a></li>
           <li><a href={articlesPath} class="hover:text-brand-accent transition-colors">{t('nav.articles')}</a></li>
           <li><a href={projectsPath} class="hover:text-brand-accent transition-colors">{t('nav.projects')}</a></li>
+          <li><a href={freezonePath} class="hover:text-amber-500 transition-colors">{t('nav.freezone')}</a></li>
           <li><a href={contactPath} class="hover:text-brand-accent transition-colors">{t('nav.contact')}</a></li>
         </ul>
       </div>
@@ -46,11 +47,11 @@ const contactPath = lang === 'tr' ? `/${lang}/iletisim` : `/${lang}/contact`;
       <!-- Column 3: Social & Contact -->
       <div class="space-y-2">
         <h3 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
-          {lang === 'tr' ? 'Bağlantılar' : 'Connect'}
+          Connect
         </h3>
         <div class="flex flex-col space-y-2 text-xs text-slate-600 dark:text-slate-400">
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/gonul-demir-49413433/"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 hover:text-brand-accent transition-colors"
@@ -60,7 +61,7 @@ const contactPath = lang === 'tr' ? `/${lang}/iletisim` : `/${lang}/contact`;
           </a>
 
           <a
-            href="https://github.com"
+            href="https://github.com/gonuldemir"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 hover:text-brand-accent transition-colors"
@@ -70,11 +71,11 @@ const contactPath = lang === 'tr' ? `/${lang}/iletisim` : `/${lang}/contact`;
           </a>
 
           <a
-            href="mailto:gonul.demir@example.com"
+            href="mailto:gonulbiteker@gmail.com"
             class="inline-flex items-center gap-2 hover:text-brand-accent transition-colors"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-            <span>gonul.demir@example.com</span>
+            <span>gonulbiteker@gmail.com</span>
           </a>
         </div>
       </div>
