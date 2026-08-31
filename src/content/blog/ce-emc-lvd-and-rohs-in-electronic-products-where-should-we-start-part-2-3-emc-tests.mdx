@@ -18,7 +18,7 @@ sourceUrl: https://www.linkedin.com/pulse/ce-emc-lvd-rohs-electronic-products-wh
 
 This article is the **second part** of our three-part series: **“Preparing a Product for the Market: CE, EMC and LVD Testing & Certification Guide.”**
 
-In **Part 1**, we covered:
+In [Part 1](/articles/where-to-start-with-ce-emc-lvd-and-rohs-in-electronic-products), we covered:
 
 - The real meaning of the **CE marking**
 - **RoHS compliance**
@@ -29,6 +29,8 @@ In **Part 1**, we covered:
 This week, we move into the **core of the compliance process** and take a deep dive into **EMC testing**.
 
 ### What This Part Covers
+
+> **Scope note:** The exact test plan is product-specific. It depends on the applicable harmonized product or generic standard, the product’s ports and power architecture, and its intended residential, commercial or industrial environment. The examples below are representative guidance, not a universal CE test list.
 
 In this section, we will:
 
@@ -62,7 +64,7 @@ The purpose of EMC testing is to **identify and control this interaction before 
 
 ### 3. Where Does the “61000” Standard Come From?
 
-The **IEC 61000 series**, published by the International Electrotechnical Commission (IEC), defines **all EMC test methodologies**.
+The **IEC 61000 series**, published by the International Electrotechnical Commission (IEC), provides the main framework for EMC phenomena, environments and immunity test methods. Emission limits and product-specific requirements are defined by separate CISPR, product-family and generic standards.
 
 Typical examples include:
 
@@ -128,19 +130,19 @@ These standards apply to **residential, office, and industrial products**. They 
 
 ## 5. Focus of This Article Series: Commercial EMC
 
-Although understanding military and automotive EMC standards shows how broad the EMC field is, our objective is to **guide EMC tests within the scope of CE** in testing and certification processes.
+Although understanding military and automotive EMC standards shows how broad the EMC field is, our objective is to **introduce the commercial EMC tests commonly considered during CE conformity assessment**.
 
 For this reason, in the following sections we will focus only on:
 
 - EN / CISPR emission limits,
 - IEC 61000-4-x immunity tests,
-- Mandatory EMC tests that a CE-marked product must pass
+- EMC tests that may apply to a CE-marked product, depending on its product standard and interfaces
 
 ### 5.1. Emission Tests
 
 ![CE, EMC, LVD and RoHS in Electronic Products: Where Should We Start? Part 2/3 – EMC Tests - figure 2](/images/articles/ce-emc-lvd-and-rohs-in-electronic-products-where-should-we-start-part-2-3-emc-tests/figure-02.png)
 
-5.2. IMMUNITY TESTS
+### 5.2. Immunity Tests
 
 While emission tests measure the noise emitted by the device into the environment, immunity tests verify how resistant the device is to electromagnetic stresses present in the environment.
 
@@ -423,7 +425,7 @@ In short, it tests whether the device can continue operating on a noisy mains su
 
 The EFT test is applied to all devices with AC or DC power lines. Additionally, depending on the product standard, it may also be applied to the following lines: Data cables and input/output lines Control lines Communication lines
 
-In summary, every device with a power cable is subject to the EFT test.
+In summary, EFT/Burst is applied to the ports and cable types specified by the applicable product or generic standard; having a power cable alone does not determine the complete test plan.
 
 **7.2.3 Test Environment and Setup**
 
@@ -446,7 +448,7 @@ At each level, the device is tested for at least one minute and observations are
 
 **What Is a CDN (Conducted Disturbance Network)?**
 
-The CDN device is a special coupling element used in the **IEC / EN 61000-4-6 Conducted RF Immunity test**. Its function is to inject the radio frequency signal into the cable in a controlled manner. While doing this, it protects the measurement system and the test setup. It ensures that the injected RF level remains stable.
+**Coupling networks:** EFT/Burst uses a coupling/decoupling network or capacitive clamp as specified by IEC 61000-4-4. Surge uses a dedicated coupling/decoupling network defined by IEC 61000-4-5. Conducted RF immunity (IEC 61000-4-6) uses a CDN, current clamp or electromagnetic clamp depending on the cable and test configuration. These networks are related, but they are not interchangeable.
 
 **7.3 Surge Test – IEC 61000-4-5**
 
@@ -498,7 +500,7 @@ This test measures a device’s immunity to radio frequency signals injected via
 
 **7.4.1 Which Devices Is It Applied To?**
 
-It is applied to all AC-powered devices because the power cable is very suitable for picking up RF interference. It is applied to devices that have data or signal cables.
+It is applied to relevant AC- or DC-powered devices and to signal/data ports when the applicable product standard identifies those cables as test ports. The presence of a cable is a practical reason for the test, but not by itself a universal applicability rule.
 
 • Ethernet
 
@@ -578,7 +580,7 @@ The device must not collapse, must not be damaged, and must continue to operate 
 
 Very simply:
 
-✔ It is applied to all AC-powered devices.
+Applicability is defined by the product or generic standard. In general, IEC 61000-4-11 is used for AC-powered equipment connected to public low-voltage networks, while DC-powered equipment may be evaluated under IEC 61000-4-29 when applicable.
 
 ❌ Not applied to:
 
@@ -594,6 +596,18 @@ Mains → Dips / Interruptions Generator → EUT (Device)
 
 In this section, we summarized the fundamental EMC requirements that a product must meet within the scope of CE in a holistic framework. We explained that emission tests verify the noise emitted by the device into its environment, while immunity tests verify the product’s resistance levels against electromagnetic stresses such as ESD, Burst, Surge, and RF. We emphasized that EMC standards are divided into three main categories—military, automotive, and commercial—and that this article comprehensively addressed only the tests applied to commercial products. We stated that Harmonics, Flicker, Conducted, and Radiated Emission tests determine mains compatibility, while the Surge test is the most critical evaluation step against high-energy pulses. We also noted that A–D performance levels define test results and that Level A and Level B represent acceptable performance according to international standards.
 
-**9. Closing**
+### References
 
-In the final part of our series next week, we will examine in detail the safety tests applied within the scope of the **LVD (Low Voltage Directive)**. You can write any questions or comments below. Your feedback is very valuable to me, and I will try to answer every question as best as I can. See you next week.
+- IEC 61000-4-2, *Electrostatic discharge immunity test*.
+- IEC 61000-4-3, *Radiated, radio-frequency, electromagnetic field immunity test*.
+- IEC 61000-4-4, *Electrical fast transient/burst immunity test*.
+- IEC 61000-4-5, *Surge immunity test*.
+- IEC 61000-4-6, *Immunity to conducted disturbances, induced by radio-frequency fields*.
+- IEC 61000-4-11, *Voltage dips, short interruptions and voltage variations immunity tests*.
+- CISPR 32 / EN 55032, *Multimedia equipment emission requirements*.
+- EN 61000-3-2, *Limits for harmonic current emissions*.
+- EN 61000-3-3, *Limitation of voltage changes, voltage fluctuations and flicker*.
+
+## 9. Closing
+
+In [Part 3](/articles/where-to-start-with-ce-emc-lvd-and-rohs-in-electronic-products-part-3-3-lvd-test), we examine the safety tests applied within the scope of the **LVD (Low Voltage Directive)**. You can write any questions or comments below. Your feedback is very valuable to me, and I will try to answer every question as best as I can. See you next week.

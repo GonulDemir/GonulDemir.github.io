@@ -35,6 +35,7 @@ const sortedArticles = articles.sort((a, b) => b.data.pubDate.valueOf() - a.data
           category={article.data.category}
           subcategory={article.data.subcategory}
           readingTime={article.data.readingTime}
+          heroImage={article.data.heroImage}
         />
       ))}
     </div>

@@ -10,6 +10,5 @@ technologies:
   - Isolated Gate Drive
   - Open Hardware
 featured: true
-externalUrl: 'https://gonuldemir.com/articles/engineering-notes-1-30-mhz-1-3-kw-solid-state-sp2t-rf-switch-part-1'
+externalUrl: 'https://gonuldemir.github.io/articles/engineering-notes-1-30-mhz-1-3-kw-solid-state-sp2t-rf-switch-part-1'
 ---
-

@@ -13,10 +13,11 @@ interface Props {
   subcategory?: string;
   readingTime?: number;
   sourceUrl?: string;
+  heroImage?: string;
   slug: string;
 }
 
-const { title, description, pubDate, category, subcategory, readingTime = 5, sourceUrl, slug } = Astro.props;
+const { title, description, pubDate, category, subcategory, readingTime = 5, sourceUrl, heroImage, slug } = Astro.props;
 
 const t = useTranslations('en');
 
@@ -55,6 +56,15 @@ const backPath = '/articles';
 
     <!-- Article Header Header -->
     <header class="mb-10 pb-8 border-b border-slate-200 dark:border-slate-800">
+      {heroImage && (
+        <img
+          src={heroImage}
+          alt={`${title} cover`}
+          class="mb-8 max-h-[26rem] w-full rounded-2xl object-cover shadow-lg"
+          loading="eager"
+        />
+      )}
+
       <div class="flex items-center gap-2 mb-4 flex-wrap">
         <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-brand-accent dark:text-blue-300 border border-blue-200/50 dark:border-blue-800/50">
           {categoryLabel}
@@ -131,6 +141,7 @@ const backPath = '/articles';
               category={post.data.category}
               subcategory={post.data.subcategory}
               readingTime={post.data.readingTime}
+              heroImage={post.data.heroImage}
             />
           ))}
         </div>
