@@ -12,10 +12,11 @@ interface Props {
   category: string;
   subcategory?: string;
   readingTime?: number;
+  sourceUrl?: string;
   slug: string;
 }
 
-const { title, description, pubDate, category, subcategory, readingTime = 5, slug } = Astro.props;
+const { title, description, pubDate, category, subcategory, readingTime = 5, sourceUrl, slug } = Astro.props;
 
 const t = useTranslations('en');
 
@@ -89,6 +90,24 @@ const backPath = '/articles';
 
         <ShareLinkedIn title={title} url={pageUrl} />
       </div>
+
+      {sourceUrl && (
+        <a
+          href={sourceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-brand-accent dark:text-blue-400 hover:underline"
+        >
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14Zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4s1.4.63 1.4 1.4v4.93h2.75ZM6.46 10.9v8.37h2.79V10.9H6.46Zm1.4-4.16a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24Z" />
+          </svg>
+          Read the original article on LinkedIn
+          <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M11 3a1 1 0 1 0 0 2h2.59L8.3 10.29a1 1 0 1 0 1.42 1.42L15 6.41V9a1 1 0 1 0 2 0V3h-6Z" />
+            <path d="M5 5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a1 1 0 1 0-2 0v3H5V7h3a1 1 0 1 0 0-2H5Z" />
+          </svg>
+        </a>
+      )}
     </header>
 
     <!-- Main Content Area -->
