@@ -9,7 +9,7 @@ author: Gönül Demir
 category: electromagnetic-compatibility
 language: en
 draft: false
-heroImage: https://media.licdn.com/mediaD4D12AQGNKOKGSApjPQ
+heroImage: /images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/cover.png
 sourceUrl: https://www.linkedin.com/pulse/emc-design-cable-shield-chassis-reference-connections-gonul-demir-iqfuf
 ---
 
@@ -29,7 +29,7 @@ When terminated incorrectly, however, the shield may:
 
 The issue is not the existence of the shield itself, but the way it is connected.
 
-![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 1](https://media.licdn.com/dms/image/v2/D4D12AQECEC4GtLCsVg/article-inline_image-shrink_1500_2232/B4DZuNW2KyI8Ac-/0/1767603135879?e=1787788800&v=beta&t=VIsClBpGFyKLJCJ8h3XACIhtKAQfY3JD58tDnIubWCw)
+![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 1](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-01.png)
 
 ### 2. Why Is the Shield Connected to the Metal Chassis?
 
@@ -57,7 +57,7 @@ As a result, high-frequency currents avoid the PE path and instead flow along th
 
 The chassis, with its large surface area, provides a much lower impedance path at high frequencies.
 
-![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 2](https://media.licdn.com/dms/image/v2/D4D12AQGE1qVUjA7VqQ/article-inline_image-shrink_1000_1488/B4DZuNXW.mHwAY-/0/1767603279942?e=1787788800&v=beta&t=o7y6uuFkQZuDY7EamJkzQy71gY1Wd8zxzRVFyDa9RD8)
+![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 2](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-02.png)
 
 ### 4. Why Is a PCB–Chassis Connection Mandatory?
 
@@ -99,7 +99,7 @@ At the opposite end of the cable, the shields are bonded together and tied to a 
 
 In this way, EMI currents are confined to the chassis path and return without being coupled into the signal ground.
 
-![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 3](https://media.licdn.com/dms/image/v2/D4D12AQGKczFXUSTh0A/article-inline_image-shrink_1000_1488/B4DZuNXlhSKAAQ-/0/1767603335529?e=1787788800&v=beta&t=zDkWy_sawfBEQLOmm18G3G0gls5nQi97PBpMnhgcd2U)
+![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 3](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-03.png)
 
 ### The Golden Rule
 
@@ -109,7 +109,7 @@ The opposite end of the shield is brought to a common potential via the PE condu
 
 Regardless of where a high-frequency ESD pulse originates, all conductive surfaces tend toward the same potential. Because the chassis presents a much lower impedance than thin conductors, the current spreads primarily over the chassis surface, and the energy is dissipated to earth through the capacitive coupling between the chassis and ground
 
-![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 4](https://media.licdn.com/dms/image/v2/D4D12AQFFC3T3iRgVGQ/article-inline_image-shrink_1500_2232/B4DZuSVv1lH8AU-/0/1767686735060?e=1787788800&v=beta&t=dN9QdXRzOBsGucFYFcNeTy1LTLxJyv50MthtKFLDQRI)
+![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 4](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-04.png)
 
 ### 8. Shield Termination in Plastic Enclosures
 
@@ -144,7 +144,7 @@ A conductive metal surface is placed on the inner wall of the plastic enclosure 
 
 **Result:** ESD energy is discharged through the plate before entering the circuitry, significantly improving system robustness.
 
-![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 5](https://media.licdn.com/dms/image/v2/D4D12AQF2B7pAwJkr1w/article-inline_image-shrink_1000_1488/B4DZuNYFlAH4AU-/0/1767603460994?e=1787788800&v=beta&t=xba_u5zQDQeagXHvoyBy76Mqaq8yPMkcewzPNh_93Yg)
+![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 5](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-05.png)
 
 ### 2) Connecting to the Return Ground Plane (MEDIUM LEVEL)
 
@@ -187,7 +187,7 @@ In mobile devices, there is no metal chassis or earth reference. ESD is therefor
 - Applying RC networks, filters, and protection to sensitive lines → Reset and IRQ glitches are avoided
 - Ensuring watchdog usage and firmware robustness → The device does not lock up after an ESD event
 
-![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 6](https://media.licdn.com/dms/image/v2/D4D12AQHd_FWaBC_j9g/article-inline_image-shrink_400_744/B4DZuNZF1xGgAc-/0/1767603724247?e=1787788800&v=beta&t=S-yysdHXJ0whi1kKVFJ1TZak_MXwBRWuvTxgmJpjwXs)
+![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 6](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-06.png)
 
 **Summary:**
 

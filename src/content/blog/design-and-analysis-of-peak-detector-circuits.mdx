@@ -9,7 +9,7 @@ author: Gönül Demir
 category: analog-design-power-electronics
 language: en
 draft: false
-heroImage: https://media.licdn.com/mediaD5612AQHTcbGEOWkZ1w
+heroImage: /images/articles/design-and-analysis-of-peak-detector-circuits/cover.png
 sourceUrl: https://www.linkedin.com/pulse/design-analysis-peak-detector-circuits-gonul-demir-krgof
 ---
 
@@ -28,15 +28,15 @@ Peak detector circuits are fundamental analog processing structures that detect 
 
 The simplest peak detector structure consists of a diode and a capacitor. When the input signal increases, the diode becomes forward biased and charges the capacitor. As the signal begins to decrease, the diode turns off and preserves the voltage stored on the capacitor. Although this structure is simple, the forward voltage drop of the diode introduces significant errors, especially for low-level signals. In addition, diode recovery time, capacitor leakage currents, and load effects can degrade peak detection performance in high-frequency pulse applications.
 
-![Design and Analysis of Peak Detector Circuits - figure 1](https://media.licdn.com/dms/image/v2/D4D12AQFoM4LTxJ2tPw/article-inline_image-shrink_1500_2232/B4DZ4dPY.NGcAU-/0/1778607034689?e=1787788800&v=beta&t=ggNBgC99eWzvJa5OR8EYCRxCV8GatL0QphoHhmxL1gE)
+![Design and Analysis of Peak Detector Circuits - figure 1](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-01.png)
 
-![Design and Analysis of Peak Detector Circuits - figure 2](https://media.licdn.com/dms/image/v2/D4D12AQGA4rNMi3zjbw/article-inline_image-shrink_1000_1488/B4DZ4dPutkIgAQ-/0/1778607123698?e=1787788800&v=beta&t=IPfl7BDvB_dOdfgvCl-MaOcjTWyqmFlVnk45CmM9gfU)
+![Design and Analysis of Peak Detector Circuits - figure 2](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-02.png)
 
 The limitations of passive structures have led to the development of active peak detector circuits capable of operating with higher accuracy and speed. In these circuits, an operational amplifier (op-amp) is used to compensate for the diode forward voltage drop through feedback, enabling more accurate peak detection, especially for low-level signals. However, conventional active peak detector circuits also exhibit several limitations under high-speed pulse conditions. As the input signal begins to decrease, the rectifier diode turns off, causing the op-amp to lose its feedback path. Under these conditions, the op-amp output may be driven into saturation, and when a new peak arrives, a certain recovery time is required for the op-amp to return to its linear operating region. This effect can lead to incomplete peak detection, particularly for short-duration and high-frequency pulses.
 
 For this reason, modern peak detector designs commonly employ high-speed op-amps, Schottky diodes, local feedback structures, and sample-and-hold-like techniques. Op-amps with low input bias current, high slew-rate capability, and low input capacitance help reduce voltage loss on the hold capacitor, resulting in more accurate peak measurements.
 
-![Design and Analysis of Peak Detector Circuits - figure 3](https://media.licdn.com/dms/image/v2/D4D12AQEfiLR7yNudLg/article-inline_image-shrink_1000_1488/B4DZ4dQ7a1IIAQ-/0/1778607437939?e=1787788800&v=beta&t=TUZgOTyPbOrwqKqb8f00Zvl-ytLOns4f7p68I6FybAI)
+![Design and Analysis of Peak Detector Circuits - figure 3](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-03.png)
 
 Peak detector circuits are often discussed together with sample-and-hold structures, since both systems aim to preserve analog signal information for a certain period of time. However, in sample-and-hold circuits, the storage operation is controlled by an external control signal, whereas in peak detector circuits the capacitor automatically tracks and stores the maximum value reached by the input signal. For this reason, peak detectors provide a more practical solution for detecting the maximum amplitude of short-duration transient pulses.
 
@@ -46,7 +46,7 @@ Based on these fundamental operating principles, the next section examines conve
 
 This section examines LTC6244-based peak detector circuits designed for high-speed analog signal peak detection. Conventional and improved active peak detector architectures are analyzed in terms of operating principles, dynamic behavior, and high-frequency performance limitations.
 
-![Design and Analysis of Peak Detector Circuits - figure 4](https://media.licdn.com/dms/image/v2/D4D12AQFsdfQDapHq5w/article-inline_image-shrink_1000_1488/B4DZ4dRs0HGQAU-/0/1778607640490?e=1787788800&v=beta&t=WCSpPOfz3Meu6GN_SOJL3T-xvo0rK0a9nO3oJAdOmW4)
+![Design and Analysis of Peak Detector Circuits - figure 4](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-04.png)
 
 ### 3.1 Conventional Active Peak Detector
 
@@ -92,7 +92,7 @@ Although conventional peak detector circuits can provide satisfactory performanc
 
 To reduce these limitations, the improved peak detector structure employs Schottky diodes, a local feedback network, and an additional biasing structure.
 
-![Design and Analysis of Peak Detector Circuits - figure 5](https://media.licdn.com/dms/image/v2/D4D12AQEOeFJlPj1egg/article-inline_image-shrink_1500_2232/B4DZ4dToqvIUAY-/0/1778608147700?e=1787788800&v=beta&t=0TWzguueGp9sPZijON1AEhZJuu6L_-ZVIYbXhtY1WOk)
+![Design and Analysis of Peak Detector Circuits - figure 5](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-05.png)
 
 In the circuit shown in Figure 5, the first major difference compared to the conventional structure is the use of Schottky diodes as the rectifying elements. Since Schottky diodes have a lower forward voltage drop than conventional PN-junction diodes, capacitor C1 can charge more rapidly. In addition, the minority carrier storage effect in Schottky diodes is significantly lower than in conventional PN-junction diodes. In conventional diodes, the carriers stored in the junction region during conduction require a certain amount of time to be removed before the diode can fully switch off. This effect is considerably reduced in Schottky diodes. As a result, Schottky diodes exhibit much shorter reverse recovery times and faster switching behavior. This improves the transition from tracking mode to hold mode and reduces *peak detection error* in high-frequency pulse applications.
 
@@ -126,7 +126,7 @@ For this reason, a controlled discharge mechanism was considered necessary in or
 
 In analog switch selection, parameters such as ON resistance, leakage current, switching speed, charge injection, and operating frequency are particularly important. High ON resistance or excessive charge injection can introduce distortion at the detected peak level and lead to measurement errors. Therefore, for high-frequency applications, it is critical to use low-loss and high-speed analog switches.
 
-![Design and Analysis of Peak Detector Circuits - figure 6](https://media.licdn.com/dms/image/v2/D4D12AQHxq11t1RyWJQ/article-inline_image-shrink_1500_2232/B4DZ4dVB6bKcAU-/0/1778608513179?e=1787788800&v=beta&t=JspI7Z4cLAjtBV22UyvaKlNX-JAiuM1rGSaNlpFuwVc)
+![Design and Analysis of Peak Detector Circuits - figure 6](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-06.png)
 
 ### 4.1.1 Frequency Response Test
 
@@ -134,9 +134,9 @@ To investigate the frequency behavior of the conventional peak detector circuit,
 
 The results also showed that under high-frequency pulse conditions, slight reductions in the detected peak level occurred due to op-amp slew-rate limitations, diode switching behavior, and insufficient capacitor charging. These observations indicate that peak tracking performance is strongly dependent on the capacitor charging dynamics, op-amp dynamic characteristics, and selected component values.
 
-![Design and Analysis of Peak Detector Circuits - figure 7](https://media.licdn.com/dms/image/v2/D4D12AQF6RWcmUkqZjg/article-inline_image-shrink_1500_2232/B4DZ4dVQT_J8Ak-/0/1778608576084?e=1787788800&v=beta&t=W6yOOq-vKQkDw5r-lf_bQkGqcwvFzeEyj9UsVXEgVuE)
+![Design and Analysis of Peak Detector Circuits - figure 7](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-07.png)
 
-![Design and Analysis of Peak Detector Circuits - figure 8](https://media.licdn.com/dms/image/v2/D4D12AQHk3YtD8Fiwyg/article-inline_image-shrink_1000_1488/B4DZ4dVV_tJUAU-/0/1778608596381?e=1787788800&v=beta&t=Y4A--7PQjHA9glsEObkagz6rGQcBG0zTorb_qN-ETag)
+![Design and Analysis of Peak Detector Circuits - figure 8](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-08.png)
 
 ### 4.1.2 Conventional Peak Detector Under Different Input Frequencies
 
@@ -146,7 +146,7 @@ The component values used in these simulations are given below:
 
 R3 = 10 kΩ, R4 = 1 kΩ, C2 = 10 nF and R5 = 2.2 kΩ.
 
-![Design and Analysis of Peak Detector Circuits - figure 9](https://media.licdn.com/dms/image/v2/D4D12AQH2xkaE5BQKaw/article-inline_image-shrink_1500_2232/B4DZ4dWTrzI4AY-/0/1778608848053?e=1787788800&v=beta&t=XpMeEJbVMQOKyiKMULaQtm3mAzbbTRKkEfD2cOuiBW0)
+![Design and Analysis of Peak Detector Circuits - figure 9](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-09.png)
 
 ### 4.1.3 Conventional Peak Detector Under Different Input Voltage Levels
 
@@ -160,7 +160,7 @@ The component values used in these simulations are given below:
 
 R3 = 10 kΩ, R4 = 1 kΩ, C2 = 10 nF R5 = 2.2 kΩ.
 
-![Design and Analysis of Peak Detector Circuits - figure 10](https://media.licdn.com/dms/image/v2/D4D12AQEskE9R5eTubQ/article-inline_image-shrink_1000_1488/B4DZ4dWi.mJYAQ-/0/1778608910738?e=1787788800&v=beta&t=mIVFFLdeMQ9e0b13GPzNzwZQudlPUOupOTKa9LL-xG0)
+![Design and Analysis of Peak Detector Circuits - figure 10](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-10.png)
 
 ### 4.1.3 Result
 
@@ -170,7 +170,7 @@ In addition, simulation results showed that even when a rail-to-rail op-amp was 
 
 ### 4.2 Improved Peak Detector Simulation
 
-![Design and Analysis of Peak Detector Circuits - figure 11](https://media.licdn.com/dms/image/v2/D4D12AQFELFChl3wLmA/article-inline_image-shrink_1500_2232/B4DZ4dXCx6HkAU-/0/1778609041026?e=1787788800&v=beta&t=lTo3DJzvoArsB902DB4bAaEeRtBUZxWTS46oQtW9LW8)
+![Design and Analysis of Peak Detector Circuits - figure 11](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-11.png)
 
 In this section, the improved peak detector circuit is analyzed. In the reference structure, a 10 MΩ resistor is used to discharge the hold capacitor. However, because this resistance value is quite large, the discharge time of the capacitor becomes excessively long, causing the previously stored peak information to remain for an extended period. Particularly under low-frequency or discontinuous input signal conditions, this behavior may introduce measurement uncertainty.
 
@@ -184,17 +184,17 @@ Measurements performed at a 5 MHz input frequency showed that the circuit was se
 
 Simulation results showed that changes in input amplitude directly affected the peak tracking performance of the circuit, especially under short-duration pulse conditions.
 
-![Design and Analysis of Peak Detector Circuits - figure 12](https://media.licdn.com/dms/image/v2/D4D12AQGBpMjMB4IXZw/article-inline_image-shrink_1500_2232/B4DZ4dXPjZI8AU-/0/1778609094098?e=1787788800&v=beta&t=sVqsWZ8_thxPiWGCDmWO8bfR-mEBkJ_xvTog5BrkubY)
+![Design and Analysis of Peak Detector Circuits - figure 12](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-12.png)
 
-![Design and Analysis of Peak Detector Circuits - figure 13](https://media.licdn.com/dms/image/v2/D4D12AQHajzVz12iOGQ/article-inline_image-shrink_400_744/B4DZ4dXW0WJUAY-/0/1778609123018?e=1787788800&v=beta&t=a_z2I5H9Pg8hwBRiKgNiMwY-hgvQXWv4tYYAXqZXue8)
+![Design and Analysis of Peak Detector Circuits - figure 13](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-13.png)
 
 At a 5 kHz input frequency, the output behavior of the circuit appeared more stable compared to the 5 MHz operating condition. However, measurement errors caused by variations in the input voltage amplitude were not completely eliminated.
 
-![Design and Analysis of Peak Detector Circuits - figure 14](https://media.licdn.com/dms/image/v2/D4D12AQF0f_Xo1ZceRA/article-inline_image-shrink_1500_2232/B4DZ4dXk4EGwAU-/0/1778609181569?e=1787788800&v=beta&t=QQWUCG8s2ZlI8pwddbziODviRWjxrPubsm_QsdxJBcI)
+![Design and Analysis of Peak Detector Circuits - figure 14](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-14.png)
 
-![Design and Analysis of Peak Detector Circuits - figure 15](https://media.licdn.com/dms/image/v2/D4D12AQHJTIymuvEFUg/article-inline_image-shrink_1500_2232/B4DZ4dXtI.KYAU-/0/1778609214492?e=1787788800&v=beta&t=stmGgTArcKu5GdGF7hs2S9koO_EmBl97TEaM1Zrh8fI)
+![Design and Analysis of Peak Detector Circuits - figure 15](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-15.png)
 
-![Design and Analysis of Peak Detector Circuits - figure 16](https://media.licdn.com/dms/image/v2/D4D12AQFAd-7anJoPSg/article-inline_image-shrink_1500_2232/B4DZ4dYEAoK4AU-/0/1778609308320?e=1787788800&v=beta&t=UDgF7V9L9BXgjZYTyNseKg3c3hpIZkZqsDqvh5-gwrs)
+![Design and Analysis of Peak Detector Circuits - figure 16](/images/articles/design-and-analysis-of-peak-detector-circuits/figure-16.png)
 
 Overall simulation results showed that the improved peak detector circuit did not provide a significant practical advantage over the conventional peak detector circuit. Both circuits operated within similar frequency ranges and produced comparable measurement accuracy. This observation indicates that increasing circuit complexity does not always result in a substantial improvement in overall performance.
 

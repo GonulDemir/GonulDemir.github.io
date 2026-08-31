@@ -9,7 +9,7 @@ author: Gönül Demir
 category: electromagnetic-compatibility
 language: en
 draft: false
-heroImage: https://media.licdn.com/mediaD4D12AQHxMH97cwPb8w
+heroImage: /images/articles/mixed-signal-pcb-design-conflicts-between-emc-theory-and-reference-designs/cover.png
 sourceUrl: https://www.linkedin.com/pulse/mixed-signal-pcb-design-conflicts-between-emc-theory-reference-demir-u8yef
 ---
 
@@ -32,7 +32,7 @@ The primary goal of this method is to prevent digital switching currents from fl
 
 Henry W. Ott notes in his work on EMC design that star grounding can be useful for controlling noise currents, particularly in low-frequency systems. In this configuration, the return currents of analog and digital circuits follow separate paths and meet only at a single reference point.
 
-![Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs - figure 1](https://media.licdn.com/dms/image/v2/D4D12AQHvcksybNzESg/article-inline_image-shrink_1000_1488/B4DZz5OacjI4AY-/0/1773707832052?e=1787788800&v=beta&t=HEFsI2LnnPzCEjCnbs_R04VVpJOiQvcOg1N8m44Tp3c)
+![Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs - figure 1](/images/articles/mixed-signal-pcb-design-conflicts-between-emc-theory-and-reference-designs/figure-01.png)
 
 Source: Analog Devices, *What Are the Basic Guidelines for Layout Design of Mixed-Signal PCBs?*
 
@@ -46,7 +46,7 @@ In the table below, the parameter **h** represents the vertical distance between
 
 For example, **x/h = 3** corresponds to a horizontal distance equal to three times the vertical distance between the trace and the reference plane.
 
-![Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs - figure 2](https://media.licdn.com/dms/image/v2/D4D12AQHi9O386fUXYg/article-inline_image-shrink_1500_2232/B4DZz5PSqoGoAU-/0/1773708061871?e=1787788800&v=beta&t=deq40PMXajDEn7XNtjkCj9lA3HhZSe1haDRYELwVtBs)
+![Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs - figure 2](/images/articles/mixed-signal-pcb-design-conflicts-between-emc-theory-and-reference-designs/figure-02.png)
 
 Source: Henry W. Ott, *Electromagnetic Compatibility Engineering*, Table 17-1.
 
@@ -56,7 +56,7 @@ These observations form the basis of the commonly cited **10h rule**. According 
 
 When the return current is forced to follow a longer path, the current loop area increases. A larger loop area results in stronger electromagnetic radiation. Therefore, discontinuities in the reference plane can behave like a **loop antenna** on the PCB, increasing electromagnetic emissions.
 
-![Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs - figure 3](https://media.licdn.com/dms/image/v2/D4D12AQGZJYDp0WBCYg/article-inline_image-shrink_1000_1488/B4DZz5QBEuGsAU-/0/1773708252271?e=1787788800&v=beta&t=X2503iEWuLN4rYPL2xT9DLwgQgAKJoBkLWZKbCZau0Y)
+![Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs - figure 3](/images/articles/mixed-signal-pcb-design-conflicts-between-emc-theory-and-reference-designs/figure-03.gif)
 
 Source: James Pawson, *We Need to Talk About Ground*
 
@@ -78,7 +78,7 @@ Typical layout guidelines include:
 
 This approach preserves the natural return current path and reduces the interaction between analog circuits and digital switching noise
 
-![Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs - figure 4](https://media.licdn.com/dms/image/v2/D4D12AQEpjENTQ0njrA/article-inline_image-shrink_1000_1488/B4DZz5RuouIkAQ-/0/1773708701569?e=1787788800&v=beta&t=BNeW_fiZyzL5n55pAi9XUxLev8ith1TqH1-7_G3uRHU)
+![Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs - figure 4](/images/articles/mixed-signal-pcb-design-conflicts-between-emc-theory-and-reference-designs/figure-04.png)
 
 *Source: Analog Devices, Mixed-Signal PCB Layout Guidelines*.
 
@@ -100,7 +100,7 @@ For this reason, modern power distribution network design must consider not only
 
 These parameters play a critical role in determining the overall performance of the power distribution network.
 
-![Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs - figure 5](https://media.licdn.com/dms/image/v2/D4D12AQFJ2jCR76UwGQ/article-inline_image-shrink_1500_2232/B4DZz5SOahJsAU-/0/1773708832096?e=1787788800&v=beta&t=WYKk3G90YYcP28Dt6M7wA6SuKAXeVfXcMol5hEEn-MU)
+![Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs - figure 5](/images/articles/mixed-signal-pcb-design-conflicts-between-emc-theory-and-reference-designs/figure-05.png)
 
 *Source: In Compliance Magazine, “Using Capacitors in Parallel: Dangerous?”*
 
@@ -116,11 +116,11 @@ Despite this recommendation, the AD9837 evaluation board design still employs a 
 
 Therefore, reference designs should not be interpreted as strict design rules that must be directly replicated. Instead, they should be considered example implementations developed under specific design constraints.
 
-![Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs - figure 6](https://media.licdn.com/dms/image/v2/D4D12AQEgkZ-7M3TwvQ/article-inline_image-shrink_1000_1488/B4DZz5S5uRGQAQ-/0/1773709008235?e=1787788800&v=beta&t=_4cpvoxI3oHXrE0ONEPMx2pMWo1WOz6L6lnvPgmnE_o)
+![Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs - figure 6](/images/articles/mixed-signal-pcb-design-conflicts-between-emc-theory-and-reference-designs/figure-06.png)
 
 Source : [**[6]**](https://www.analog.com/media/en/technical-documentation/data-sheets/AD9837.PDF)
 
-![Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs - figure 7](https://media.licdn.com/dms/image/v2/D4D12AQE_rUE67wnpjQ/article-inline_image-shrink_1500_2232/B4DZz5TMBBIkAU-/0/1773709083814?e=1787788800&v=beta&t=eSxgTv4LR4BKan4P8W9aeVjEMiSe_6MPug6DhaEPt74)
+![Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs - figure 7](/images/articles/mixed-signal-pcb-design-conflicts-between-emc-theory-and-reference-designs/figure-07.png)
 
 Source : [**[6]**](https://www.analog.com/media/en/technical-documentation/data-sheets/AD9837.PDF)
 

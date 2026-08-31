@@ -9,7 +9,7 @@ author: Gönül Demir
 category: analog-design-power-electronics
 language: en
 draft: false
-heroImage: https://media.licdn.com/mediaD4D12AQFCgaBYC7bY8g
+heroImage: /images/articles/power-mosfet-gate-drive-fundamentals-1-2/cover.png
 sourceUrl: https://www.linkedin.com/pulse/power-mosfet-gate-drive-fundamentals-12-gonul-demir-qapff
 ---
 
@@ -28,7 +28,7 @@ Since the subject of gate driving is extensive, this guide has been organized in
 
 It is my hope that this guide will serve as a practical reference for engineers working in power electronics, as well as for students interested in the subject, helping them develop a more comprehensive understanding of MOSFET gate driving principles.
 
-![Figure 1: Various types of MOSFET packages used in modern electronics](https://media.licdn.com/dms/image/v2/D4D12AQFWkjmDw2-ZoQ/article-inline_image-shrink_1000_1488/B4DZ9LbjajH0AI-/0/1783676942292?e=1787184000&v=beta&t=BMWMpuU3FYkjDMoPxt5uD-wCyLoRQg3Wu7d4Jj_C1MA)
+![Figure 1: Various types of MOSFET packages used in modern electronics](/images/articles/power-mosfet-gate-drive-fundamentals-1-2/figure-01.png)
 
 *Figure 1: Various types of MOSFET packages used in modern electronics*
 
@@ -74,7 +74,7 @@ This guide is organized to progress from the fundamental gate-related characteri
 
 The objective of this two-part structure is to first explain the physical and electrical behavior of the MOSFET gate, and then demonstrate how this knowledge can be applied in practical gate-driver design.
 
-![Figure 2 Gate Voltage Limits Source \[1\]](https://media.licdn.com/dms/image/v2/D4D12AQHJqm1QwFHzgA/article-inline_image-shrink_1000_1488/B4DZ9LfBcbIYAI-/0/1783677851669?e=1787184000&v=beta&t=aaOOSvgmnDr0sSWrZkSlxcJamN_w8JmnGLx412MS76w)
+![Figure 2 Gate Voltage Limits Source \[1\]](/images/articles/power-mosfet-gate-drive-fundamentals-1-2/figure-02.png)
 
 *Figure 2 Gate Voltage Limits Source [1]*
 
@@ -82,7 +82,7 @@ The objective of this two-part structure is to first explain the physical and el
 
 A typical MOSFET datasheet contains dozens of electrical parameters. However, for an initial device evaluation, the following four parameters are sufficient in most applications.
 
-![Power MOSFET Gate Drive Fundamentals 1/2 - figure 3](https://media.licdn.com/dms/image/v2/D4D12AQEZySgJk6GdEQ/article-inline_image-shrink_1500_2232/B4DZ9Lgt89HgAQ-/0/1783678296081?e=1787184000&v=beta&t=gu8wo0QiH8fKa5qowaMQL5FDTw58aB8NF5osp522EPQ)
+![Power MOSFET Gate Drive Fundamentals 1/2 - figure 3](/images/articles/power-mosfet-gate-drive-fundamentals-1-2/figure-03.png)
 
 ### Designer's Note
 
@@ -116,7 +116,7 @@ The situation changes during switching. The energy supplied by the gate driver i
 
 The statement **"A MOSFET gate does not draw current"** is only valid under **steady-state conditions**. During switching, a significant gate current flows while charging and discharging the gate capacitances. This transient current is one of the key factors determining the overall performance of the gate driver.
 
-![Figure 3 MOSFET gate capacitances Source \[1\]](https://media.licdn.com/dms/image/v2/D4D12AQFuRgQm98zjVQ/article-inline_image-shrink_1500_2232/B4DZ9Lg_yvGwAQ-/0/1783678369415?e=1787184000&v=beta&t=_63vt9H38yrIWn7588x83PKCaXT9sYCBFNeqphi6So4)
+![Figure 3 MOSFET gate capacitances Source \[1\]](/images/articles/power-mosfet-gate-drive-fundamentals-1-2/figure-04.png)
 
 *Figure 3 MOSFET gate capacitances Source [1]*
 
@@ -140,7 +140,7 @@ While **CGS** primarily influences the initial turn-on behavior of the MOSFET, *
 
 Rather than specifying **CGS**, **CGD**, and **CDS** individually, MOSFET datasheets typically provide the following equivalent capacitances.
 
-![Power MOSFET Gate Drive Fundamentals 1/2 - figure 5](https://media.licdn.com/dms/image/v2/D4D12AQGwC-2w6tMVXg/article-inline_image-shrink_1500_2232/B4DZ9LjYgpJQAQ-/0/1783678994694?e=1787184000&v=beta&t=G_aL6oI8BPSyPp8LQNXeGYM-f7p3qMQGkqVgGTCJyXc)
+![Power MOSFET Gate Drive Fundamentals 1/2 - figure 5](/images/articles/power-mosfet-gate-drive-fundamentals-1-2/figure-05.png)
 
 ### 3.4 Gate Capacitances Are Not Constant
 
@@ -150,7 +150,7 @@ As **VDS** decreases, **CGD** increases. This variation directly affects the loa
 
 For this reason, designers should not rely solely on the capacitance values listed in the datasheet tables. The **Capacitance vs. VDS** characteristic curves should also be examined, especially in high-frequency switching applications.
 
-![Figure 4 E xample of capacitance between terminals as well as capacitance vs. drain to source voltagecharacteristics. Source \[2\]](https://media.licdn.com/dms/image/v2/D4D12AQHWHP_z2EwzYg/article-inline_image-shrink_400_744/B4DZ9Lk.xFK0AM-/0/1783679413922?e=1787184000&v=beta&t=hfl1_GKues1wzE2XsJDkoVM9bAt-Yx2sDz14FmHmyrI)
+![Figure 4 E xample of capacitance between terminals as well as capacitance vs. drain to source voltagecharacteristics. Source \[2\]](/images/articles/power-mosfet-gate-drive-fundamentals-1-2/figure-06.png)
 
 *Figure 4 E xample of capacitance between terminals as well as capacitance vs. drain to source voltagecharacteristics. Source [2]*
 
@@ -166,7 +166,7 @@ The input capacitances of a MOSFET are **not constant** during operation. In par
 
 For this reason, MOSFET manufacturers use the **Gate Charge (Qg)** parameter, which represents the **total amount of charge that must be delivered to the gate during the switching process**, rather than relying solely on capacitance values.
 
-![Figure 5 Gate Charge Measurement Circuit Soruce \[2\]](https://media.licdn.com/dms/image/v2/D4D12AQGq9cOxn5ru3Q/article-inline_image-shrink_1500_2232/B4DZ9Ll1lWI4AQ-/0/1783679638242?e=1787184000&v=beta&t=eELXr0lxv2KDfGPuDe_f7DLtLNOsZT2J9ftymk6gj-Q)
+![Figure 5 Gate Charge Measurement Circuit Soruce \[2\]](/images/articles/power-mosfet-gate-drive-fundamentals-1-2/figure-07.png)
 
 *Figure 5 Gate Charge Measurement Circuit Soruce [2]*
 
@@ -182,7 +182,7 @@ Unlike **Ciss**, **Gate Charge is not a capacitance**. Instead, it is an experim
 
 For this reason, in high-frequency power electronic applications, MOSFET selection should not be based solely on the **Ciss** value. The **Gate Charge (Qg)** should also be carefully evaluated, as it directly influences the required gate drive capability and the achievable switching performance.
 
-![Figure 6 VGS against QG under different VGS and ID conditions Source \[1\]](https://media.licdn.com/dms/image/v2/D4D12AQFWJXFuKmHtxA/article-inline_image-shrink_1500_2232/B4DZ9LmIPwK0AQ-/0/1783679714528?e=1787184000&v=beta&t=1Jo8KPoYZgOwvaMp5CkwWsh33DuXWe6_8nod45o3uuI)
+![Figure 6 VGS against QG under different VGS and ID conditions Source \[1\]](/images/articles/power-mosfet-gate-drive-fundamentals-1-2/figure-08.png)
 
 *Figure 6 VGS against QG under different VGS and ID conditions Source [1]*
 
@@ -204,7 +204,7 @@ The physical significance of these regions and their impact on switching perform
 
 Two MOSFETs may have identical **RDS(on)** values while exhibiting completely different **Gate Charge (Qg)** values. As a result, the same gate driver can produce significantly different switching times.
 
-![Power MOSFET Gate Drive Fundamentals 1/2 - figure 9](https://media.licdn.com/dms/image/v2/D4D12AQGPHGtfpGy7Ag/article-inline_image-shrink_400_744/B4DZ9Lm8JoI8AM-/0/1783679927110?e=1787184000&v=beta&t=7Jq_A9_g90unUB1Gp6trwVgIEBev2Zh1HMkqbI6Ntg4)
+![Power MOSFET Gate Drive Fundamentals 1/2 - figure 9](/images/articles/power-mosfet-gate-drive-fundamentals-1-2/figure-09.png)
 
 Although both devices have similar conduction losses, the MOSFET with a **Gate Charge of 82 nC** requires considerably more gate current to achieve the same switching speed.
 
@@ -256,7 +256,7 @@ After the drain current reaches the load current, the **Drain-to-Source voltage 
 
 Consequently, the gate voltage remains nearly constant for a short period. This constant-voltage interval is known as the **Miller Plateau**.
 
-![Figure 7: MOSFET gate charge, drain voltage and current during switch-on(ideal waveforms) Source \[1\]](https://media.licdn.com/dms/image/v2/D4D12AQFNEZgaPLKndA/article-inline_image-shrink_1000_1488/B4DZ9LnJpsKYAM-/0/1783679982405?e=1787184000&v=beta&t=f-1ftslCQfic9Q_zynGMMIFKmRFXyQW0_AtNEpKtEBM)
+![Figure 7: MOSFET gate charge, drain voltage and current during switch-on(ideal waveforms) Source \[1\]](/images/articles/power-mosfet-gate-drive-fundamentals-1-2/figure-10.png)
 
 *Figure 7: MOSFET gate charge, drain voltage and current during switch-on(ideal waveforms) Source [1]*
 
@@ -281,7 +281,7 @@ The highest switching losses generally occur during the Miller Plateau because t
 
 The switching loss can be approximately estimated as:
 
-![Power MOSFET Gate Drive Fundamentals 1/2 - figure 11](https://media.licdn.com/dms/image/v2/D4D12AQFuIIYhIlvM5g/article-inline_image-shrink_1000_1488/B4DZ9LojjjHQAI-/0/1783680350650?e=1787184000&v=beta&t=Vz6Jb8TzKIEjNh8XZqugtECTzBdFptd5H7UKtAZawjU)
+![Power MOSFET Gate Drive Fundamentals 1/2 - figure 11](/images/articles/power-mosfet-gate-drive-fundamentals-1-2/figure-11.png)
 
 where:
 
