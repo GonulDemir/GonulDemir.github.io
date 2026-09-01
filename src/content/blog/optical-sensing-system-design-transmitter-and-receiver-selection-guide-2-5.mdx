@@ -48,6 +48,8 @@ For this reason, it is the first choice in systems where speed is critical.
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 1](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-01.png)
 
+*Figure 1 — Source: Hamamatsu Photonics, “Photodiodes Exposed,” 2024*
+
 **2.2 Phototransistor – General Definition**
 
 A phototransistor is a BJT transistor whose base region is made sensitive to light. Incident light generates a small base current, which is amplified by the β gain and converted into a collector current.
@@ -57,6 +59,9 @@ Result: Higher signal amplitude → easier detection However → slower response
 Compared to a photodiode, producing a signal that is 10–200 times larger makes it ideal for ON/OFF sensors; however, it can become a limiting factor in high-speed systems.
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 2](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-02.png)
+
+*Figure 2 — Phototransistor operating principle and basic output circuit.*<br />
+*Source: DigiKey, adapted from Mechapedia / Northwestern University.*
 
 **2.3 Photodetectors – Technical Analysis of Common and Distinct Parameters**
 
@@ -144,6 +149,9 @@ Below, the parameters common to both detectors and their differing operating cha
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 3](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-03.png)
 
+*Figure 3 — Typical responsivity of Si, Ge and InGaAs photodetectors versus wavelength.*<br />
+*Source: Azadeh, Fiber Optics Engineering, Springer.*
+
 **2.3.1.6 – Dark Current (Idark)**
 
 **Definition:** The leakage current that exists in the absence of light and serves as a source of shot noise.
@@ -194,6 +202,9 @@ Below, the parameters common to both detectors and their differing operating cha
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 4](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-04.png)
 
+*Figure 4 — Rise and fall time definition of a photodetector response.*<br />
+*Source: Adapted from standard 10–90% photodetector timing definition.*
+
 **2.3.1.8 – Breakdown Voltage (Vbr)**
 
 **Definition:** The voltage at which uncontrolled conduction begins under reverse bias.
@@ -220,6 +231,9 @@ Below, the parameters common to both detectors and their differing operating cha
 - However, controllability is lower.
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 5](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-05.png)
+
+*Figure 5 — Photodiode I–V characteristics under different illumination levels.*<br />
+*Source: University of Arizona, Photodetectors lecture notes.*
 
 **2.3.1.10 – Temperature Coefficient**
 
@@ -250,11 +264,17 @@ Below, the parameters common to both detectors and their differing operating cha
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 6](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-06.png)
 
+*Figure 6 — Photodetector field of view and incident-light geometry.*<br />
+*Source: Adapted from standard photodetector FOV geometry.*
+
 **2.3.1.12 – Spectral Sensitivity (Range & Peak Sensitivity)**
 
 **Definition:** Indicates the wavelength range to which the sensor is responsive and the wavelength at which its sensitivity reaches a maximum.
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 7](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-07.png)
+
+*Figure 7 — Typical spectral responsivity of a silicon photodiode.*<br />
+*Source: Adapted from S. O. Kasap, Optoelectronics.*
 
 **2.3.2 PARAMETERS UNIQUE TO PHOTODIODES**
 
@@ -289,6 +309,9 @@ Below, the parameters common to both detectors and their differing operating cha
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 8](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-08.png)
 
+*Figure 8 — BJT output characteristics, DC load line and Q-point.*<br />
+*Source: IIT Bombay, EP215 Electronics Lab.*
+
 ## 2.3.4 Photodiode – Phototransistor Comparison Table
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 9](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-09.png)
@@ -322,6 +345,9 @@ First, we will examine the characteristics of both photodetectors in detail, and
 In our tests, we will use the following receiver circuits.
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 11](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-11.png)
+
+*Figure 11 — Simplified photodiode and phototransistor output circuits.*<br />
+*Source: Author’s illustration.*
 
 **2.3.5.3 Theoretical Output Levels**
 
@@ -361,6 +387,9 @@ On the receiver side, there are two different hardware configurations: a photodi
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 12](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-12.png)
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 13](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-13.png)
+
+*Figure 13 — Simulated response comparison of SFH 213 FA photodiode and SFH 313 FA phototransistor for a 200-slot encoder at 300 rpm.*<br />
+*Source: Author’s simulation.*
 
 **TEST-2**
 
@@ -416,6 +445,9 @@ In the experiment, we observed how the sensors behave under:
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 15](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-15.png)
 
+*Figure 15 — Illustrative comparison of phototransistor and photodiode outputs under ambient-light variation.*<br />
+*Source: Author’s simulation.*
+
 **2.3.6 Photodetectors – Summary**
 
 Photodiodes and phototransistors are semiconductor sensors that convert optical signals into electrical current; however, their speed, gain, and noise performance differ significantly.
@@ -461,6 +493,9 @@ The following section will clearly and concisely present the physical and mathem
 Indicates the spectral region in which the source emits light.
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 16](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-16.png)
+
+*Figure 16 — Typical spectral output of an LED and a laser source.*<br />
+*Source: Adapted from standard LED–laser spectral characteristics.*
 
 **LED:**
 
@@ -511,6 +546,9 @@ Shows how much the light spreads in space.
 - Provides long range and a sharp beam.
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 17](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-17.png)
+
+*Figure 17 — Laser beam divergence and diameter geometry.*<br />
+*Source: Gentec-EO.*
 
 ### 3.3.1.4 Radiant Intensity / Optical Power
 
@@ -582,6 +620,9 @@ The LED’s ability to withstand short-duration high currents.
 Indicates how closely the laser beam approximates an ideal Gaussian beam.
 
 ![Optical Sensing System Design – Transmitter & Receiver Selection Guide (2/5) - figure 18](/images/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/figure-18.png)
+
+*Figure 18 — Gaussian beam propagation and focusing before and after a lens.*<br />
+*Source: Gentec-EO, Beamage-M² User Manual.*
 
 **What is a Gaussian Beam?**
 
@@ -660,3 +701,21 @@ In this section, we have seen how the correct selection of receiver and transmit
 In the next section, we will no longer be designers who merely “sense” light—we will become designers who shape light.
 
 Continue with [Part 3A – Optical Elements: Lenses](/articles/optical-sensing-system-design-optical-elements-part-3-of-5/).
+
+## References
+
+[1] Hamamatsu Photonics, *Photodiodes Exposed: Unlocking the Characteristics of These Crucial Sensors*, 2024.
+
+[2] DigiKey, *How to Use Photodiodes and Phototransistors Most Effectively*.
+
+[3] M. Azadeh, *Fiber Optics Engineering*, Springer.
+
+[4] RSC, *Best Practices in the Measurement of Photodetectors*, 2022.
+
+[5] S. O. Kasap, *Optoelectronics and Photonics: Principles and Practices*.
+
+[6] IIT Bombay, *EP215 Electronics Lab – BJT Characteristics and Load Line*.
+
+[7] Gentec-EO, *Laser Beam Divergence and Diameter*.
+
+[8] Gentec-EO, *Beamage-M² User Manual*.
