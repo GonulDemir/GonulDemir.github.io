@@ -8,7 +8,7 @@ author: Gönül Demir
 category: astronomy-astrophysics-space-science
 language: en
 draft: false
-heroImage: /images/articles/telescopes-that-learned-to-ignore-the-atmosphere/cover.png
+heroImage: /images/articles/telescopes-that-learned-to-ignore-the-atmosphere/cover-v2.png
 sourceUrl: https://www.linkedin.com/pulse/telescopes-learned-ignore-atmosphere-gonul-demir-98cmf
 ---
 
@@ -17,7 +17,7 @@ Recently, while observing the night sky with my amateur telescope, I noticed som
 
 On some nights, the image is remarkably sharp, while on others, stars seem to shimmer constantly and the view becomes noticeably blurred. Curious about the reason, I started digging deeper and came across a fascinating technology used in modern astronomy:
 
-## Adaptive Optics.
+## Adaptive Optics
 
 ### The Problem Isn't the Telescope — It's the Atmosphere
 
@@ -30,6 +30,9 @@ This affects not only amateur telescopes but also some of the largest observator
 So how do giant ground-based telescopes overcome this problem?
 
 ![Telescopes That Learned to Ignore the Atmosphere - figure 1](/images/articles/telescopes-that-learned-to-ignore-the-atmosphere/figure-01.png)
+
+*Figure 1 — Atmospheric turbulence distorting starlight before it reaches a ground-based telescope.*<br />
+*Source: Author's illustration.*
 
 ### What Does a Wavefront Sensor Do?
 
@@ -49,7 +52,10 @@ In simple terms, the sensor answers the question:
 
 ![Telescopes That Learned to Ignore the Atmosphere - figure 2](/images/articles/telescopes-that-learned-to-ignore-the-atmosphere/figure-02.png)
 
-The incoming wavefront (W) passes through a microlens array (MA), which divides the light into multiple sub-apertures. Each microlens focuses light onto the CCD detector below. If the wavefront is perfectly flat, all focal spots appear at their expected positions. Atmospheric turbulence tilts different portions of the wavefront, causing these spots to shift. By measuring these tiny displacements, the system reconstructs the wavefront and determines how the atmosphere is distorting the incoming light.
+*Figure 2 — Shack–Hartmann wavefront sensor: a microlens array maps local wavefront tilts onto a detector.*<br />
+*Source: Author's illustration, adapted from the standard Shack–Hartmann principle.*
+
+The incoming wavefront (W) passes through a microlens array (MA), which divides the light into multiple sub-apertures. Each microlens focuses light onto the camera detector below. If the wavefront is perfectly flat, all focal spots appear at their expected positions. Atmospheric turbulence tilts different portions of the wavefront, causing these spots to shift. By measuring these tiny displacements, the system reconstructs the wavefront and determines how the atmosphere is distorting the incoming light.
 
 ### Shape-Shifting Mirrors
 
@@ -65,15 +71,18 @@ This process happens hundreds or even thousands of times every second.
 
 To achieve this, the cameras used in adaptive optics systems must provide:
 
-✔ High frame rates
+- High frame rates
 
-✔ Extremely low read noise
+- Extremely low read noise
 
-✔ High sensitivity under very low light conditions
+- High sensitivity under very low light conditions
 
-Scientific cameras such as the Hamamatsu ORCA-Fusion series are examples of imaging systems designed for these demanding applications.
+Scientific cameras such as the [Hamamatsu ORCA-Fusion series](https://www.hamamatsu.com/us/en/product/cameras/scientific-cameras/orca-fusion.html) are examples of imaging systems designed for these demanding applications.
 
 ![Telescopes That Learned to Ignore the Atmosphere - figure 3](/images/articles/telescopes-that-learned-to-ignore-the-atmosphere/figure-03.png)
+
+*Figure 3 — Closed-loop adaptive-optics architecture combining wavefront sensing, real-time control and a deformable mirror.*<br />
+*Source: Author's illustration.*
 
 At first glance, the diagram may look complex, but the idea is surprisingly simple. Light from a star is distorted by atmospheric turbulence before entering the telescope. A beam splitter directs a small portion of this light to the wavefront sensor, which measures the distortion. The real-time controller calculates the required correction and sends commands to the wavefront corrector (deformable mirror). The corrected wavefront is then directed to the scientific camera, producing a much sharper image. This process is repeated continuously, often hundreds or thousands of times per second.
 
@@ -93,16 +102,15 @@ In reality, they are not illuminating space—they are measuring the atmosphere.
 
 ![Telescopes That Learned to Ignore the Atmosphere - figure 4](/images/articles/telescopes-that-learned-to-ignore-the-atmosphere/figure-04.png)
 
+*Figure 4 — Laser guide star generation in the mesospheric sodium layer.*<br />
+*Source: Author's illustration, based on the laser-guide-star principle.*
+
 Unlike natural guide stars, these artificial stars can be created almost anywhere in the sky. By tracking them, the adaptive optics system measures atmospheric turbulence and continuously updates the correction applied by the deformable mirror.
 
-Further Reading
+## Further Reading
 
-• ESO – Adaptive Optics Overview
-
-• ESO – Four Laser Guide Star Facility
-
-• Hamamatsu Photonics – Adaptive Optics Applications
-
-• Subaru Telescope – Adaptive Optics System
-
-• Tyson, R.K. – Principles of Adaptive Optics
+- [ESO — Adaptive Optics overview](https://www.eso.org/public/teles-instr/technology/adaptive_optics/)
+- [ESO — Four Laser Guide Star Facility](https://www.eso.org/public/teles-instr/technology/4lgsf/)
+- [Hamamatsu Photonics — Astronomy applications](https://www.hamamatsu.com/us/en/applications/astronomy.html)
+- [Subaru Telescope — Adaptive Optics](https://www.naoj.org/Observing/Telescope/OPTM/)
+- Tyson, R. K., *Principles of Adaptive Optics*.
