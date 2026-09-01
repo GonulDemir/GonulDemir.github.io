@@ -34,16 +34,22 @@ function rehypeLinkedInImageSources() {
           child.children[0].properties.src.startsWith('/images/articles/')
         ) {
           const image = child.children[0];
-          let sourceText = sourceFrom(image.properties.alt || '');
+          const altSource = sourceFrom(image.properties.alt || '');
+          let captionChildren = altSource
+            ? [{ type: 'text', value: altSource }]
+            : null;
           const following = node.children[index + 1];
-          if (!sourceText && following?.type === 'element' && following.tagName === 'p') {
-            sourceText = sourceFrom(textContent(following));
+          const followingSource = following?.type === 'element' && following.tagName === 'p'
+            ? sourceFrom(textContent(following))
+            : '';
+          if (!captionChildren && followingSource) {
+            captionChildren = following.children;
           }
-          if (sourceText && following?.type === 'element' && following.tagName === 'p' && sourceFrom(textContent(following))) {
+          if (captionChildren && followingSource) {
             node.children.splice(index + 1, 1);
           }
 
-          if (!sourceText) continue;
+          if (!captionChildren) continue;
 
           child.tagName = 'figure';
           child.properties = { className: ['article-figure', 'my-6'] };
@@ -53,7 +59,7 @@ function rehypeLinkedInImageSources() {
             properties: {
               className: ['mt-2', 'text-center', 'text-xs', 'text-slate-500', 'dark:text-slate-400']
             },
-            children: [{ type: 'text', value: sourceText }]
+            children: captionChildren
           });
         } else {
           visit(child);
