@@ -10,6 +10,8 @@ draft: false
 sourceUrl: https://www.linkedin.com/pulse/optical-sensing-system-design-part-1-5-part-series-gonul-demir-0dhhf
 ---
 
+import ArticleFigure from '../../components/ArticleFigure.astro';
+
 
 **Why This Series Exists**
 
@@ -75,7 +77,12 @@ Certain wavelengths of light are absorbed by materials at different rates. This 
 - Oxygenated hemoglobin absorbs these wavelengths differently.
 - The sensor measures the absorption ratio and calculates oxygen saturation.
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 1](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-01.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-01.png"
+  alt="Pulse oximeter probe showing red and infrared LEDs and the light-receiving detector"
+  caption="Figure 01 — Source: Physio-Control, LIFEPAK Monitor/Defibrillator Operating Instructions."
+  maxWidth="32rem"
+/>
 
 ### 2.2. Reflection (Back Reflection)
 
@@ -85,7 +92,11 @@ An object’s color, brightness, and surface texture affect how much light it re
 
 Light hits the surface → returns depending on surface properties → the sensor decides “object present / not present.”
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 2](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-02.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-02.png"
+  alt="Diffuse optical sensor detecting bottles on a conveyor"
+  caption="Figure 02 — Source: Leuze electronic, Packaging Technology – Beverage Filling Application."
+/>
 
 ### 2.3. Scattering
 
@@ -95,25 +106,42 @@ Smoke, fog, and airborne particles scatter light. Smoke detectors and particle-m
 
 An LED illuminates the chamber → smoke scatters the light → scattered light reaches the photodiode → increasing intensity triggers the alarm.
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 3](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-03.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-03.png"
+  alt="Photoelectric smoke detector scattering principle with and without smoke"
+  caption="Figure 03 — Source: Renesas, Photoelectric Smoke Detector Working Principle."
+/>
 
 ### 2.4. Interruption / Occlusion
 
 The emitter and receiver face each other; when an object blocks the beam, light is interrupted. This is the basis of door sensors, turnstiles, and safety barriers.
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 4](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-04.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-04.png"
+  alt="FENAC transmitter and receiver light curtain with a 1600 mm detection height"
+  caption="Figure 04 — Source: FENAC, FNC DD36 Series."
+  maxWidth="22rem"
+/>
 
 ### 2.5. Transmission
 
 In transmission-based sensing, the amount of light passing through a material is measured. Changes in smoke, gas concentration, or liquid properties can be detected this way.
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 5](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-05.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-05.png"
+  alt="Transmitted-beam smoke detector with smoke attenuating the beam"
+  caption="Figure 05 — Source: Easy Detect, ED-TR6100 Beam Smoke Detector."
+/>
 
 ### 2.6. Refraction and Optical Density
 
 Liquids and transparent materials refract light. Changes in refraction angle can reveal liquid level, foam presence, or density variations.
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 6](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-06.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-06.png"
+  alt="Optical liquid-level sensor tip operating in air and immersed in water"
+  caption="Figure 06 — Source: SST Sensing Ltd., “Optical Liquid Level Sensor Operating Principle,” AN0041."
+/>
 
 ### 2.7. Time of Flight (ToF)
 
@@ -121,15 +149,24 @@ Light is emitted, hits a target, and the return time is measured. Distance is ca
 
 ### Example: Foam Detection in Coffee Machines
 
-As foam rises, the measured distance decreases → the system can control foam formation.
+In a suitably designed system, a ToF sensor can track the foam surface: as the foam rises, the measured distance decreases and the controller can regulate the process. Figure 07 shows the application context only; the product image does not reveal or verify an internal ToF architecture.
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 7](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-07.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-07.png"
+  alt="Perfect Moose automatic milk steamer dispensing milk into a pitcher"
+  caption="Figure 07 — Automatic milk-steaming application context. Source: Perfect Moose, Automatic Milk Steamer."
+  maxWidth="26rem"
+/>
 
 ### 2.8. Speckle Pattern (Laser Roughness Measurement)
 
 When a laser hits a rough surface, it produces a random speckle pattern. This pattern serves as an optical signature for surface roughness.
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 8](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-08.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-08.png"
+  alt="Laser speckle measurement using incident and scattered light captured by a camera"
+  caption="Figure 08 — Source: Senarathna et al., 2013."
+/>
 
 ### 2.9. Spectral Signature
 
@@ -137,17 +174,34 @@ Every material has a unique optical signature at certain wavelengths—such as t
 
 These unique signatures allow optical systems to identify and classify materials.
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 9](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-09.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-09.png"
+  alt="Optical sorting machine separating accepted and rejected grains"
+  caption="Figure 09 — Source: Manitech, Rice Camera Structure Schematic."
+  maxWidth="28rem"
+  lightBackground={true}
+/>
 
 ### 2.10. Diffraction and Pattern Analysis
 
 When light passes through a slit or edge, it creates diffraction patterns. These patterns reveal detailed geometric information about the surface or structure.
 
-### Example: Precision Surface Measurement
+### Example: Laser-Diffraction Particle-Size Measurement
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 10](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-10.png)
+Particles passing through a laser beam produce an angular scattering and diffraction pattern. A lens maps that pattern onto a detector array, allowing the particle-size distribution to be estimated.
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 11](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-11.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-10.png"
+  alt="Laser diffraction particle measurement system with sample, lens, and detectors"
+  caption="Figure 10 — Source: Ullah et al., 2022."
+/>
+
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-11.png"
+  alt="Laser particle-size measurement using a flow cell and CCD detector"
+  caption="Figure 11 — Source: Laser Quantum / Novanta, 2021."
+  maxWidth="30rem"
+/>
 
 ## 3. The Spectrum of Sensing – Why Wavelength Matters
 
@@ -177,7 +231,11 @@ As wavelength decreases, energy increases; as wavelength increases, energy decre
 - **LWIR band:** Since almost everything—including humans—emits thermal radiation in this region, the target signal must be separated from a highly active background. This is why **thermal imaging is inherently complex**.
 - **Mid-IR band:** Only gas molecules produce sharp absorption peaks in this wavelength range, allowing **NDIR gas sensors** to operate with very high accuracy.
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 12](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-12.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-12.png"
+  alt="Electromagnetic spectrum highlighting visible, NIR, SWIR, MWIR, and LWIR regions"
+  caption="Figure 12 — Source: National Research Council Canada, 2015."
+/>
 
 ## 3.1. Detailed Examination of Wavelength Regions
 
@@ -197,9 +255,18 @@ Fluorescent dye glows bright green/blue under UV illumination.
 
 **Block Diagram:****UV LED → Surface → Fluorescence → Optical Filter → Photodiode / Camera**
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 13](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-13.png)
+### 2) UV Fluorescence Gas Measurement
 
-### 2) UV Marker / Security Ink Readin
+UV fluorescence is also used in analytical instruments. In the example below, sulfur dioxide molecules are excited by UV light and their fluorescence is measured selectively by a photodetector.
+
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-13.png"
+  alt="UV fluorescence measurement principle for sulfur dioxide gas"
+  caption="Figure 13 — Source: HORIBA, APSA-380 Sulfur Dioxide Monitor."
+  maxWidth="36rem"
+/>
+
+### 3) UV Marker / Security Ink Reading
 
 Invisible UV-reactive ink becomes visible when illuminated with UV light.
 
@@ -209,9 +276,18 @@ Invisible UV-reactive ink becomes visible when illuminated with UV light.
 - Logistics package verification
 - Pharmaceutical packaging security
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 14](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-14.png)
+### 4) UV Curing and Photopolymerization
 
-### 3) UV Flame Detection (180–260 nm)
+UV light can initiate polymerization in photosensitive resins and inks. This principle is widely used in additive manufacturing, printing, and coating processes.
+
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-14.png"
+  alt="UV lamp curing photopolymer ink during layered printing"
+  caption="Figure 14 — Source: Torah et al., 2019."
+  maxWidth="40rem"
+/>
+
+### 5) UV Flame Detection (180–260 nm)
 
 Flames emit natural UV radiation in this band. Solar influence is minimal → very low false alarm rate.
 
@@ -219,7 +295,11 @@ Flames emit natural UV radiation in this band. Solar influence is minimal → ve
 
 **Block Diagram:****Flame → Band-Pass Filter → UV Photodiode → Amplifier → Alarm**
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 15](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-15.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-15.png"
+  alt="UV flame-detection system with an aspherical mirror, controller, and alarm outputs"
+  caption="Figure 15 — Source: Truong et al., Applied Sciences, 2023."
+/>
 
 ## 3.1.2. Visible Spectrum (400–700 nm)
 
@@ -262,7 +342,11 @@ Chemical changes related to ripeness are clearly detectable in NIR.
 
 **Block Diagram:****NIR LED → Fruit → Absorption → NIR Photodiode → Spectral Analysis**
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 16](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-16.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-16.png"
+  alt="Colorimetric sensor array and deep neural network workflow for banana ripeness prediction"
+  caption="Figure 16 — Source: Zhao et al., Foods, 2024."
+/>
 
 ### 2) Biological Tissue Detection (Medical / Laboratory Applications)
 
@@ -285,7 +369,11 @@ Organic materials reflect NIR light differently, enabling automated classificati
 
 **Block Diagram:****NIR Illumination → Surface → Spectral Response → Classification**
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 17](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-17.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-17.png"
+  alt="NIR plastic-sorting system identifying and separating two plastic types"
+  caption="Figure 17 — Source: Mattley, 2020; reproduced in Taneepanichskul et al., 2022."
+/>
 
 ## 3.1.4. SWIR – Short Wave Infrared (1.0–2.5 µm)
 
@@ -346,7 +434,11 @@ This is why NDIR systems are simple yet extremely effective.
 - Biogas / natural gas systems
 - CO₂ monitoring in enclosed spaces
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 18](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-18.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-18.png"
+  alt="NDIR carbon-dioxide sensor response in clean air and carbon dioxide"
+  caption="Figure 18 — Source: HKUST Clean Air Challenge."
+/>
 
 ### 2) Flame Spectrum Analysis (IR Flame Detector – MWIR)
 
@@ -372,7 +464,12 @@ Molecules absorb light at their vibration frequencies in the Mid-IR region. This
 
 **Block Diagram:****IR Source → Sample → Absorption Spectrum → Analysis**
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 19](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-19.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-19.png"
+  alt="Infrared spectrum regions and characteristic functional-group absorption bands"
+  caption="Figure 19 — Source: Murillo-Bello, 2025."
+  maxWidth="38rem"
+/>
 
 ## 3.1.6. LWIR – Long Wave Infrared (8–14 µm)
 
@@ -404,7 +501,11 @@ Because LWIR can resolve temperature differences at **millikelvin** levels, it c
 - MOSFET overload in inverters
 - Cell-level heat imbalance in battery packs
 
-![Optical Sensing System Design – Part 1 of a 5-Part Series - figure 20](/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-20.png)
+<ArticleFigure
+  src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-20.png"
+  alt="Machine-learning workflow for thermal solar-panel hotspot detection"
+  caption="Figure 20 — Source: Fernando et al., Information, 2025."
+/>
 
 ### 3) Human / Living Being Detection (Security, Rescue Operations)
 
@@ -443,26 +544,16 @@ In this part, we explored the spectrum domain that forms the foundation of optic
 If there is a detail you are curious about, a situation you have encountered in your own project, or a concept you would like me to clarify further, feel free to share your questions in the comments. I will be happy to respond to each one.
 
 We will continue next week. See you in the next section.
-References
 
-[1] R. Paschotta, “Optical Effects,” RP Photonics Encyclopedia.
-Covers fundamental optical phenomena including absorption, reflection, refraction, scattering, diffraction, polarization, and transmission.
-https://www.rp-photonics.com/optical_effects.html
+## References
 
-[2] R. Paschotta, RP Photonics Encyclopedia, RP Photonics.
-Comprehensive reference resource covering optics, photonics, optical detection, propagation, imaging, and light–matter interaction.
-https://www.rp-photonics.com/encyclopedia.html
-
-[3] Hamamatsu Photonics, Technical Note: Si Photodiodes.
-Technical reference covering photodiode operating principles, spectral response, sensitivity, noise characteristics, junction capacitance, and practical detector selection.
-https://www.hamamatsu.com/us/en/product/optical-sensors/photodiodes/si-photodiodes/related_documents.html
-
-[4] Hamamatsu Photonics, Selection Guide: Si Photodiodes.
-Practical reference for selecting photodiodes according to wavelength range, photosensitive area, sensitivity, speed, and application requirements.
-https://www.hamamatsu.com/us/en/product/optical-sensors/photodiodes/si-photodiodes/related_documents.html
-
-[5] E. Hecht, Optics, 5th ed., Pearson, 2017.
-Fundamental reference for reflection, refraction, interference, diffraction, polarization, and the interaction of light with optical materials.
-
-[6] B. E. A. Saleh and M. C. Teich, Fundamentals of Photonics, 3rd ed., Wiley, 2019.
-Comprehensive reference covering geometrical optics, wave optics, photodetection, optical sources, propagation, and optical sensing principles.
+1. SST Sensing Ltd., *Optical Liquid Level Sensor Operating Principle*, AN0041.
+2. Senarathna et al., *IEEE Reviews in Biomedical Engineering*, 2013.
+3. Novanta / Laser Quantum, *Highly Accurate Particle Measuring Using Lasers*, 2021.
+4. National Research Council Canada, *Infrared Vision*, 2015.
+5. HORIBA, *APSA-380 Sulfur Dioxide Monitor*.
+6. Truong et al., *Applied Sciences*, 2023.
+7. Zhao et al., *Foods*, 2024.
+8. Taneepanichskul et al., *Frontiers in Sustainability*, 2022.
+9. HKUST, *Clean Air Challenge – Infrared CO₂ Sensing*.
+10. Fernando et al., *Information*, 2025.

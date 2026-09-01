@@ -1,0 +1,32 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  caption: string;
+  maxWidth?: string;
+  lightBackground?: boolean;
+}
+
+const {
+  src,
+  alt,
+  caption,
+  maxWidth = '48rem',
+  lightBackground = false,
+} = Astro.props;
+---
+
+<figure class="not-prose mx-auto my-8" style={`max-width: ${maxWidth};`}>
+  <div class:list={['overflow-hidden rounded-xl', lightBackground && 'bg-white p-3']}>
+    <img
+      src={src}
+      alt={alt}
+      class="mx-auto block h-auto w-full"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <figcaption class="mt-2 text-center text-sm italic leading-relaxed text-slate-500 dark:text-slate-400">
+    {caption}
+  </figcaption>
+</figure>
