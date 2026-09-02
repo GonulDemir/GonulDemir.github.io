@@ -30,7 +30,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 }).format(pubDate);
 
 const pageUrl = Astro.url.href;
-const shareImage = ogImage || heroImage || '/og-default.png';
+const shareImage = ogImage || heroImage || '/og-default-v2.png';
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 const articleStructuredData = {
   '@context': 'https://schema.org',

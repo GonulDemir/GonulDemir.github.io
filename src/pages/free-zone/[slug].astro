@@ -24,7 +24,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 }).format(post.data.pubDate);
 
 const pageUrl = Astro.url.href;
-const shareImage = post.data.ogImage || post.data.heroImage || '/og-default.png';
+const shareImage = post.data.ogImage || post.data.heroImage || '/og-default-v2.png';
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 const articleStructuredData = {
   '@context': 'https://schema.org',
