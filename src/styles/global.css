@@ -57,6 +57,9 @@
   width: auto;
   height: auto;
   max-width: min(100%, 48rem) !important;
+  max-height: 28rem;
+  object-fit: contain;
+  object-position: left center;
   margin-left: 0 !important;
   margin-right: auto !important;
 }
