@@ -52,8 +52,17 @@
 .prose pre code {
   @apply bg-transparent p-0 text-inherit text-slate-100 dark:text-slate-100;
 }
-.prose img {
+.article-content img {
   display: block;
+  width: auto;
+  height: auto;
+  max-width: min(100%, 48rem) !important;
   margin-left: 0 !important;
   margin-right: auto !important;
+}
+
+.article-content figure {
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: auto;
 }

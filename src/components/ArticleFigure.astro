@@ -16,17 +16,17 @@ const {
 } = Astro.props;
 ---
 
-<figure class="not-prose mx-auto my-8" style={`max-width: ${maxWidth};`}>
-  <div class:list={['overflow-hidden rounded-xl', lightBackground && 'bg-white p-3']}>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style={`width: fit-content; max-width: min(100%, ${maxWidth});`}>
+  <div class:list={['max-w-full overflow-hidden rounded-xl', lightBackground && 'bg-white p-3']}>
     <img
       src={src}
       alt={alt}
-      class="mx-auto block h-auto w-full"
+      class="mr-auto ml-0 block h-auto max-w-full"
       loading="lazy"
       decoding="async"
     />
   </div>
-  <figcaption class="mt-2 text-center text-sm italic leading-relaxed text-slate-500 dark:text-slate-400">
+  <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400">
     {caption}
   </figcaption>
 </figure>
