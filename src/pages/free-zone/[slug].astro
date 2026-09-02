@@ -24,9 +24,35 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 }).format(post.data.pubDate);
 
 const pageUrl = Astro.url.href;
+const shareImage = post.data.ogImage || post.data.heroImage || '/og-default.png';
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const articleStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  image: new URL(shareImage, Astro.site).href,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate || post.data.pubDate).toISOString(),
+  mainEntityOfPage: canonicalUrl,
+  author: {
+    '@type': 'Person',
+    '@id': new URL('/#person', Astro.site).href,
+    name: 'Gönül Demir',
+    url: new URL('/', Astro.site).href,
+  },
+};
 ---
 
-<BaseLayout title={`${post.data.title} | Free Zone | Gönül Demir`} description={post.data.description} articleDate={post.data.pubDate}>
+<BaseLayout
+  title={`${post.data.title} | Free Zone | Gönül Demir`}
+  description={post.data.description}
+  ogImage={shareImage}
+  ogImageAlt={`${post.data.title} — article cover`}
+  articleDate={post.data.pubDate}
+  articleModifiedDate={post.data.updatedDate}
+  structuredData={articleStructuredData}
+>
   <article class="max-w-4xl mx-auto">
     <!-- Back to Free Zone Link -->
     <a

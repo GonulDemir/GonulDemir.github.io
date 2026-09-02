@@ -14,10 +14,12 @@ interface Props {
   readingTime?: number;
   sourceUrl?: string;
   heroImage?: string;
+  ogImage?: string;
+  updatedDate?: Date;
   slug: string;
 }
 
-const { title, description, pubDate, category, subcategory, readingTime = 5, sourceUrl, heroImage, slug } = Astro.props;
+const { title, description, pubDate, category, subcategory, readingTime = 5, sourceUrl, heroImage, ogImage, updatedDate, slug } = Astro.props;
 
 const t = useTranslations('en');
 
@@ -28,6 +30,29 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 }).format(pubDate);
 
 const pageUrl = Astro.url.href;
+const shareImage = ogImage || heroImage || '/og-default.png';
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const articleStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  image: new URL(shareImage, Astro.site).href,
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate || pubDate).toISOString(),
+  mainEntityOfPage: canonicalUrl,
+  author: {
+    '@type': 'Person',
+    '@id': new URL('/#person', Astro.site).href,
+    name: 'Gönül Demir',
+    url: new URL('/', Astro.site).href,
+  },
+  publisher: {
+    '@type': 'Person',
+    '@id': new URL('/#person', Astro.site).href,
+    name: 'Gönül Demir',
+  },
+};
 
 // Fetch related articles (excluding current)
 const allPosts = await getCollection('blog');
@@ -41,7 +66,15 @@ const categoryLabel = t(categoryKey) || category;
 const backPath = '/articles';
 ---
 
-<BaseLayout title={`${title} | Gönül Demir`} description={description} articleDate={pubDate}>
+<BaseLayout
+  title={`${title} | Gönül Demir`}
+  description={description}
+  ogImage={shareImage}
+  ogImageAlt={`${title} — article cover`}
+  articleDate={pubDate}
+  articleModifiedDate={updatedDate}
+  structuredData={articleStructuredData}
+>
   <article class="max-w-4xl mx-auto">
     <!-- Back to Articles Link -->
     <a

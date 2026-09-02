@@ -21,9 +21,46 @@ const articles = await getCollection('blog');
 const latestArticles = articles
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
+
+const profileStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  '@id': new URL('/#profile', Astro.site).href,
+  url: new URL('/', Astro.site).href,
+  name: 'Gönül Demir | Senior Electronics R&D & Product Engineer',
+  mainEntity: {
+    '@type': 'Person',
+    '@id': new URL('/#person', Astro.site).href,
+    name: 'Gönül Demir',
+    url: new URL('/', Astro.site).href,
+    image: new URL(profilePhoto.src, Astro.site).href,
+    jobTitle: 'Senior Electronics R&D & Product Engineer',
+    description: 'Senior Electronics R&D engineer specializing in hardware design, optoelectronic sensor systems and EMC/EMI engineering.',
+    sameAs: [
+      'https://www.linkedin.com/in/gonul-demir-49413433/',
+      'https://github.com/gonuldemir',
+    ],
+    knowsAbout: [
+      'Electronics R&D',
+      'Hardware Design',
+      'Optoelectronic Sensor Systems',
+      'Electromagnetic Compatibility',
+      'PCB Design',
+      'Product Certification',
+    ],
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Istanbul',
+      addressCountry: 'TR',
+    },
+  },
+};
 ---
 
-<BaseLayout title="Gönül Demir | Senior Electronics R&D & Product Engineer">
+<BaseLayout
+  title="Gönül Demir | Senior Electronics R&D & Product Engineer"
+  structuredData={profileStructuredData}
+>
 
   <!-- ======================================= -->
   <!-- CINEMATIC HERO SECTION                  -->

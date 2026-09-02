@@ -10,7 +10,10 @@ const articles = await getCollection('blog', (a) => a.data.category !== 'free-zo
 const sortedArticles = articles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<BaseLayout title="Articles & Technical Notes | Gönül Demir">
+<BaseLayout
+  title="Articles & Technical Notes | Gönül Demir"
+  description="Technical articles by Gönül Demir on electronics hardware, optical sensing, EMC/EMI, analog design, power electronics, certification and engineering."
+>
   <div class="max-w-4xl mx-auto space-y-8">
     <div class="border-b border-slate-200 dark:border-slate-800 pb-6">
       <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-2">

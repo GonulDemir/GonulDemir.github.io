@@ -73,7 +73,7 @@ function rehypeLinkedInImageSources() {
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://gonuldemir.com',
+  site: 'https://gonuldemir.github.io',
   integrations: [
     tailwind({
       applyBaseStyles: false

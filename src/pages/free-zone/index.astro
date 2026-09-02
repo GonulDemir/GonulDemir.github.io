@@ -7,7 +7,10 @@ const posts = await getCollection('blog', (post) => post.data.category === 'free
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<BaseLayout title="Free Zone | Art, Travel & Creative Musings | Gönül Demir">
+<BaseLayout
+  title="Free Zone | Art, Travel & Creative Musings | Gönül Demir"
+  description="Gönül Demir's creative space for original art, travel notes, photography and personal reflections beyond electronics engineering."
+>
   <div class="max-w-4xl mx-auto space-y-10">
     
     <!-- Hero Header Banner -->
