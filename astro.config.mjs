@@ -39,7 +39,14 @@ function rehypeLinkedInImageSources() {
           let captionChildren = altSource
             ? [{ type: 'text', value: altSource }]
             : null;
-          const following = node.children[index + 1];
+          let followingIndex = index + 1;
+          while (
+            node.children[followingIndex]?.type === 'text' &&
+            !node.children[followingIndex].value?.trim()
+          ) {
+            followingIndex += 1;
+          }
+          const following = node.children[followingIndex];
           const followingSource = following?.type === 'element' && following.tagName === 'p'
             ? sourceFrom(textContent(following))
             : '';
@@ -47,7 +54,7 @@ function rehypeLinkedInImageSources() {
             captionChildren = following.children;
           }
           if (captionChildren && followingSource) {
-            node.children.splice(index + 1, 1);
+            node.children.splice(followingIndex, 1);
           }
 
           if (!captionChildren) continue;
