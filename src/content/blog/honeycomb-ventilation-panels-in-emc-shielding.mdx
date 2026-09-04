@@ -13,7 +13,11 @@ heroImage: /images/articles/honeycomb-emc/cover.jpg
 
 ## Why Many Small Openings Can Perform Better Than One Large Aperture
 
-A metal enclosure can provide very effective electromagnetic shielding, but a real electronic product can rarely remain completely closed. Thermal management requires airflow, while connectors, cable entries, displays, seams, and service openings create unavoidable discontinuities in the conductive enclosure.
+In my earlier EMC articles, I discussed how slots, seams, and cable exits interrupt the continuity of a Faraday cage and can become unintended radiation paths. The companion article [The Effect of Slot Openings in a Faraday Cage on EMC](/articles/the-effect-of-slot-openings-in-a-faraday-cage-on-emc/) examines that enclosure-level problem, while [Electromagnetic Shielding Design Tips](/articles/electromagnetic-shielding-design-tips/) explains how field type, frequency, conductivity, permeability, and skin depth influence the shielding strategy.
+
+Those principles lead to an important practical question: what can we do when an opening cannot simply be removed? Real electronic products need ventilation for cooling, cable and connector exits for electrical interfaces, display openings, and service access. A completely closed metal enclosure may offer excellent shielding in theory, but it is rarely a workable product architecture.
+
+The goal is therefore not to make every opening disappear. It is to engineer the opening so that it preserves the required function while minimizing electromagnetic leakage. For this compromise, we can take inspiration from nature. A honeycomb uses many small, efficient cells to provide a large overall passage while retaining a strong, organized structure. The same geometry can turn a large uncontrolled aperture into a controlled array of short conductive channels.
 
 From an EMC point of view, the important parameter is not simply the **total open area**. The dimensions of each individual opening relative to wavelength, its geometry, its depth, and the quality of the surrounding electrical bond all influence the coupling path.
 
