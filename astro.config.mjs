@@ -57,7 +57,7 @@ function rehypeLinkedInImageSources() {
             type: 'element',
             tagName: 'figcaption',
             properties: {
-              className: ['mt-2', 'text-center', 'text-xs', 'text-slate-500', 'dark:text-slate-400']
+              className: ['mt-2', 'text-left', 'text-xs', 'text-slate-500', 'dark:text-slate-400']
             },
             children: captionChildren
           });
