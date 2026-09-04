@@ -36,8 +36,8 @@ const categoryLabel = t(categoryKey) || category;
   data-description={description.toLowerCase()}
 >
   {heroImage && (
-    <a href={articleUrl} class="mb-5 block overflow-hidden rounded-lg" aria-label={`Read ${title}`}>
-      <img src={heroImage} alt="" loading="lazy" class="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+    <a href={articleUrl} class="mb-5 block aspect-[1200/627] overflow-hidden rounded-lg bg-slate-950" aria-label={`Read ${title}`}>
+      <img src={heroImage} alt="" loading="lazy" class="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]" />
     </a>
   )}
 
