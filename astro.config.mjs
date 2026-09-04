@@ -15,8 +15,9 @@ function rehypeLinkedInImageSources() {
     };
 
     const sourceFrom = (value) => {
-      const match = value.match(/source\s*:?\s*(.*)$/i);
-      return match ? `Source: ${match[1].trim()}` : '';
+      const match = value.match(/\bsource\s*:\s*([\s\S]*)$/i);
+      const source = match?.[1]?.trim();
+      return source ? `Source: ${source}` : '';
     };
 
     const visit = (node) => {
