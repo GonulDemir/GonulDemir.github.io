@@ -13,6 +13,7 @@ heroImage: /images/articles/emc-design-cable-shield-chassis-and-reference-connec
 sourceUrl: https://www.linkedin.com/pulse/emc-design-cable-shield-chassis-reference-connections-gonul-demir-iqfuf
 ---
 
+> **Figure attribution:** The three connection diagrams in this article are author-generated illustrations based on standard EMC grounding principles. The enclosure, smartphone shielding, and cable-construction images are reproduced or adapted from the external sources identified in their captions.
 
 ### 1. WHAT IS A CABLE SHIELD — AND WHAT IS IT NOT?
 
@@ -29,7 +30,9 @@ When terminated incorrectly, however, the shield may:
 
 The issue is not the existence of the shield itself, but the way it is connected.
 
-![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 1](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-01.png)
+![Shielded cable construction using aluminum foil and braided copper shielding](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-01.png)
+
+*Figure 1 — Shielded cable construction using aluminum foil and braided copper shielding. Source: [Passive Components, “EMI Suppression Shields: Understanding the Basics”](https://passive-components.eu/emi-suppression-shields-understanding-the-basics/).*
 
 ### 2. Why Is the Shield Connected to the Metal Chassis?
 
@@ -57,7 +60,9 @@ As a result, high-frequency currents avoid the PE path and instead flow along th
 
 The chassis, with its large surface area, provides a much lower impedance path at high frequencies.
 
-![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 2](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-02.png)
+![High-frequency current flowing along a low-inductance metal chassis instead of a long ground wire](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-02.png)
+
+*Figure 2 — High-frequency current prefers the low-inductance chassis path rather than a long ground wire. Source: Author-generated illustration based on standard EMC grounding principles.*
 
 ### 4. Why Is a PCB–Chassis Connection Mandatory?
 
@@ -99,7 +104,9 @@ At the opposite end of the cable, the shields are bonded together and tied to a 
 
 In this way, EMI currents are confined to the chassis path and return without being coupled into the signal ground.
 
-![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 3](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-03.png)
+![Cable shields bonded to the chassis and linked to a common protective-earth reference](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-03.png)
+
+*Figure 3 — Correct relationship between cable shield, chassis, and protective earth (PE). Source: Author-generated illustration.*
 
 ### The Golden Rule
 
@@ -109,7 +116,9 @@ The opposite end of the shield is brought to a common potential via the PE condu
 
 Regardless of where a high-frequency ESD pulse originates, all conductive surfaces tend toward the same potential. Because the chassis presents a much lower impedance than thin conductors, the current spreads primarily over the chassis surface, and the energy is dissipated to earth through the capacitive coupling between the chassis and ground
 
-![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 4](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-04.png)
+![Cable shield bonded to a metal chassis with a 360-degree circumferential connection](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-04.png)
+
+*Figure 4 — Cable shield bonded to the chassis with a 360° low-impedance connection, forming an extension of the Faraday cage. Source: Author-generated illustration.*
 
 ### 8. Shield Termination in Plastic Enclosures
 
@@ -144,7 +153,9 @@ A conductive metal surface is placed on the inner wall of the plastic enclosure 
 
 **Result:** ESD energy is discharged through the plate before entering the circuitry, significantly improving system robustness.
 
-![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 5](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-05.png)
+![Conductive metal enclosure used for electromagnetic shielding](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-05.png)
+
+*Figure 5 — Conductive metal enclosure used for electromagnetic shielding. Source: Adapted from [Fresu Electronics EMC training materials](https://fresuelectronics.com/).*
 
 ### 2) Connecting to the Return Ground Plane (MEDIUM LEVEL)
 
@@ -187,7 +198,9 @@ In mobile devices, there is no metal chassis or earth reference. ESD is therefor
 - Applying RC networks, filters, and protection to sensitive lines → Reset and IRQ glitches are avoided
 - Ensuring watchdog usage and firmware robustness → The device does not lock up after an ESD event
 
-![EMC Design: Cable Shield, Chassis, and Reference Connections — Where and How Should They Be Connected? - figure 6](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-06.png)
+![Internal metal shield in a smartphone reducing electromagnetic coupling between electronic sections](/images/articles/emc-design-cable-shield-chassis-and-reference-connections-where-and-how-should-they-be-connected/figure-06.png)
+
+*Figure 6 — Internal metal shielding used in a smartphone to reduce electromagnetic coupling between electronic sections. Source: [Industrielackierungen, EMC coating project](https://www.industrielackierungen.de/projects/projects-emc-coating/?L=1).*
 
 **Summary:**
 
