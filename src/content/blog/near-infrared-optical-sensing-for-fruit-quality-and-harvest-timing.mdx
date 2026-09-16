@@ -1,0 +1,56 @@
+---
+title: 'Seeing Beyond the Surface: NIR Sensing for Fruit Quality and Harvest Timing'
+description: 'How near-infrared light can help estimate fruit quality without cutting the fruit open—and why wavelength selection, calibration and signal quality matter in the field.'
+pubDate: '2026-09-16'
+createdDate: '2026-09-16'
+author: 'Gönül Demir'
+category: optical-sensing-system-design
+subcategory: Agricultural Sensing
+featured: false
+readingTime: 6
+language: en
+draft: false
+ogImage: /images/articles/nir-fruit-quality-linkedin.jpg
+---
+
+Two fruits can look equally ripe and still differ on the inside. Their skin color may be similar, while their soluble-solids content, water content or dry matter is not. For a grower deciding when to harvest, that hidden difference matters—and cutting open every fruit is not an option.
+
+Near-infrared (NIR) optical sensing offers a way to collect information from intact fruit. It does not replace a laboratory measurement by magic: it combines carefully chosen light, a stable measurement geometry and a calibrated model to **estimate** internal quality indicators without destroying the sample.
+
+![Illustration contrasting UV cues in nature with NIR sensing of fruit](/images/articles/nir-fruit-quality-linkedin.jpg)
+
+*Illustration from my original LinkedIn post. UV and NIR are different spectral bands; the image is a conceptual comparison, not a depiction of how a sensor sees inside an apple.*
+
+## A cue from nature—but a different wavelength
+
+The human eye does not see ultraviolet light. Some birds and insects can perceive it, and optical signals outside our visible range can influence food selection. For example, an experimental study found that ultraviolet reflection from bilberries affected the foraging choices of redwings. That is a useful reminder that an ordinary-looking surface may contain information we miss. It does **not** mean that UV vision and an engineered NIR fruit sensor work by the same physical mechanism. [UV-reflecting berries study](https://pmc.ncbi.nlm.nih.gov/articles/PMC1690328/)
+
+In the engineering application here, we illuminate a fruit and observe how its tissue modifies light in a **short-wavelength NIR measurement window, roughly 700–1100 nm**. This is one useful window, not the full extent of the NIR spectrum. The returned spectral pattern is influenced by absorption and scattering in the skin and flesh. Fruit-to-fruit differences that are hard to judge visually can therefore appear in the measured spectrum.
+
+## From a spectrum to a quality estimate
+
+A sensor does not read “sugar” directly from one wavelength. It measures optical signals. To turn those signals into a useful prediction, developers compare spectra from many fruits against reference measurements—such as soluble-solids content in °Brix or dry matter—and train and validate a calibration model. The model must then be checked on new fruit, not only on the samples used to build it.
+
+Research on intact mangoes has used **700–1100 nm** measurements to build calibrations for °Brix and dry matter; work on kiwifruit has used **800–1100 nm** for soluble solids, dry matter and firmness. These results demonstrate the method, but their accuracy is not automatically transferable to another fruit, cultivar, season or measurement geometry. [Mango calibration study](https://opg.optica.org/jnirs/abstract.cfm?uri=jnirs-9-4-287), [kiwifruit study](https://www.sciencedirect.com/science/article/abs/pii/S0925521498000076)
+
+This distinction is especially important in a handheld field instrument. Ambient sunlight, distance from the fruit, surface curvature, peel thickness, temperature and detector noise can all change the signal. A useful design needs repeatable illumination and collection geometry, stable electronics, sufficient signal-to-noise ratio (SNR), and a calibration appropriate to the crop being measured. **More optical power alone does not solve a poor measurement architecture.**
+
+## Why harvest timing matters
+
+The value of a non-destructive measurement is not limited to sorting fruit after harvest. It can also inform **when to harvest**. Grapes, strawberries and citrus are commonly classed as non-climacteric fruits: unlike fruit that ripens substantially after picking, they do not gain the same degree of post-harvest ripening. Their quality at harvest is therefore particularly important. NIR measurements can help growers sample more fruit in the field and assess maturity trends without sacrificing each sample. [Review of fruit-ripening patterns](https://pubmed.ncbi.nlm.nih.gov/23572821/)
+
+That does not make a single NIR reading a universal “pick now” command. Harvest decisions also involve cultivar, weather, intended market, firmness, acidity and the variation across a field. The optical measurement contributes another data point—one that may reveal differences hidden beneath similar-looking skin.
+
+## Turning the principle into a portable instrument
+
+An instrument needs a light source, optics that control where light enters and leaves the fruit, a spectral detector, low-noise readout electronics and a calibration pipeline. The illumination wavelengths should be chosen for the property and fruit under study; the electronics should preserve small spectral differences rather than bury them in drift and noise.
+
+This is becoming practical outside a laboratory. [ams OSRAM describes a portable fruit-testing demonstration](https://look.ams-osram.com/m/48194bcedb07dc74/original/White-paper-Chip-scale-spectral-sensing.pdf) that combines NIR measurements with chemical-analysis models to estimate °Brix and dry matter. Its [AS7421 spectral sensor datasheet](https://look.ams-osram.com/m/1164a4e1da5c19a9/original/AS7421-DS000667.pdf) also lists fruit °Brix and dry-matter measurement among intended applications. A component or demonstration system is a starting point, however—not evidence that every crop can be measured accurately without crop-specific validation.
+
+## The engineering takeaway
+
+NIR fruit sensing is compelling because it can turn an invisible optical response into a practical, non-destructive quality estimate. The difficult part is not simply making a fruit glow under an infrared LED. It is choosing informative wavelengths, keeping the optical geometry stable, protecting the signal-to-noise ratio and proving the calibration against real fruit under real field conditions.
+
+That is the broader theme of my [Optical Sensing System Design series](/articles/optical-sensing-system-design-part-1-of-a-5-part-series/): optical systems become useful when the physics, electronics and application are designed together.
+
+**Links shared with the original post:** [related video](https://lnkd.in/dn93fjHT) · [technical background](https://lnkd.in/dHxc64dW).
