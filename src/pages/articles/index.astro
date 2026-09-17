@@ -8,7 +8,7 @@ import { useTranslations } from '../../i18n/utils';
 const t = useTranslations('en');
 const articles = await getCollection(
   'blog',
-  (a) => a.data.category !== 'free-zone' && a.data.projectOnly !== true,
+  (a) => a.data.category !== 'free-zone' && a.slug !== 'engineering-notes-1-30-mhz-1-3-kw-solid-state-sp2t-rf-switch-part-1',
 );
 const sortedArticles = articles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---

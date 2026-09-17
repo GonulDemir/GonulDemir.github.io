@@ -26,9 +26,6 @@ const blogCollection = defineCollection({
     sourceUrl: z.string().optional(),
     language: z.string().optional(),
     draft: z.boolean().optional(),
-    // Some long-form project logs are reachable from the project page, but
-    // should not be mixed into the general articles index.
-    projectOnly: z.boolean().optional(),
   }),
 });
 
