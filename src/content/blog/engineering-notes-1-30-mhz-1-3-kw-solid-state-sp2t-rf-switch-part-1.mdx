@@ -3,6 +3,7 @@ title: 'Engineering Notes on a 1–30 MHz, 1.3 kW Solid-State SP2T RF Switch —
 description: 'Design assumptions, component selection, schematic architecture, open questions and the validation plan for an experimental high-power HF RF switch.'
 pubDate: '2026-08-31'
 createdDate: '2026-08-31'
+updatedDate: '2026-09-17'
 author: 'Gönül Demir and Hadrien Theveneau (F4INX)'
 category: analog-design-power-electronics
 subcategory: RF Engineering
@@ -22,11 +23,19 @@ ogImage: /images/sp2t-rf-switch/sp2t-rf-switch-architecture.png
 
 Hadrien and I are pleased to introduce a joint engineering project: an experimental SP2T RF switch for a 50 Ω HF system. Its intended function is to route the output of a transmitter to either an antenna/test port or a dummy load from 1 MHz to 30 MHz, with 1.3 kW as the design target.
 
+## Welcome to the open HF Switch project
+
+This is not a finished product announcement. It is a public engineering log for a real 1–30 MHz, 1.3 kW solid-state SP2T RF switch being developed by **Gönül Demir and Hadrien Theveneau (F4INX)**. We are publishing the project as a sequence of design notes, schematics, calculations, layout decisions, test setups and measured results as the work progresses.
+
+The project is open source in spirit and in practice: the design files and reports are shared so that experienced engineers, radio amateurs and curious readers can inspect the assumptions, reproduce the reasoning and point out problems. Constructive comments are welcome. If you see a missing mechanism, an unsafe assumption or a better way to validate the design, please join the discussion below the article.
+
 This first note records the reasoning behind the schematic: electrical stress estimates, switching topology, component choices, isolation boundaries, thermal assumptions and the questions that still require measurement. The next part will address PCB geometry and mechanical construction. Hadrien will lead RF characterization and staged power testing at his radio club; I will develop the PCB, assemble and bring up the prototype, verify the control and gate-drive sections, and incorporate the results into subsequent revisions.
 
 > **Current status:** The schematic is complete. No PCB or assembled prototype has yet been validated. The 1.3 kW value is a design objective, not a measured power rating.
 
-The project is being developed in the open. Design files, revisions, test setups and results will be published as they become available. Technical comments are welcome, particularly on wideband OFF-state isolation, high-power connector transitions, thermal mounting and safe mismatch testing.
+The project is being developed in the open. Design files, revisions, test setups and results will be published as they become available. The first topology-comparison report is available here: [download the Rev. 1 topology comparison report](/downloads/hf-switch/HF_SP2T_Topology_Comparison_Report_Rev1.pdf).
+
+Technical comments are especially useful on wideband OFF-state isolation, high-power connector transitions, thermal mounting, Coss-related displacement current and safe mismatch testing.
 
 ![Functional architecture of the proposed SP2T RF switch](/images/sp2t-rf-switch/sp2t-rf-switch-architecture.svg)
 
@@ -59,6 +68,26 @@ The MOSFET gates do **not** change state every 33 ns. Once a branch is selected,
 The matched-load numbers are also not worst-case device stresses. Antenna mismatch and the switch position within a standing-wave pattern can increase local voltage or current. An open or shorted termination can produce far more severe conditions than the nominal 361 V peak.
 
 ## Original RF topology
+
+### What we got wrong about Coss
+
+The first schematic made the MOSFET selection look attractive: low nominal ON resistance, a high voltage rating and a manageable first-order conduction-loss estimate. During the design review, however, we recognized that the OFF-state RF path cannot be judged from the DC blocking rating or a single small-signal capacitance value. The nonlinear, voltage-dependent **Coss** charge, the floating source node, device-to-device voltage sharing and the physical PCB/connector geometry all shape the actual RF isolation.
+
+Our initial Coss treatment was therefore a useful warning estimate, but not a complete isolation model. The next revision must compare alternative topologies and verify them with low-power S-parameter measurements before any high-power test. The updated calculations and candidate structures will be published in the next parts of this series.
+
+## Rev. 1 topology comparison
+
+The updated study compares three candidate architectures before layout work proceeds. The figures below are included to make the decision process inspectable; the full calculation report is available for download.
+
+![Series MOSFET topology candidate](/images/sp2t-rf-switch/topology/topology_1_series_mosfet.png)
+
+![PIN-diode series-shunt topology candidate](/images/sp2t-rf-switch/topology/topology_2_pin_series_shunt.png)
+
+![MOSFET series-shunt topology candidate](/images/sp2t-rf-switch/topology/topology_3_mosfet_series_shunt.png)
+
+![Series-only isolation comparison](/images/sp2t-rf-switch/topology/series_only_isolation_chart.png)
+
+[Download the complete Rev. 1 topology-comparison report (PDF)](/downloads/hf-switch/HF_SP2T_Topology_Comparison_Report_Rev1.pdf)
 
 The first design contains two RF branches. Each branch uses two N-channel SiC MOSFETs connected source-to-source. With both channels ON, the pair provides a bidirectional current path. With both channels OFF, the opposed body diodes allow the pair to block both polarities of the RF waveform.
 

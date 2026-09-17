@@ -64,6 +64,7 @@ const relatedPosts = allPosts
 const categoryKey = `cat.${category}` as any;
 const categoryLabel = t(categoryKey) || category;
 const backPath = '/articles';
+const isHfSwitchSeries = slug.startsWith('engineering-notes-1-30-mhz-1-3-kw-solid-state-sp2t-rf-switch');
 ---
 
 <BaseLayout
@@ -157,6 +158,27 @@ const backPath = '/articles';
     <div class="article-content prose prose-slate dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-brand-accent dark:prose-a:text-blue-400 prose-img:h-auto prose-img:max-w-full prose-img:rounded-xl">
       <slot />
     </div>
+
+    {isHfSwitchSeries && (
+      <section class="mt-16 rounded-2xl border border-blue-200/70 bg-blue-50/60 p-6 dark:border-blue-900/60 dark:bg-blue-950/20">
+        <h2 class="text-xl font-bold text-slate-900 dark:text-white">Join the project discussion</h2>
+        <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          This project is being developed in the open. Share a technical observation, challenge an assumption or suggest a measurement that could improve the next revision.
+        </p>
+        <div class="mt-6" id="hf-switch-comments">
+          <script
+            src="https://utteranc.es/client.js"
+            repo="GonulDemir/GonulDemir.github.io"
+            issue-term="pathname"
+            label="hf-switch-discussion"
+            theme="github-dark"
+            crossorigin="anonymous"
+            async
+            is:inline
+          ></script>
+        </div>
+      </section>
+    )}
 
     <!-- Related Articles Section -->
     {relatedPosts.length > 0 && (
