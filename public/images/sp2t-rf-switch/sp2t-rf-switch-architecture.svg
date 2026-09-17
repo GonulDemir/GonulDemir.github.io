@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760" role="img" aria-labelledby="title desc">
   <title id="title">Architecture of the 1-30 MHz, 1.3 kW solid-state SP2T RF switch</title>
-  <desc id="desc">External controls pass through protection and optocouplers, safety logic, an isolated dual gate driver and floating gate-bias supplies. Two back-to-back SiC MOSFET pairs route a common RF input to either an antenna and test port or a dummy load.</desc>
+  <desc id="desc">External controls pass through protection and optocouplers, safety logic, an isolated dual gate driver and floating gate-bias supplies. Two back-to-back SiC MOSFET pairs route RF_COMMON to either RF_ANT_TEST or RF_DUMMY.</desc>
   <defs>
     <style>
       .box { fill: #f8fafc; stroke: #334155; stroke-width: 2; rx: 14; }
@@ -79,10 +79,10 @@
   <text x="1420" y="504" text-anchor="middle" class="tiny">back-to-back SiC pair</text>
 
   <rect x="1320" y="305" width="200" height="60" class="box"/>
-  <text x="1420" y="342" text-anchor="middle" class="small">ANTENNA / TEST</text>
+  <text x="1420" y="342" text-anchor="middle" class="small">RF_ANT_TEST</text>
 
   <rect x="1320" y="565" width="200" height="60" class="box"/>
-  <text x="1420" y="602" text-anchor="middle" class="small">DUMMY LOAD</text>
+  <text x="1420" y="602" text-anchor="middle" class="small">RF_DUMMY</text>
 
   <path d="M1260 225 H1320" class="rfline"/>
   <path d="M1260 225 C1285 225 1285 468 1320 468" class="rfline"/>

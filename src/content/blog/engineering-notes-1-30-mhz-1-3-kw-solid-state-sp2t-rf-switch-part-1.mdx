@@ -11,8 +11,8 @@ featured: true
 readingTime: 16
 language: en
 draft: false
-heroImage: /images/sp2t-rf-switch/sp2t-rf-switch-architecture.png
-ogImage: /images/sp2t-rf-switch/sp2t-rf-switch-architecture.png
+heroImage: /images/sp2t-rf-switch/sp2t-rf-switch-architecture.svg
+ogImage: /images/sp2t-rf-switch/sp2t-rf-switch-architecture.svg
 ---
 
 *Part I — Design 1: targets, architecture and engineering assumptions*
@@ -20,6 +20,8 @@ ogImage: /images/sp2t-rf-switch/sp2t-rf-switch-architecture.png
 **Authors:** Gönül Demir and [Hadrien Theveneau](https://www.linkedin.com/in/hadrien-theveneau-4a2b0883/)
 
 ## An open engineering series
+
+In the KiCad schematic, the three RF ports are named `RF_COMMON`, `RF_ANT_TEST` and `RF_DUMMY`. These names are used throughout the project so that the functional diagram, schematic and test notes describe the same signal path.
 
 We are developing an experimental solid-state SP2T RF switch for a 50 Ω HF system. The target is to route a transmitter between an antenna/test port and a dummy load across **1–30 MHz**, with a design target of **1.3 kW**.
 
@@ -98,11 +100,21 @@ The [Texas Instruments UCC21550](https://www.ti.com/lit/ds/symlink/ucc21550.pdf)
 
 The driver is not a substitute for a complete interlock. A later revision should retain an independent one-hot interlock in the logic path as a second layer of protection.
 
+The gate is a capacitive, charge-driven input rather than a static logic node. The selected SiC device is characterized around 54 nC total gate charge and 14 nC gate-drain charge at the intended drive voltage. A first estimate is:
+
+$$
+I_G\approx Q_G/t_{SW}
+$$
+
+This is why the driver, gate resistor and Kelvin return must be designed together. Excessive resistance slows the transition; too little resistance increases ringing, EMI and parasitic oscillation risk. The goal is controlled switching, not the shortest possible edge.
+
 ### Why QA053C-1803R3 isolated supplies were selected
 
 Each floating MOSFET domain needs a local bipolar gate supply. The [MORNSUN QA053C-1803R3](https://www.mornsun-power.com/public/uploads/pdf/QAxx3C-R3.pdf) was selected to provide an isolated approximately +18 V / −3.5 V supply referenced to the corresponding Kelvin node.
 
 The positive rail provides the intended ON bias. The negative OFF bias improves immunity to Miller-induced false turn-on when the RF drain voltage changes rapidly. Two independent converters are used so that the floating gate domains do not unintentionally share a return path through the control circuitry.
+
+In Design 1 the nominal gate states are approximately **+18 V for ON** and **-3 to -3.5 V for OFF**, always measured from the corresponding Kelvin source. The negative rail is deliberately moderate: it adds turn-off margin without approaching the device's specified negative gate limit.
 
 ### Why SN74HC08PWR was included
 
@@ -112,7 +124,7 @@ Logic gating alone cannot prove RF safety, but it creates a clear control bounda
 
 ### Why optocouplers were considered necessary
 
-The control side and the RF power side must not share an uncontrolled galvanic return path. Optocouplers provide a simple isolation boundary for low-speed control and fault signals before the isolated gate-driver domains. They also make it easier to reason about what happens when the RF structure moves several hundred volts relative to the controller.
+The control side and the RF power side must not share an uncontrolled galvanic return path. TLP291-4 optocouplers provide a simple isolation boundary for the low-speed enable, branch-select and detector signals before the isolated gate-driver domains. They also make it easier to reason about what happens when the RF structure moves several hundred volts relative to the controller.
 
 The optocoupler is not the only isolation barrier in the system; the UCC21550 and isolated gate supplies provide the power-stage isolation. The layers serve different purposes and should not be treated as interchangeable.
 
@@ -138,11 +150,11 @@ Until then, the most useful contribution is a technical question: which assumpti
 
 ## Design 1 schematic and working files
 
-The original Design 1 schematic is available for reference:
+The original Design 1 schematic is available for reference. Its RF labels are kept consistent with the KiCad schematic: `RF_COMMON`, `RF_ANT_TEST` and `RF_DUMMY`.
 
 ![Complete Design 1 schematic](/images/sp2t-rf-switch/sp2t-rf-switch-schematic.png)
 
-*Figure 1. Design 1 schematic, including control isolation, logic conditioning, isolated gate drive, floating gate-bias supplies and RF switching.*
+*Figure 1. Design 1 schematic, including control isolation, logic conditioning, isolated gate drive, floating gate-bias supplies and the RF_COMMON / RF_ANT_TEST / RF_DUMMY switching path.*
 
 [Download the Design 1 schematic PDF (A1)](/downloads/hf-switch/SP2T_RF_Switch_A1_SCH.pdf)
 
