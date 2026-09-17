@@ -1,14 +1,14 @@
 ---
 title: 'Engineering Notes on a 1–30 MHz, 1.3 kW Solid-State SP2T RF Switch — Part I'
-description: 'Design 1 of an open engineering series: the target, risk analysis, component choices and validation plan for a high-power HF RF switch developed by Gönül Demir and Hadrien Theveneau.'
+description: 'Design 1 of an open engineering series: why the first HF switch architecture was selected, how its risks were calculated, and why the design is now being revised before PCB release.'
 pubDate: '2026-08-31'
 createdDate: '2026-08-31'
-updatedDate: '2026-09-17'
+updatedDate: '2026-09-18'
 author: 'Gönül Demir and Hadrien Theveneau'
 category: analog-design-power-electronics
 subcategory: RF Engineering
 featured: true
-readingTime: 16
+readingTime: 14
 language: en
 draft: false
 heroImage: /images/sp2t-rf-switch/sp2t-rf-switch-architecture.svg
@@ -19,19 +19,15 @@ ogImage: /images/sp2t-rf-switch/sp2t-rf-switch-architecture.svg
 
 **Authors:** Gönül Demir and [Hadrien Theveneau](https://www.linkedin.com/in/hadrien-theveneau-4a2b0883/)
 
-## An open engineering series
+## An open engineering project
 
-In the KiCad schematic, the three RF ports are named `RF_COMMON`, `RF_ANT_TEST` and `RF_DUMMY`. These names are used throughout the project so that the functional diagram, schematic and test notes describe the same signal path.
+This project began with a shared question: how can a solid-state switch route a high-power HF signal reliably between two outputs? The target is a 50 Ω SP2T switch covering **1–30 MHz** and designed for up to **1.3 kW**. In the KiCad schematic, the RF ports are named `RF_COMMON`, `RF_ANT_TEST` and `RF_DUMMY`.
 
-We are developing an experimental solid-state SP2T RF switch for a 50 Ω HF system. The target is to route a transmitter between an antenna/test port and a dummy load across **1–30 MHz**, with a design target of **1.3 kW**.
+The objective is not to present a finished product. We are publishing the project as an open engineering series: requirements, calculations, component choices, schematics, design reviews, revisions, measurements and unexpected results will remain visible as the work develops. Hadrien Theveneau will lead RF characterisation and staged power testing; I will develop the electronics and PCB, assemble the prototype and document the design decisions.
 
-This project is not being presented as a finished product. It is a step-by-step engineering series: design assumptions, calculations, schematics, PCB decisions, revisions, measurements and failures will be published as the work progresses. The design is open source so that engineers and radio amateurs can inspect the reasoning, reproduce the calculations and contribute useful criticism.
+## What makes this difficult? — initial risk analysis
 
-Hadrien Theveneau will carry out the RF characterisation and staged power tests. I will develop the electronics and PCB, assemble and bring up the prototype, verify the control and gate-drive sections, and incorporate the test results into later revisions.
-
-## What makes this project difficult?
-
-At first glance, the requirement looks simple: switch a 50 Ω RF signal from one output to another. At 1.3 kW, however, the matched-load voltage is already substantial:
+At 1.3 kW into a matched 50 Ω load, the nominal electrical stress is already significant:
 
 $$
 V_{RMS}=\sqrt{PR}=\sqrt{1300\times50}\approx255\ \text{V}
@@ -41,134 +37,120 @@ $$
 V_{PEAK}=\sqrt{2}V_{RMS}\approx361\ \text{V},\qquad I_{RMS}=\sqrt{P/R}\approx5.1\ \text{A}
 $$
 
-The design must handle this voltage and current while maintaining a useful 50 Ω path, low insertion loss and high isolation at the unselected port. The hardest problems are the interaction between nonlinear capacitance, RF layout, connector transitions, floating gate-drive domains, thermal mounting, mismatch conditions and measurement uncertainty.
+These are matched-load values, not worst-case values. An antenna can present a high VSWR, and mismatch can increase voltage and current beyond the nominal estimate. Before selecting components, we identified the main risks:
 
-### Initial risk analysis
+- **OFF-state isolation:** MOSFET output capacitance can pass RF to the unselected branch.
+- **Nonlinear Coss:** capacitance and stored charge vary with voltage; one datasheet value is not a complete large-signal model.
+- **Voltage sharing:** the series devices and their floating source node must share RF stress predictably.
+- **RF layout:** connector launches, drain-pad area, package inductance and return paths are part of the circuit.
+- **Gate-drive immunity:** high dV/dt can disturb floating references or cause false turn-on.
+- **Thermal and mechanical behaviour:** the TO-247 package, insulation and heatsink can influence RF performance.
+- **Measurement confidence:** the excitation path and the verification path must be independent.
 
-Before committing to a PCB, we identified the main risks:
+For this reason, validation is staged: low-power continuity and control checks first, then VNA measurements, then controlled power increases into a suitable dummy load. Full-power antenna testing comes only after protection and mismatch behaviour are understood.
 
-- **OFF-state isolation:** MOSFET output capacitance can provide an unintended RF path to the unselected port.
-- **Nonlinear Coss behaviour:** capacitance and stored charge vary with voltage, so a small-signal datasheet number is not a complete large-signal isolation model.
-- **Voltage sharing:** the two series MOSFETs and their floating common-source node must share RF stress predictably.
-- **Layout parasitics:** connector launches, drain-pad area, package inductance and return-current paths become part of the RF circuit.
-- **Gate-drive integrity:** RF common-mode transients can cause unintended turn-on or disturb the floating gate references.
-- **Thermal and mechanical constraints:** the TO-247 drain tab, insulating hardware and heatsink capacitance can affect both safety and RF behaviour.
-- **Mismatch testing:** an antenna is not a guaranteed 50 Ω load; open- and short-circuit conditions can produce stresses far above the matched-load estimate.
-- **Measurement confidence:** a result can be misleading if the same detector chain is used both to drive and to judge the switch.
+## Design 1: why back-to-back MOSFETs were selected
 
-These risks define the validation order: low-power continuity and control checks first, then VNA measurements, then controlled power increases into a suitable dummy load.
+The first architecture uses two RF branches. Each branch contains two N-channel SiC MOSFETs connected source-to-source. A single MOSFET cannot block both polarities of an RF waveform because its intrinsic body diode provides a one-way path. In a back-to-back pair, both devices conduct bidirectionally when ON, while the opposed body diodes block both polarities when OFF.
 
-## Design 1: why the original architecture was attractive
-
-Design 1 uses two RF branches. Each branch contains two N-channel SiC MOSFETs connected source-to-source. When both devices are ON, the pair conducts bidirectionally. When both are OFF, the opposed body diodes block both polarities of the RF waveform.
-
-The design therefore uses four MOSFETs in total:
+The SP2T therefore contains four power MOSFETs:
 
 $$
 2\ \text{branches}\times2\ \text{MOSFETs per branch}=4\ \text{MOSFETs}
 $$
 
-The architecture was attractive because it offered a compact solid-state path, static gate states and a high voltage rating without mechanical contacts in the RF path. The selected parts and supporting circuits were chosen for specific engineering reasons.
+This was an attractive starting point: it provided a compact solid-state RF path, static ON/OFF states and high voltage capability without mechanical contacts. The important question was whether the same architecture could also deliver sufficient isolation at 30 MHz and 1.3 kW.
 
-### IMZC140R029M2H SiC MOSFET
+## MOSFET selection: VDS, RDS(on) and Coss
 
-The [Infineon IMZC140R029M2H](https://www.infineon.com/assets/row/public/documents/60/49/infineon-imzc140r029m2h-datasheet-en.pdf) was selected for its combination of:
+The [Infineon IMZC140R029M2H](https://www.infineon.com/assets/row/public/documents/60/49/infineon-imzc140r029m2h-datasheet-en.pdf) was selected for Design 1 because it combines a **1400 V VDS rating**, low nominal **RDS(on)**, SiC technology and a four-lead TO-247 package with a dedicated Kelvin Source terminal.
 
-- 1400 V drain-source rating;
-- low nominal ON resistance;
-- dedicated Kelvin-source terminal;
-- SiC switching technology suitable for high-voltage transients;
-- a package and gate-charge range compatible with the intended driver.
-
-For two devices in series, a first-order room-temperature channel resistance is approximately 58 mΩ. At 5.1 A RMS, the resistance-only conduction estimate is:
+In the ON state, conduction loss can be estimated as:
 
 $$
-P_{COND}\approx I_{RMS}^{2}\times0.058\approx1.5\ \text{W}
+P_{COND}=I_{RMS}^{2}R_{DS(on)}
 $$
 
-This explains why the MOSFET looked promising at the beginning: the conduction-loss estimate is small and the voltage rating provides useful margin. It is an initial estimate, not a prediction of finished-switch performance. Temperature, package inductance, PCB loss, connector loss, mismatch and OFF-state capacitance still have to be verified.
+For two devices in series, an initial room-temperature estimate of the total channel resistance was approximately 58 mΩ. At 5.1 A RMS:
 
-### Why the Kelvin connection matters
+$$
+P_{COND}\approx5.1^{2}\times0.058\approx1.5\ \text{W}
+$$
 
-The Kelvin-source connection provides a low-inductance reference for the gate driver that is separated from the high-current source path. Without this separation, RF current and common-source inductance can create an unwanted voltage between the driver reference and the actual source potential. That error directly changes the effective gate voltage and can reduce switching margin or promote parasitic turn-on.
+This result made Design 1 look promising. However, an RF switch is also defined by its OFF state. The MOSFET is not an ideal open circuit; Coss creates a frequency-dependent path:
 
-In Design 1, `Kelvin_A` and `Kelvin_B` are floating gate-drive references. They are deliberately separate from logic ground, chassis ground and the RF current nodes.
+$$
+X_C=\frac{1}{2\pi fC}
+$$
 
-### Why UCC21550ADWR was selected
+As frequency increases, this impedance decreases. At 30 MHz, voltage-dependent Coss, stored charge, floating-node behaviour, PCB coupling and connector parasitics can produce meaningful leakage even when the DC resistance is extremely high. This became the central risk in the first design review.
 
-The [Texas Instruments UCC21550](https://www.ti.com/lit/ds/symlink/ucc21550.pdf) provides two isolated gate-drive channels with the isolation and timing features needed for the floating MOSFET domains. It was selected to support reinforced isolation, independent drive channels, programmable dead time and gate-drive current appropriate for charging and discharging the SiC MOSFET gates.
+## Gate-drive architecture
 
-The driver is not a substitute for a complete interlock. A later revision should retain an independent one-hot interlock in the logic path as a second layer of protection.
-
-The gate is a capacitive, charge-driven input rather than a static logic node. The selected SiC device is characterized around 54 nC total gate charge and 14 nC gate-drain charge at the intended drive voltage. A first estimate is:
+A 5 V MCU signal is not sufficient to drive the selected SiC MOSFET directly. The gate is a charge-driven capacitive input. The device is characterised around 54 nC total gate charge and approximately 14 nC gate-drain charge at the intended drive voltage. A first-order estimate of the required gate current is:
 
 $$
 I_G\approx Q_G/t_{SW}
 $$
 
-This is why the driver, gate resistor and Kelvin return must be designed together. Excessive resistance slows the transition; too little resistance increases ringing, EMI and parasitic oscillation risk. The goal is controlled switching, not the shortest possible edge.
+The [Texas Instruments UCC21550ADWR](https://www.ti.com/lit/ds/symlink/ucc21550.pdf) was selected because it provides two independent isolated channels, reinforced isolation, programmable dead time, hardware disable and high peak source/sink capability. It forms a suitable boundary between logic control and the floating MOSFET domains.
 
-### Why QA053C-1803R3 isolated supplies were selected
+The target gate states are approximately **+18 V for ON** and **−3 to −3.5 V for OFF**. The negative OFF bias improves immunity to Miller-induced false turn-on:
 
-Each floating MOSFET domain needs a local bipolar gate supply. The [MORNSUN QA053C-1803R3](https://www.mornsun-power.com/public/uploads/pdf/QAxx3C-R3.pdf) was selected to provide an isolated approximately +18 V / −3.5 V supply referenced to the corresponding Kelvin node.
+$$
+I_{Miller}=C_{GD}\frac{dV_{DS}}{dt}
+$$
 
-The positive rail provides the intended ON bias. The negative OFF bias improves immunity to Miller-induced false turn-on when the RF drain voltage changes rapidly. Two independent converters are used so that the floating gate domains do not unintentionally share a return path through the control circuitry.
+Gate resistance, driver output impedance and PCB inductance must be tuned together. Excessive resistance makes the transition slow and increases time in the high-dissipation region; too little resistance increases ringing, EMI and parasitic oscillation. The design goal is controlled switching, not simply the fastest edge.
 
-In Design 1 the nominal gate states are approximately **+18 V for ON** and **-3 to -3.5 V for OFF**, always measured from the corresponding Kelvin source. The negative rail is deliberately moderate: it adds turn-off margin without approaching the device's specified negative gate limit.
+### Why the QA053C-1803R3 supply was needed
 
-### Why SN74HC08PWR was included
+The UCC21550 does not create the gate-bias rails by itself. Each floating gate-drive domain therefore uses an isolated [MORNSUN QA053C-1803R3](https://www.mornsun-power.com/public/uploads/pdf/QAxx3C-R3.pdf) converter to generate approximately +18 V and −3.5 V relative to its own Kelvin source. Independent supplies prevent the two floating domains from creating an unintended return path through logic ground.
 
-The [SN74HC08PWR](https://www.ti.com/lit/ds/symlink/sn74hc08.pdf) provides simple logic conditioning and gating before the isolated driver. In Design 1 it is used to combine enable/interlock conditions and ensure that an invalid command does not directly create simultaneous branch selection.
+### Why the Kelvin Source connection matters
 
-Logic gating alone cannot prove RF safety, but it creates a clear control boundary and gives the later design a place to add a hard one-hot interlock, reset behaviour and fault handling.
+The power Source terminal carries RF current and its parasitic inductance produces a voltage:
 
-### Why optocouplers were considered necessary
+$$
+V_{LS}=L_S\frac{di}{dt}
+$$
 
-The control side and the RF power side must not share an uncontrolled galvanic return path. TLP291-4 optocouplers provide a simple isolation boundary for the low-speed enable, branch-select and detector signals before the isolated gate-driver domains. They also make it easier to reason about what happens when the RF structure moves several hundred volts relative to the controller.
+If the driver return shares this path, the voltage drop becomes part of the gate loop and changes the actual VGS. The dedicated Kelvin Source separates the gate-reference path from the high-current Source path. In the schematic, `Kelvin_A` and `Kelvin_B` are floating gate-drive references; they are not logic ground or chassis ground.
 
-The optocoupler is not the only isolation barrier in the system; the UCC21550 and isolated gate supplies provide the power-stage isolation. The layers serve different purposes and should not be treated as interchangeable.
+## Logic isolation and RF-state verification
 
-### Why an independent detector is required
+The enable, branch-select and detector signals enter through [TLP291-4 optocouplers](https://toshiba.semicon-storage.com/info/TLP291-4_datasheet_en_20191129.pdf). This prevents external cables from creating uncontrolled common-mode, ground-loop or RF-coupling paths. The isolated signals are conditioned with the [SN74HC08PWR](https://www.ti.com/lit/ds/symlink/sn74hc08.pdf), providing a hardware gating layer before the UCC21550 inputs. Logic gating cannot prove RF safety, but it limits invalid combinations during startup, reset and branch transitions.
 
-The switch must not be judged only by the signal that the same system uses to excite it. An independent RF detector, power meter or calibrated measurement path is needed to verify forward power, reflected power, selected-path insertion loss and leakage into the unselected port.
+An OFF command is not proof that RF energy has disappeared from a branch. Coss, connector coupling and transient behaviour can leave substantial energy on the unselected port. An independent RF detector or calibrated power-measurement path is therefore required to verify the actual RF state before the second branch is enabled:
 
-Independent detection helps separate a real switch response from errors caused by the source, couplers, cables, detector compression or instrument calibration. It also becomes essential during staged power testing, where a plausible-looking reading must not be mistaken for proof of safe operation.
+**Selected branch OFF → RF level verified low → second branch ON**
+
+The same independent measurement path will later be used to evaluate forward power, reflected power, insertion loss and leakage into the unselected port. It must not be confused with the control signal that commands the switch.
 
 ## The first design review changed the direction
 
-Design 1 is a coherent starting point. It has a clear signal path, a high-voltage SiC device, isolated gate drive, Kelvin references and a staged validation plan. We are documenting it in detail because the reasoning is valuable even though the design is not yet complete.
+Design 1 was a coherent engineering baseline: a clear RF path, high-voltage SiC devices, isolated bipolar gate drive, Kelvin references, logic isolation and a staged test plan. We initially expected this architecture to be a strong candidate for the prototype.
 
-After our first project meeting and joint design review, Gönül Demir and Hadrien Theveneau concluded that the RF switching path must be redesigned before PCB release. The decision was not that the entire project had failed; it was that the isolation risk was too important to leave unresolved.
+After the first project meeting and design review with Hadrien Theveneau, we decided **not to release Design 1 to PCB fabrication**. The decision was driven by the OFF-state isolation risk, not by a failure of the overall project. A low Coss value and a low conduction-loss estimate did not fully describe the large-signal RF behaviour at 30 MHz. Voltage-dependent capacitance, charge behaviour, floating nodes, PCB coupling and connector parasitics had to be evaluated together.
 
-The critical issue is the large-signal effect of MOSFET output capacitance (**Coss**). The initial calculation treated capacitance as a useful first-order warning. It did not fully capture voltage-dependent charge, floating-node behaviour, device sharing, PCB coupling and connector parasitics. The new designs are now nearing completion and will be presented in the next articles.
+Design 1 therefore became an engineering reference: it showed exactly which problem the next architecture must solve. We are now evaluating series/shunt paths, shunt MOSFET options, devices with lower OFF-state capacitance and high-power PIN-diode alternatives. The new designs are nearing completion and will be presented in the next parts of this series.
 
-### A preview of the next parts
+## Design files and current status
 
-The next instalments will show the revised architectures, explain why the series/shunt path and the switching device choice are being reconsidered, and compare the alternatives with updated calculations. We will publish the new schematics when that design work is complete.
-
-Until then, the most useful contribution is a technical question: which assumption in Design 1 would you challenge first, and what measurement would you use to challenge it?
-
-## Design 1 schematic and working files
-
-The original Design 1 schematic is available for reference. Its RF labels are kept consistent with the KiCad schematic: `RF_COMMON`, `RF_ANT_TEST` and `RF_DUMMY`.
+The schematic below uses the same port names as the functional architecture: `RF_COMMON`, `RF_ANT_TEST` and `RF_DUMMY`.
 
 ![Complete Design 1 schematic](/images/sp2t-rf-switch/sp2t-rf-switch-schematic.png)
 
-*Figure 1. Design 1 schematic, including control isolation, logic conditioning, isolated gate drive, floating gate-bias supplies and the RF_COMMON / RF_ANT_TEST / RF_DUMMY switching path.*
+*Figure 1. Design 1 schematic with control isolation, logic conditioning, isolated gate drive, floating gate-bias supplies and the RF_COMMON / RF_ANT_TEST / RF_DUMMY switching path.*
 
-[Download the Design 1 schematic PDF (A1)](/downloads/hf-switch/SP2T_RF_Switch_A1_SCH.pdf)
-
-The current calculation files are available for readers who want to inspect the assumptions:
-
-- [Detailed RF and thermal model (ODS)](/downloads/hf-switch/HF_SP2T_RF_Switch_Detailed_RF_Thermal_Model.ods)
+- [Design 1 schematic PDF (A1)](/downloads/hf-switch/SP2T_RF_Switch_A1_SCH.pdf)
 - [Design 1 bill of materials (ODS)](/downloads/hf-switch/SP2T_RF_Switch_A1_BOM.ods)
+- [Detailed RF and thermal model (ODS)](/downloads/hf-switch/HF_SP2T_RF_Switch_Detailed_RF_Thermal_Model.ods)
 
-## Current status
+Design 1 is an engineering baseline, not a validated 1.3 kW product. The PCB and assembled prototype have not yet demonstrated full-power operation. Hadrien Theveneau will perform RF characterisation and staged power testing after the revised architecture is ready.
 
-Design 1 is an engineering baseline, not a finished or validated product. The PCB and assembled prototype have not yet demonstrated 1.3 kW operation. Hadrien Theveneau will perform RF characterisation and staged power testing after the revised architecture is ready. Measurements will determine which claims survive contact with hardware.
-
-Technical comments are welcome, especially on Coss modelling, RF isolation, connector transitions, Kelvin routing, thermal mounting and independent measurement strategy. Please use the discussion link below to challenge the design constructively.
+Technical comments are welcome, especially on Coss modelling, RF isolation, connector transitions, Kelvin routing, thermal mounting and independent measurement strategy. Which assumption in Design 1 would you challenge first, and what measurement would you use?
 
 ## Safety notice
 
-This project involves potentially lethal RF voltages and high power. It is an experimental design, not a certified product or construction recommendation. High-power testing requires appropriate loads, shielding, interlocks, calibrated equipment and experienced supervision.
+This project involves potentially lethal RF voltages and high power. It is an experimental engineering study, not a certified product or construction recommendation. High-power testing requires suitable loads, shielding, interlocks, calibrated equipment and experienced supervision.
