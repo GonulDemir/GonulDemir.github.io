@@ -1,8 +1,11 @@
 ---
 title: "How Green, Red and Infrared Light Enable Heart Rate and SpO₂ Measurement"
 description: "How wavelength selection, tissue optics, photoplethysmography and pulse oximetry work together in wearable optical sensors."
-date: 2026-09-04
+pubDate: 2026-09-04
 author: "Gonul Demir"
+category: optical-sensing-system-design
+subcategory: Wearable Optical Sensors
+readingTime: 8
 ---
 
 # How Green, Red and Infrared Light Enable Heart Rate and SpO₂ Measurement
