@@ -6,7 +6,10 @@ import { getCollection } from 'astro:content';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations('en');
-const articles = await getCollection('blog', (a) => a.data.category !== 'free-zone');
+const articles = await getCollection(
+  'blog',
+  (a) => a.data.category !== 'free-zone' && a.data.projectOnly !== true,
+);
 const sortedArticles = articles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 

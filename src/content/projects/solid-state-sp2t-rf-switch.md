@@ -1,6 +1,6 @@
 ---
 title: '1–30 MHz, 1.3 kW Solid-State SP2T RF Switch'
-description: 'An open engineering project developed with Hadrien Theveneau (F4INX): a 1–30 MHz, 1.3 kW target HF routing switch documented through transparent design notes, topology studies and staged RF validation.'
+description: 'An open engineering project developed with Hadrien Theveneau (F4INX): a 1–30 MHz, 1.3 kW target HF routing switch documented through transparent design notes, design revisions and staged RF validation.'
 pubDate: '2026-08-31'
 lang: en
 technologies:
