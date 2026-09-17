@@ -165,17 +165,15 @@ const isHfSwitchSeries = slug.startsWith('engineering-notes-1-30-mhz-1-3-kw-soli
         <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
           This project is being developed in the open. Share a technical observation, challenge an assumption or suggest a measurement that could improve the next revision.
         </p>
-        <div class="mt-6" id="hf-switch-comments">
-          <script
-            src="https://utteranc.es/client.js"
-            repo="GonulDemir/GonulDemir.github.io"
-            issue-term="pathname"
-            label="hf-switch-discussion"
-            theme="github-dark"
-            crossorigin="anonymous"
-            async
-          ></script>
-        </div>
+        <a
+          href={`https://github.com/GonulDemir/GonulDemir.github.io/issues/new?title=HF%20Switch%20technical%20comment&labels=hf-switch-discussion`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-6 inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+        >
+          Open a technical discussion on GitHub
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.5 3a1 1 0 0 1 1-1h4.586a1 1 0 0 1 1 1v4.586a1 1 0 1 1-2 0V5.414l-8.379 8.379a1 1 0 0 1-1.414-1.414l8.379-8.379H11.5a1 1 0 0 1-1-1Z" clip-rule="evenodd"/><path d="M4 4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4a1 1 0 1 0-2 0v4H4V6h4a1 1 0 1 0 0-2H4Z"/></svg>
+        </a>
       </section>
     )}
 
