@@ -31,7 +31,19 @@ jobs:
         run: npm ci
 
       - name: Build site
-        run: npx astro build
+        run: |
+          set +e
+          npx astro build 2>&1 | tee astro-build.log
+          status=${PIPESTATUS[0]}
+          echo "Astro build exit code: $status"
+          exit $status
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astro-build-log
+          path: astro-build.log
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
