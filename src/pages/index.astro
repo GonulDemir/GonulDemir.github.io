@@ -81,13 +81,16 @@ const profileStructuredData = {
       <div class="relative group">
         <div class="absolute -inset-1.5 bg-gradient-to-tr from-blue-500 via-indigo-500 to-cyan-400 rounded-full opacity-70 blur-md group-hover:opacity-90 transition-opacity duration-500"></div>
         <div class="absolute -inset-0.5 bg-gradient-to-tr from-blue-500 via-indigo-500 to-cyan-400 rounded-full"></div>
-        <Image
-          src={profilePhoto}
-          alt="Gönül Demir"
-          width={352}
-          class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full object-cover object-top ring-4 ring-slate-900"
-          loading="eager"
-        />
+        <div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden ring-4 ring-slate-900">
+          <Image
+            src={profilePhoto}
+            alt="Gönül Demir"
+            width={448}
+            class="w-full h-full object-cover"
+            style="object-position: 50% 28%; transform: scale(1.13);"
+            loading="eager"
+          />
+        </div>
         <div class="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 rounded-full border-[3px] border-slate-900 shadow-lg shadow-emerald-500/40"></div>
       </div>
 
