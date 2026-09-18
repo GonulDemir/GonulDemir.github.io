@@ -5,7 +5,7 @@ import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 import { useTranslations } from '../i18n/utils';
 import { Image } from 'astro:assets';
-import profilePhoto from '../assets/profile-photo.png';
+import profilePhoto from '../assets/profile-photo.jpg';
 
 const t = useTranslations('en');
 
@@ -84,8 +84,7 @@ const profileStructuredData = {
         <Image
           src={profilePhoto}
           alt="Gönül Demir"
-          width={176}
-          height={176}
+          width={352}
           class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full object-cover object-top ring-4 ring-slate-900"
           loading="eager"
         />
