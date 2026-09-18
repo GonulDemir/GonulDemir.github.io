@@ -1,8 +1,9 @@
 ---
 title: "Engineering Notes on a 1–30 MHz, 1.3 kW Solid-State SP2T RF Switch — Part I"
 description: "Design 1: topology, SiC MOSFET selection, isolated gate drive, control isolation, RF detection, and the design review that led to a new architecture."
-date: 2026-09-18
+pubDate: '2026-09-18'
 author: "Gönül Demir and Hadrien Theveneau"
+category: analog-design-power-electronics
 tags:
   - RF engineering
   - power electronics
@@ -41,9 +42,9 @@ When a single MOSFET is turned OFF, its channel stops conducting, but its intrin
 
 The two-branch SP2T structure therefore requires four MOSFETs in total:
 
-\[
-2\ 	ext{branches}	imes2\ 	ext{MOSFETs}=4\ 	ext{MOSFETs}
-\]
+$$
+2\ \text{branches}\times2\ \text{MOSFETs}=4\ \text{MOSFETs}
+$$
 
 This topology was a reasonable starting point for Design 1 because it provides bidirectional RF switching without mechanical contacts. However, at 1.3 kW and up to 30 MHz, voltage rating alone was not enough. ON-state loss, OFF-state coupling, thermal behaviour, and gate-drive integrity all had to be considered together.
 
@@ -51,11 +52,11 @@ This topology was a reasonable starting point for Design 1 because it provides b
 
 At 1.3 kW into a matched 50 Ω load, the nominal line values are approximately:
 
-\[
-V_{RMS}pprox255\ 	ext{V}, \qquad
-V_{PEAK}pprox361\ 	ext{V}, \qquad
-I_{RMS}pprox5.1\ 	ext{A}
-\]
+$$
+V_{RMS}\approx255\ \text{V}, \qquad
+V_{PEAK}\approx361\ \text{V}, \qquad
+I_{RMS}\approx5.1\ \text{A}
+$$
 
 These are nominal matched-load values. Antenna mismatch and standing-wave conditions can increase the instantaneous voltage or current stress seen by the MOSFETs.
 
@@ -68,17 +69,17 @@ For that reason, four parameters became particularly important in device selecti
 
 RDS(on) directly affects conduction loss:
 
-\[
-P_{COND}=I_{RMS}^{2}	imes R_{DS(on)}
-\]
+$$
+P_{COND}=I_{RMS}^{2}\times R_{DS(on)}
+$$
 
 This makes low RDS(on) desirable. But in an RF switch, good ON-state performance alone is not sufficient.
 
 When the MOSFET is OFF, the channel is closed, but the drain-source path does not become an ideal open circuit. The device output capacitance, together with other topology parasitics, creates an **effective OFF-state capacitance (Coff)**. From an RF perspective:
 
-\[
-X_C=rac{1}{2\pi fC}
-\]
+$$
+X_C=\frac{1}{2\pi fC}
+$$
 
 so the impedance of the OFF path decreases as frequency increases.
 
@@ -88,9 +89,9 @@ For Design 1, the **Infineon IMZC140R029M2H** was selected because it combined a
 
 Assuming approximately 58 mΩ total channel resistance for the two series MOSFETs:
 
-\[
-P_{COND}pprox5.1^2	imes0.058pprox1.5\ 	ext{W}
-\]
+$$
+P_{COND}\approx5.1^2\times0.058\approx1.5\ \text{W}
+$$
 
 The ON-state result looked promising. The later design review, however, showed that the dominant limitation could instead be **OFF-state capacitance and port isolation**.
 
@@ -102,9 +103,9 @@ After selecting the MOSFET, the next question was not simply how to turn it ON a
 
 Although the control side operates at approximately **5 V logic**, directly driving the SiC MOSFET from an MCU GPIO would not be appropriate. A MOSFET gate draws very little DC current in steady state, but during switching its capacitances require a finite amount of charge to be moved:
 
-\[
-I_Gpproxrac{Q_G}{t_{SW}}
-\]
+$$
+I_G\approx\frac{Q_G}{t_{SW}}
+$$
 
 For the IMZC140R029M2H, the manufacturer characterizes the gate charge using an 18 V gate-drive condition. Here it is important to distinguish threshold voltage from full enhancement: the point at which the channel starts to conduct is not the same as the operating point where the device reaches low RDS(on).
 
@@ -118,9 +119,9 @@ There is an important distinction in this project:
 
 At 30 MHz, one RF period is only:
 
-\[
-T=rac{1}{30\ 	ext{MHz}}pprox33.3\ 	ext{ns}
-\]
+$$
+T=\frac{1}{30\ \text{MHz}}\approx33.3\ \text{ns}
+$$
 
 but the MOSFET gates are not being switched every 33 ns. Once a branch is selected, the MOSFETs may remain in the same ON or OFF state for seconds, minutes, or longer, while the continuous 1–30 MHz RF carrier propagates through that static conduction path.
 
@@ -136,9 +137,9 @@ Instead of relying only on 0 V in the OFF state, Design 1 uses approximately **�
 
 Fast drain-voltage changes can couple displacement current into the gate through the gate-drain capacitance:
 
-\[
-I_{Miller}=C_{GD}	imesrac{dV_{DS}}{dt}
-\]
+$$
+I_{Miller}=C_{GD}\times\frac{dV_{DS}}{dt}
+$$
 
 This current can create a positive voltage excursion across the gate impedance and increase the risk of false turn-on. Negative OFF bias provides additional margin below threshold and therefore improves immunity to this mechanism.
 
@@ -148,15 +149,15 @@ Each floating gate-drive domain is powered by a **MORNSUN QA053C-1803R3** isolat
 
 Gate voltage is meaningful relative to the MOSFET source terminal, not to system ground:
 
-\[
+$$
 V_{GS}=V_G-V_S
-\]
+$$
 
 Parasitic inductance in the power-source path can generate:
 
-\[
-V_{LS}=L_S	imesrac{di}{dt}
-\]
+$$
+V_{LS}=L_S\times\frac{di}{dt}
+$$
 
 If the gate-driver return shares the same high-current source path, this voltage directly modulates the actual VGS seen by the MOSFET.
 
