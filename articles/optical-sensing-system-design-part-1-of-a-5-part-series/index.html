@@ -1,0 +1,332 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Apply the saved theme before styles are loaded to avoid a flash of the wrong theme. --><script>
+      (() => {
+        let theme = 'dark';
+        try {
+          const savedTheme = window.localStorage.getItem('color-theme');
+          if (savedTheme === 'light' || savedTheme === 'dark') {
+            theme = savedTheme;
+          }
+        } catch {
+          // Keep the existing dark default if storage is unavailable.
+        }
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+      })();
+    </script><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.18.2"><!-- Canonical URL --><link rel="canonical" href="https://gonuldemir.github.io/articles/optical-sensing-system-design-part-1-of-a-5-part-series/"><!-- Primary Meta Tags --><title>Optical Sensing System Design – Part 1: Foundations | Gönül Demir</title><meta name="title" content="Optical Sensing System Design – Part 1: Foundations | Gönül Demir"><meta name="description" content="The foundations of optical sensing, from light–matter interactions to wavelength selection, and the updated reading order for the series."><meta name="author" content="Gönül Demir"><meta name="robots" content="index, follow, max-image-preview:large"><!-- Open Graph / Facebook --><meta property="og:type" content="article"><meta property="og:url" content="https://gonuldemir.github.io/articles/optical-sensing-system-design-part-1-of-a-5-part-series/"><meta property="og:site_name" content="Gönül Demir — Electronics R&D"><meta property="og:locale" content="en_US"><meta property="og:title" content="Optical Sensing System Design – Part 1: Foundations | Gönül Demir"><meta property="og:description" content="The foundations of optical sensing, from light–matter interactions to wavelength selection, and the updated reading order for the series."><meta property="og:image" content="https://gonuldemir.github.io/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/cover-natural-v2.png"><meta property="og:image:alt" content="Optical Sensing System Design – Part 1: Foundations — article cover"><meta property="article:published_time" content="2025-12-03T00:00:00.000Z"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:url" content="https://gonuldemir.github.io/articles/optical-sensing-system-design-part-1-of-a-5-part-series/"><meta name="twitter:title" content="Optical Sensing System Design – Part 1: Foundations | Gönül Demir"><meta name="twitter:description" content="The foundations of optical sensing, from light–matter interactions to wavelength selection, and the updated reading order for the series."><meta name="twitter:image" content="https://gonuldemir.github.io/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/cover-natural-v2.png"><meta name="twitter:image:alt" content="Optical Sensing System Design – Part 1: Foundations — article cover"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Optical Sensing System Design – Part 1: Foundations","description":"The foundations of optical sensing, from light–matter interactions to wavelength selection, and the updated reading order for the series.","image":"https://gonuldemir.github.io/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/cover-natural-v2.png","datePublished":"2025-12-03T00:00:00.000Z","dateModified":"2025-12-03T00:00:00.000Z","mainEntityOfPage":"https://gonuldemir.github.io/articles/optical-sensing-system-design-part-1-of-a-5-part-series/","author":{"@type":"Person","@id":"https://gonuldemir.github.io/#person","name":"Gönül Demir","url":"https://gonuldemir.github.io/"},"publisher":{"@type":"Person","@id":"https://gonuldemir.github.io/#person","name":"Gönül Demir"}}</script><!-- KaTeX Styling --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css" integrity="sha384-zh0WpH2gLtM6eDtfDR5gXGJ18966mEubXyaM1a7gFY9Wjff+29uLqNqN25SblKx9" crossorigin="anonymous"><!-- GoatCounter Analytics --><script data-goatcounter="https://gonuldemir.goatcounter.com/count" async src="https://gc.zgo.at/count.js">
+    </script><link rel="stylesheet" href="/_astro/_slug_.CImMp5ia.css"></head> <body class="bg-brand-light dark:bg-brand-dark text-brand-textLight dark:text-brand-textDark antialiased flex flex-col min-h-screen"> <header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md transition-colors"> <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex items-center justify-between h-20"> <!-- Brand / Logo & Title --> <div class="flex flex-col justify-center"> <a href="/" class="group flex items-baseline gap-2"> <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-brand-accent transition-colors">
+Gönül Demir
+</span> <span class="inline-block w-2 h-2 rounded-full bg-brand-accent"></span> </a> <span class="text-xs font-medium text-slate-500 dark:text-slate-400 tracking-wide mt-0.5"> Senior Electronics R&amp;D &amp; Product Engineer </span> </div> <!-- Desktop Navigation --> <nav class="hidden md:flex items-center gap-1 lg:gap-2 text-sm font-medium"> <a href="/" class="px-3 py-2 rounded-md transition-colors text-slate-700 dark:text-slate-300 hover:text-brand-accent dark:hover:text-brand-accent hover:bg-slate-50 dark:hover:bg-slate-800/50"> Home </a> <a href="/about" class="px-3 py-2 rounded-md transition-colors text-slate-700 dark:text-slate-300 hover:text-brand-accent dark:hover:text-brand-accent hover:bg-slate-50 dark:hover:bg-slate-800/50"> About </a> <!-- Articles with Dropdown --> <div class="relative group"> <a href="/articles" class="inline-flex items-center gap-1 px-3 py-2 rounded-md transition-colors text-brand-accent font-semibold bg-slate-100 dark:bg-slate-800"> <span>Articles</span> <svg class="w-4 h-4 text-slate-400 group-hover:text-brand-accent transition-transform group-hover:rotate-180 duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path> </svg> </a> <!-- Dropdown Panel --> <div class="absolute left-0 top-full pt-2 w-96 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50"> <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl p-3 space-y-1"> <a href="/articles?category=optical-sensing-system-design" class="block px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-accent dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-lg transition-colors"> Optical Sensing System Design </a><a href="/articles?category=electromagnetic-compatibility" class="block px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-accent dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-lg transition-colors"> Electromagnetic Compatibility </a><a href="/articles?category=analog-design-power-electronics" class="block px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-accent dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-lg transition-colors"> Analog Design &amp; Power Electronics </a><a href="/articles?category=astronomy-astrophysics-space-science" class="block px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-accent dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-lg transition-colors"> Astronomy, Astrophysics &amp; Space Science </a><a href="/articles?category=product-verification-certification" class="block px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-accent dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-lg transition-colors"> Product Verification &amp; Certification </a><a href="/articles?category=bio-inspired-sensors-robotics" class="block px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-accent dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-lg transition-colors"> Bio-Inspired Sensors &amp; Robotics </a> </div> </div> </div> <a href="/projects" class="px-3 py-2 rounded-md transition-colors text-slate-700 dark:text-slate-300 hover:text-brand-accent dark:hover:text-brand-accent hover:bg-slate-50 dark:hover:bg-slate-800/50"> Projects </a> <!-- Free Zone Independent Link --> <a href="/free-zone" class="px-3 py-2 rounded-md transition-colors text-amber-600 dark:text-amber-400 hover:text-amber-500 dark:hover:text-amber-300 hover:bg-amber-50/50 dark:hover:bg-amber-950/30"> Free Zone </a> <a href="/contact" class="px-3 py-2 rounded-md transition-colors text-slate-700 dark:text-slate-300 hover:text-brand-accent dark:hover:text-brand-accent hover:bg-slate-50 dark:hover:bg-slate-800/50"> Contact </a> </nav> <!-- Action Controls (Dark Mode) --> <div class="flex items-center gap-3"> <button id="theme-toggle" type="button" class="inline-flex items-center justify-center p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 dark:focus-visible:ring-cyan-300 transition-colors" aria-label="Toggle theme"> <!-- Sun Icon for Dark Mode (shows when dark mode is active to switch to light) --> <svg id="theme-toggle-light-icon" class="hidden h-5 w-5 dark:block" fill="currentColor" viewBox="0 0 20 20"> <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path> </svg> <!-- Moon Icon for Light Mode (shows when light mode is active to switch to dark) --> <svg id="theme-toggle-dark-icon" class="block h-5 w-5 dark:hidden" fill="currentColor" viewBox="0 0 20 20"> <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path> </svg> </button> <script type="module">function n(){const t=document.getElementById("theme-toggle");t&&(t.onclick=function(){const e=!document.documentElement.classList.contains("dark");document.documentElement.classList.toggle("dark",e);try{localStorage.setItem("color-theme",e?"dark":"light")}catch{}})}n();document.addEventListener("astro:after-swap",n);</script> <!-- Mobile Menu Toggle Button --> <button id="mobile-menu-button" type="button" class="md:hidden p-2 rounded-md text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white focus:outline-none" aria-label="Toggle mobile menu"> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </div> </div> </div> <!-- Mobile Dropdown Navigation --> <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-6 space-y-2"> <a href="/" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"> Home </a> <a href="/about" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"> About </a> <a href="/articles" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"> Articles </a> <a href="/projects" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"> Projects </a> <a href="/free-zone" class="block px-3 py-2 rounded-md text-base font-medium text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/40"> Free Zone </a> <a href="/contact" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"> Contact </a> </div> </header> <script type="module">function n(){const e=document.getElementById("mobile-menu-button"),t=document.getElementById("mobile-menu");e&&t&&(e.onclick=()=>{t.classList.toggle("hidden")})}n();document.addEventListener("astro:after-swap",n);</script> <main class="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">  <article class="max-w-4xl mx-auto"> <!-- Back to Articles Link --> <a href="/articles" class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-brand-accent dark:hover:text-blue-400 transition-colors mb-8"> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path> </svg> Articles </a> <!-- Article Header Header --> <header class="mb-10 pb-8 border-b border-slate-200 dark:border-slate-800"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/cover-natural-v2.png" alt="Optical Sensing System Design – Part 1: Foundations cover" class="mb-8 h-auto max-h-[36rem] w-full rounded-2xl object-contain shadow-lg" loading="eager"> <div class="flex items-center gap-2 mb-4 flex-wrap"> <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-brand-accent dark:text-blue-300 border border-blue-200/50 dark:border-blue-800/50"> Optical Sensing System Design </span>  </div> <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-4"> Optical Sensing System Design – Part 1: Foundations </h1> <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6"> The foundations of optical sensing, from light–matter interactions to wavelength selection, and the updated reading order for the series. </p> <div class="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400"> <time datetime="2025-12-03T00:00:00.000Z"> December 3, 2025 </time> <span>•</span> <span class="flex items-center gap-1"> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path> </svg> 12 min read </span> </div> <a href="https://www.linkedin.com/pulse/optical-sensing-system-design-part-1-5-part-series-gonul-demir-0dhhf" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-brand-accent dark:text-blue-400 hover:underline"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"> <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14Zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4s1.4.63 1.4 1.4v4.93h2.75ZM6.46 10.9v8.37h2.79V10.9H6.46Zm1.4-4.16a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24Z"></path> </svg>
+Read the original article on LinkedIn
+<svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"> <path d="M11 3a1 1 0 1 0 0 2h2.59L8.3 10.29a1 1 0 1 0 1.42 1.42L15 6.41V9a1 1 0 1 0 2 0V3h-6Z"></path> <path d="M5 5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a1 1 0 1 0-2 0v3H5V7h3a1 1 0 1 0 0-2H5Z"></path> </svg> </a> </header> <!-- Main Content Area --> <div class="article-content prose prose-slate dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-brand-accent dark:prose-a:text-blue-400 prose-img:h-auto prose-img:max-w-full prose-img:rounded-xl">  <p><strong>Why This Series Exists</strong></p>
+<p>My career in R&amp;D—spanning more than fourteen years—has taken me through a wide range of optical sensing projects. I’ve worked with light in many forms: absorbed, scattered, transmitted, reflected, refracted. And every time, I found myself fascinated by the same simple truth:</p>
+<p><strong>Light always has something to say; we just need to learn how to read it.</strong></p>
+<p>Over the years, I also noticed that many talented engineers hesitate when it comes to optical sensing. Not because they lack skill, but because the topic is often presented in a way that feels overly academic or fragmented.</p>
+<p>This series aims to bring clarity. My intention is to share the practical foundations of optical sensing—the version we use in real engineering work—while keeping the explanations accessible and structured.</p>
+<h3 id="series-outline">Series Outline</h3>
+<p>When I began writing, I envisioned this as a five-week series. As the work developed, that original schedule naturally changed: the first two subjects became standalone articles, while the broad third subject—optical elements—grew into several focused articles. Rather than compressing these topics to fit the initial plan, I chose to give each one the space it needed.</p>
+<p>The published reading order is:</p>
+<ol>
+<li><strong>Part 1 – Foundations:</strong> light–matter interactions, application areas, and wavelength selection <em>(this article)</em></li>
+<li><strong>Part 2 – Transmitter &amp; Receiver Selection:</strong> <a href="/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/">LEDs, lasers, photodiodes, phototransistors, and final component selection</a></li>
+<li><strong>Part 3A – Optical Elements: Lenses:</strong> <a href="/articles/optical-sensing-system-design-optical-elements-part-3-of-5/">lens terminology, lens types, aberrations, and collimation</a></li>
+<li><strong>Part 3B – Optical Elements: Polarization:</strong> <a href="/articles/optical-sensing-system-design-optical-elements-polarization-part-3-of-5/">polarization, birefringence, polarizers, and practical applications</a></li>
+<li><strong>Part 3C – Optical Elements: Prisms:</strong> <a href="/articles/optical-sensing-system-design-optical-elements-prism-part-3-of-5/">beam steering, image transformation, and dispersive and non-dispersive prisms</a></li>
+<li><strong>Part 3D – Optical Elements: Retroreflectors:</strong> <a href="/articles/optical-sensing-system-design-optical-elements-prism-retroreflectors-part-3-of-5/">corner cubes, cat’s-eye reflectors, and retroreflective foils</a></li>
+</ol>
+<p>I hope you enjoy reading this series.</p>
+<p>Let’s begin.</p>
+<h2 id="2-overview-of-optical-interaction-principles">2. Overview of Optical Interaction Principles</h2>
+<p>Optical sensing systems extract information based on how light interacts with an object. Every object in the real world handles light differently:</p>
+<ul>
+<li>Some absorb it</li>
+<li>Some reflect it</li>
+<li>Some scatter it</li>
+<li>Some transmit it</li>
+<li>Some refract it</li>
+</ul>
+<p>This leads to a fundamental rule in optical sensing:</p>
+<p><strong>Emit (or collect) light → measure its interaction → convert the measurement into a decision.</strong></p>
+<p>Below are the key physical behaviors used in optical sensing, along with real industrial applications.</p>
+<h3 id="21-absorption">2.1. Absorption</h3>
+<p>Certain wavelengths of light are absorbed by materials at different rates. This is heavily used in medical devices, food analysis, and quality inspection systems.</p>
+<h3 id="example-pulse-oximeter">Example: Pulse Oximeter</h3>
+<ul>
+<li>660 nm and 940 nm light pass through the finger.</li>
+<li>Oxygenated hemoglobin absorbs these wavelengths differently.</li>
+<li>The sensor measures the absorption ratio and calculates oxygen saturation.</li>
+</ul>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 32rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-01.png" alt="Pulse oximeter probe showing red and infrared LEDs and the light-receiving detector" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 01 — Source: Physio-Control, LIFEPAK Monitor/Defibrillator Operating Instructions. </figcaption> </figure>
+<h3 id="22-reflection-back-reflection">2.2. Reflection (Back Reflection)</h3>
+<p>An object’s color, brightness, and surface texture affect how much light it reflects. Diffuse sensors and color-recognition systems operate using this principle.</p>
+<h3 id="example-diffuse-sensor">Example: Diffuse Sensor</h3>
+<p>Light hits the surface → returns depending on surface properties → the sensor decides “object present / not present.”</p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 48rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-02.png" alt="Diffuse optical sensor detecting bottles on a conveyor" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 02 — Source: Leuze electronic, Packaging Technology – Beverage Filling Application. </figcaption> </figure>
+<h3 id="23-scattering">2.3. Scattering</h3>
+<p>Smoke, fog, and airborne particles scatter light. Smoke detectors and particle-measurement instruments use this effect.</p>
+<h3 id="example-optical-smoke-detector">Example: Optical Smoke Detector</h3>
+<p>An LED illuminates the chamber → smoke scatters the light → scattered light reaches the photodiode → increasing intensity triggers the alarm.</p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 48rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-03.png" alt="Photoelectric smoke detector scattering principle with and without smoke" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 03 — Source: Renesas, Photoelectric Smoke Detector Working Principle. </figcaption> </figure>
+<h3 id="24-interruption--occlusion">2.4. Interruption / Occlusion</h3>
+<p>The emitter and receiver face each other; when an object blocks the beam, light is interrupted. This is the basis of door sensors, turnstiles, and safety barriers.</p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 22rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-04.png" alt="FENAC transmitter and receiver light curtain with a 1600 mm detection height" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 04 — Source: FENAC, FNC DD36 Series. </figcaption> </figure>
+<h3 id="25-transmission">2.5. Transmission</h3>
+<p>In transmission-based sensing, the amount of light passing through a material is measured. Changes in smoke, gas concentration, or liquid properties can be detected this way.</p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 48rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-05.png" alt="Transmitted-beam smoke detector with smoke attenuating the beam" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 05 — Source: Easy Detect, ED-TR6100 Beam Smoke Detector. </figcaption> </figure>
+<h3 id="26-refraction-and-optical-density">2.6. Refraction and Optical Density</h3>
+<p>Liquids and transparent materials refract light. Changes in refraction angle can reveal liquid level, foam presence, or density variations.</p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 48rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-06.png" alt="Optical liquid-level sensor tip operating in air and immersed in water" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 06 — Source: SST Sensing Ltd., “Optical Liquid Level Sensor Operating Principle,” AN0041. </figcaption> </figure>
+<h3 id="27-time-of-flight-tof">2.7. Time of Flight (ToF)</h3>
+<p>Light is emitted, hits a target, and the return time is measured. Distance is calculated from the round-trip time.</p>
+<h3 id="example-foam-detection-in-coffee-machines">Example: Foam Detection in Coffee Machines</h3>
+<p>In a suitably designed system, a ToF sensor can track the foam surface: as the foam rises, the measured distance decreases and the controller can regulate the process. Figure 07 shows the application context only; the product image does not reveal or verify an internal ToF architecture.</p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 26rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-07.png" alt="Perfect Moose automatic milk steamer dispensing milk into a pitcher" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 07 — Automatic milk-steaming application context. Source: Perfect Moose, Automatic Milk Steamer. </figcaption> </figure>
+<h3 id="28-speckle-pattern-laser-roughness-measurement">2.8. Speckle Pattern (Laser Roughness Measurement)</h3>
+<p>When a laser hits a rough surface, it produces a random speckle pattern. This pattern serves as an optical signature for surface roughness.</p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 48rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-08.png" alt="Laser speckle measurement using incident and scattered light captured by a camera" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 08 — Source: Senarathna et al., 2013. </figcaption> </figure>
+<h3 id="29-spectral-signature">2.9. Spectral Signature</h3>
+<p>Every material has a unique optical signature at certain wavelengths—such as the UV/IR signature of flames, NIR reflection differences between plastic types, or spectral distinctions between rice and stones.</p>
+<p>These unique signatures allow optical systems to identify and classify materials.</p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 28rem);"> <div class="max-w-full overflow-hidden rounded-xl bg-white p-3"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-09.png" alt="Optical sorting machine separating accepted and rejected grains" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 09 — Source: Manitech, Rice Camera Structure Schematic. </figcaption> </figure>
+<h3 id="210-diffraction-and-pattern-analysis">2.10. Diffraction and Pattern Analysis</h3>
+<p>When light passes through a slit or edge, it creates diffraction patterns. These patterns reveal detailed geometric information about the surface or structure.</p>
+<h3 id="example-laser-diffraction-particle-size-measurement">Example: Laser-Diffraction Particle-Size Measurement</h3>
+<p>Particles passing through a laser beam produce an angular scattering and diffraction pattern. A lens maps that pattern onto a detector array, allowing the particle-size distribution to be estimated.</p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 48rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-10.png" alt="Laser diffraction particle measurement system with sample, lens, and detectors" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 10 — Source: Ullah et al., 2022. </figcaption> </figure>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 30rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-11.png" alt="Laser particle-size measurement using a flow cell and CCD detector" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 11 — Source: Laser Quantum / Novanta, 2021. </figcaption> </figure>
+<h2 id="3-the-spectrum-of-sensing--why-wavelength-matters">3. The Spectrum of Sensing – Why Wavelength Matters</h2>
+<p><em>“Light is the oldest messenger in nature.” — Albert Einstein</em></p>
+<p>Optical sensing is essentially the process of reading this message. However, what the light tells us depends entirely on <strong>the wavelength we observe it in.</strong></p>
+<p>As explained in David Attenborough’s <em>Life in Color</em> documentary, many herbivores perceive orange as a shade of green. Therefore, a tiger appears bright to us but blends into the background for a deer.</p>
+<p>This demonstrates a fundamental truth:</p>
+<p><strong>The same object can produce entirely different realities at different wavelengths.</strong></p>
+<p>This is why wavelength selection is one of the most critical decisions in any optical sensing project.</p>
+<h3 id="wavelength--energy">Wavelength = Energy</h3>
+<p><strong>The Physics That Determines What Light Reveals</strong></p>
+<p>As wavelength decreases, energy increases; as wavelength increases, energy decreases:</p>
+<ul>
+<li><strong>Short wavelengths (UV–VIS–NIR)</strong> → high energy → object details become more pronounced</li>
+<li><strong>Long wavelengths (Mid-IR–LWIR)</strong> → lower energy → background noise increases, making separation more difficult</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<ul>
+<li><strong>LWIR band:</strong> Since almost everything—including humans—emits thermal radiation in this region, the target signal must be separated from a highly active background. This is why <strong>thermal imaging is inherently complex</strong>.</li>
+<li><strong>Mid-IR band:</strong> Only gas molecules produce sharp absorption peaks in this wavelength range, allowing <strong>NDIR gas sensors</strong> to operate with very high accuracy.</li>
+</ul>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 48rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-12.png" alt="Electromagnetic spectrum highlighting visible, NIR, SWIR, MWIR, and LWIR regions" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 12 — Source: National Research Council Canada, 2015. </figcaption> </figure>
+<h2 id="31-detailed-examination-of-wavelength-regions">3.1. Detailed Examination of Wavelength Regions</h2>
+<h3 id="311-ultraviolet--uv-180400-nm">3.1.1. Ultraviolet – UV (180–400 nm)</h3>
+<p>Used in fluorescence, contamination inspection, and flame detection. UV light is high-energy and reveals features invisible under visible light.</p>
+<h3 id="1-leak-detection-using-fluorescent-dye">1) Leak Detection Using Fluorescent Dye</h3>
+<p>Fluorescent dye glows bright green/blue under UV illumination.</p>
+<p><strong>Applications:</strong></p>
+<ul>
+<li>HVAC and refrigeration systems</li>
+<li>Hydraulic line leak detection</li>
+<li>Automotive fluid inspection</li>
+</ul>
+<p><strong>Block Diagram:</strong> <strong>UV LED → Surface → Fluorescence → Optical Filter → Photodiode / Camera</strong></p>
+<h3 id="2-uv-fluorescence-gas-measurement">2) UV Fluorescence Gas Measurement</h3>
+<p>UV fluorescence is also used in analytical instruments. In the example below, sulfur dioxide molecules are excited by UV light and their fluorescence is measured selectively by a photodetector.</p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 36rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-13.png" alt="UV fluorescence measurement principle for sulfur dioxide gas" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 13 — Source: HORIBA, APSA-380 Sulfur Dioxide Monitor. </figcaption> </figure>
+<h3 id="3-uv-marker--security-ink-reading">3) UV Marker / Security Ink Reading</h3>
+<p>Invisible UV-reactive ink becomes visible when illuminated with UV light.</p>
+<p><strong>Applications:</strong></p>
+<ul>
+<li>Banknote authentication</li>
+<li>Logistics package verification</li>
+<li>Pharmaceutical packaging security</li>
+</ul>
+<h3 id="4-uv-curing-and-photopolymerization">4) UV Curing and Photopolymerization</h3>
+<p>UV light can initiate polymerization in photosensitive resins and inks. This principle is widely used in additive manufacturing, printing, and coating processes.</p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 40rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-14.png" alt="UV lamp curing photopolymer ink during layered printing" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 14 — Source: Torah et al., 2019. </figcaption> </figure>
+<h3 id="5-uv-flame-detection-180260-nm">5) UV Flame Detection (180–260 nm)</h3>
+<p>Flames emit natural UV radiation in this band. Solar influence is minimal → very low false alarm rate.</p>
+<p><strong>Applications:</strong> refineries, natural gas systems, paint curing ovens.</p>
+<p><strong>Block Diagram:</strong> <strong>Flame → Band-Pass Filter → UV Photodiode → Amplifier → Alarm</strong></p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 48rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-15.png" alt="UV flame-detection system with an aspherical mirror, controller, and alarm outputs" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 15 — Source: Truong et al., Applied Sciences, 2023. </figcaption> </figure>
+<h2 id="312-visible-spectrum-400700-nm">3.1.2. Visible Spectrum (400–700 nm)</h2>
+<p>The primary band for color, contrast, printing, and surface inspection. This is the same band the human eye perceives, and it is widely used in industrial automation.</p>
+<h3 id="1-color-detection-and-classification">1) Color Detection and Classification</h3>
+<p>Color information is obtained using white/RGB LEDs and photodiode arrays.</p>
+<p><strong>Applications:</strong></p>
+<ul>
+<li>Food sorting</li>
+<li>Plastic classification</li>
+<li>Label verification</li>
+<li>Textile inspection</li>
+</ul>
+<p><strong>Block Diagram:</strong> <strong>LED → Object → Reflection → Color Sensor → Digital Analysis</strong></p>
+<h3 id="2-contrast-sensors-blackwhite-detection">2) Contrast Sensors (Black–White Detection)</h3>
+<p>Essential in printing and labeling processes.</p>
+<p><strong>Applications:</strong></p>
+<ul>
+<li>Label cutting and alignment</li>
+<li>Barcode/marker detection</li>
+<li>Paper processing</li>
+</ul>
+<p><strong>Block Diagram:</strong> <strong>LED → Surface → Reflection → Photodiode → Thresholding → Output</strong></p>
+<h2 id="313-nir--near-infrared-7001100-nm">3.1.3. NIR – Near Infrared (700–1100 nm)</h2>
+<p>A band that penetrates the internal structure of organic materials. Unlike visible light, NIR enters fruits, plants, food products, and biological tissues.</p>
+<h3 id="1-fruit-ripeness-detection">1) Fruit Ripeness Detection</h3>
+<p>Chemical changes related to ripeness are clearly detectable in NIR.</p>
+<p><strong>Applications:</strong> apples, mangos, avocados; internal defect detection.</p>
+<p><strong>Block Diagram:</strong> <strong>NIR LED → Fruit → Absorption → NIR Photodiode → Spectral Analysis</strong></p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 48rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-16.png" alt="Colorimetric sensor array and deep neural network workflow for banana ripeness prediction" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 16 — Source: Zhao et al., Foods, 2024. </figcaption> </figure>
+<h3 id="2-biological-tissue-detection-medical--laboratory-applications">2) Biological Tissue Detection (Medical / Laboratory Applications)</h3>
+<p>Blood, skin, and biological tissues transmit and absorb NIR light at different rates. With NIR illumination, the following can be achieved:</p>
+<ul>
+<li>Vein detection</li>
+<li>Subdermal bruise/bleeding visualization</li>
+<li>Non-invasive measurements</li>
+<li>Tissue oxygenation analysis</li>
+</ul>
+<p><strong>Block Diagram:</strong> <strong>NIR LED → Tissue → Transmitted/Scattered Light → Photodiode → Tissue Analysis</strong></p>
+<h3 id="3-industrial-material-separation-paper--textile--organic-vs-inorganic">3) Industrial Material Separation (Paper / Textile / Organic vs. Inorganic)</h3>
+<p>Organic materials reflect NIR light differently, enabling automated classification processes such as:</p>
+<ul>
+<li>Textile sorting</li>
+<li>Recycling line separation</li>
+<li>Paper coating inspection</li>
+</ul>
+<p><strong>Block Diagram:</strong> <strong>NIR Illumination → Surface → Spectral Response → Classification</strong></p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 48rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-17.png" alt="NIR plastic-sorting system identifying and separating two plastic types" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 17 — Source: Mattley, 2020; reproduced in Taneepanichskul et al., 2022. </figcaption> </figure>
+<h2 id="314-swir--short-wave-infrared-1025-µm">3.1.4. SWIR – Short Wave Infrared (1.0–2.5 µm)</h2>
+<p>SWIR is powerful because it distinguishes materials that look identical in visible and NIR bands. Chemical composition differences, moisture content, and subsurface features become clearly visible in SWIR.</p>
+<p>Below is a summary of the most characteristic SWIR applications:</p>
+<h3 id="1-plastic-type-identification-pet--pvc--pe--pp">1) Plastic Type Identification (PET – PVC – PE – PP)</h3>
+<p>Plastics that appear identical in visible and NIR bands exhibit completely different reflection signatures in SWIR.</p>
+<p><strong>Where is it used?</strong></p>
+<ul>
+<li>Recycling facilities</li>
+<li>Granule/plastic quality inspection lines</li>
+</ul>
+<p><strong>Block Diagram:</strong> <strong>SWIR LED → Plastic → InGaAs Sensor → Spectral Separation</strong></p>
+<h3 id="2-subsurface-defect-detection">2) Subsurface Defect Detection</h3>
+<p>SWIR makes certain materials appear semi-transparent. This enables visibility of:</p>
+<ul>
+<li>Coating-under cracks</li>
+<li>Air bubbles inside plastics</li>
+<li>Composite delamination</li>
+</ul>
+<p><strong>Block Diagram:</strong> <strong>SWIR Illumination → Material → Camera → Defect Map</strong></p>
+<h3 id="3-foreign-object-detection-in-food">3) Foreign Object Detection in Food</h3>
+<p>Chemical structures separate more sharply in SWIR, allowing detection of:</p>
+<ul>
+<li>Stones mixed with rice</li>
+<li>Plastic/wood fragments inside food products</li>
+</ul>
+<p><strong>Block Diagram:</strong> <strong>SWIR Light → Product → Reflectance → Classification</strong></p>
+<h2 id="315-mid-ir-35-µm">3.1.5. Mid-IR (3–5 µm)</h2>
+<p>The “fingerprint region” for gas molecules. Many gases have strong and highly specific absorption lines in this band. This makes Mid-IR uniquely suited for gas detection.</p>
+<h3 id="1-ndir-gas-sensors-co--ch--co--sf">1) NDIR Gas Sensors (CO₂ – CH₄ – CO – SF₆)</h3>
+<p>Each gas absorbs a very specific wavelength in the Mid-IR region:</p>
+<ul>
+<li>CO₂ → <strong>4.26 µm</strong></li>
+<li>CH₄ → <strong>3.3 µm</strong></li>
+<li>CO → <strong>4.7 µm</strong></li>
+</ul>
+<p>This is why NDIR systems are simple yet extremely effective.</p>
+<p><strong>Block Diagram:</strong> <strong>IR Source → Gas Chamber → Band-Pass Filter → Thermopile → Absorption Measurement</strong></p>
+<p><strong>Where is it used?</strong></p>
+<ul>
+<li>Ventilation / Indoor Air Quality</li>
+<li>Industrial gas leak detection</li>
+<li>Biogas / natural gas systems</li>
+<li>CO₂ monitoring in enclosed spaces</li>
+</ul>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 48rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-18.png" alt="NDIR carbon-dioxide sensor response in clean air and carbon dioxide" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 18 — Source: HKUST Clean Air Challenge. </figcaption> </figure>
+<h3 id="2-flame-spectrum-analysis-ir-flame-detector--mwir">2) Flame Spectrum Analysis (IR Flame Detector – MWIR)</h3>
+<p>In some critical environments, UV alone is not sufficient. Flames exhibit strong, distinctive IR emissions in the 3–5 µm band, making Mid-IR flame detectors highly reliable.</p>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>No influence from sunlight</li>
+<li>Very low false alarm rate</li>
+<li>Flame type and combustion characteristics can be analyzed</li>
+</ul>
+<p><strong>Block Diagram:</strong> <strong>Flame Emission → IR Filter (3–5 µm) → Pyroelectric Sensor → Decision Logic</strong></p>
+<h3 id="3-chemical-substance-analysis-via-ir-spectroscopy">3) Chemical Substance Analysis via IR Spectroscopy</h3>
+<p>Molecules absorb light at their vibration frequencies in the Mid-IR region. This makes it the most reliable band for chemical identification.</p>
+<p><strong>Applications:</strong></p>
+<ul>
+<li>Oil/lubricant quality analysis</li>
+<li>Paper–plastic identity verification</li>
+<li>Compact laboratory FTIR systems</li>
+</ul>
+<p><strong>Block Diagram:</strong> <strong>IR Source → Sample → Absorption Spectrum → Analysis</strong></p>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 38rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-19.png" alt="Infrared spectrum regions and characteristic functional-group absorption bands" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 19 — Source: Murillo-Bello, 2025. </figcaption> </figure>
+<h2 id="316-lwir--long-wave-infrared-814-µm">3.1.6. LWIR – Long Wave Infrared (8–14 µm)</h2>
+<p>The <strong>thermal sensing band</strong>.</p>
+<p>In this range, all objects emit their own thermal radiation—so LWIR sensors work <strong>passively</strong> (no illumination is required).</p>
+<p>While visible/NIR/SWIR imaging relies on reflected light, <strong>LWIR directly observes the temperature of the object</strong>.</p>
+<h3 id="1-thermal-cameras-microbolometer-sensors">1) Thermal Cameras (Microbolometer Sensors)</h3>
+<p>Special microbolometer arrays are used in this band. Each pixel heats up according to incoming IR energy → its resistance changes → temperature information is produced.</p>
+<p><strong>Where is it used?</strong></p>
+<ul>
+<li>Machine fault diagnostics</li>
+<li>Electrical panel temperature monitoring</li>
+<li>Building insulation analysis</li>
+<li>Human/mammal detection (security systems)</li>
+</ul>
+<p><strong>Block Diagram:</strong> <strong>Thermal Radiation → LWIR Lens → Microbolometer → Readout Electronics → Thermal Image</strong></p>
+<h3 id="2-temperature-distribution-and-hotspot-detection">2) Temperature Distribution and Hotspot Detection</h3>
+<p>Because LWIR can resolve temperature differences at <strong>millikelvin</strong> levels, it can detect:</p>
+<ul>
+<li>Bearing overheating</li>
+<li>Hot cable junctions</li>
+<li>MOSFET overload in inverters</li>
+<li>Cell-level heat imbalance in battery packs</li>
+</ul>
+<figure class="not-prose my-8 mr-auto ml-0 max-w-full" style="width: fit-content; max-width: min(100%, 48rem);"> <div class="max-w-full overflow-hidden rounded-xl"> <img src="/images/articles/optical-sensing-system-design-part-1-of-a-5-part-series/figure-20.png" alt="Machine-learning workflow for thermal solar-panel hotspot detection" class="mr-auto ml-0 block h-auto max-w-full" loading="lazy" decoding="async"> </div> <figcaption class="mt-2 text-left text-sm italic leading-relaxed text-slate-500 dark:text-slate-400"> Figure 20 — Source: Fernando et al., Information, 2025. </figcaption> </figure>
+<h3 id="3-human--living-being-detection-security-rescue-operations">3) Human / Living Being Detection (Security, Rescue Operations)</h3>
+<p>The human body emits strong IR radiation in the <strong>9–13 µm</strong> band. This makes people visible even in darkness, smoke, or fog.</p>
+<p><strong>Applications:</strong></p>
+<ul>
+<li>Search and rescue (detecting survivors under rubble)</li>
+<li>Night-time security cameras</li>
+<li>Wildlife/forest fire rescue monitoring</li>
+<li>Military thermal imaging systems</li>
+</ul>
+<p><strong>Block Diagram:</strong> <strong>Body Heat → IR Lens → Sensor Array → Contour/Heat Map → Detection</strong></p>
+<h2 id="summary">Summary</h2>
+<p>As we have seen in this section, wavelength is not merely a matter of “color.” It fully determines how a sensor perceives the world, what information it can extract, and which objects it can detect under different conditions.</p>
+<p>The same object appears as:</p>
+<ul>
+<li>Contamination under <strong>UV</strong></li>
+<li>Color and texture under <strong>Visible</strong></li>
+<li>Internal structure under <strong>NIR</strong></li>
+<li>Material differentiation under <strong>SWIR</strong></li>
+<li>Gas absorption signature under <strong>Mid-IR</strong></li>
+<li>Heat distribution under <strong>LWIR</strong></li>
+</ul>
+<p>Therefore, the very first question in optical system design is always:</p>
+<p><strong>“What exactly do I want to observe, and at which wavelength does this information become visible?”</strong></p>
+<h2 id="closing">Closing</h2>
+<p>In this part, we explored the spectrum domain that forms the foundation of optical sensing. We saw that each wavelength band reveals a completely different layer of reality.</p>
+<p>If there is a detail you are curious about, a situation you have encountered in your own project, or a concept you would like me to clarify further, feel free to share your questions in the comments. I will be happy to respond to each one.</p>
+<p>Continue with <a href="/articles/optical-sensing-system-design-transmitter-and-receiver-selection-guide-2-5/">Part 2 – Transmitter &amp; Receiver Selection</a>.</p>
+<h2 id="references">References</h2>
+<ol>
+<li>SST Sensing Ltd., <em>Optical Liquid Level Sensor Operating Principle</em>, AN0041.</li>
+<li>Senarathna et al., <em>IEEE Reviews in Biomedical Engineering</em>, 2013.</li>
+<li>Novanta / Laser Quantum, <em>Highly Accurate Particle Measuring Using Lasers</em>, 2021.</li>
+<li>National Research Council Canada, <em>Infrared Vision</em>, 2015.</li>
+<li>HORIBA, <em>APSA-380 Sulfur Dioxide Monitor</em>.</li>
+<li>Truong et al., <em>Applied Sciences</em>, 2023.</li>
+<li>Zhao et al., <em>Foods</em>, 2024.</li>
+<li>Taneepanichskul et al., <em>Frontiers in Sustainability</em>, 2022.</li>
+<li>HKUST, <em>Clean Air Challenge – Infrared CO₂ Sensing</em>.</li>
+<li>Fernando et al., <em>Information</em>, 2025.</li>
+</ol>  </div>  <!-- Related Articles Section --> <section class="mt-16 pt-10 border-t border-slate-200 dark:border-slate-800"> <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6"> Related Articles </h2> <div class="grid grid-cols-1 md:grid-cols-2 gap-6"> <article class="group relative flex flex-col bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-6 shadow-sm hover:shadow-md hover:border-brand-accent/50 dark:hover:border-brand-accent/50 transition-all duration-200 focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2 dark:focus-within:ring-offset-slate-950" data-category="optical-sensing-system-design" data-subcategory="Wearable Optical Sensing" data-title="how wearable optical sensors measure heart rate and spo₂" data-description="why wearables use green light for pulse tracking and red and infrared light for oxygen-saturation estimates—and what the photodiode actually measures."> <a href="/articles/how-wearable-optical-sensors-measure-heart-rate-and-spo2" tabindex="-1" class="mb-5 block aspect-[1200/627] overflow-hidden rounded-lg bg-slate-950" aria-label="Read How Wearable Optical Sensors Measure Heart Rate and SpO₂"> <img src="/images/articles/wearable-ppg-green-red-ir-linkedin.jpg" alt="" loading="lazy" class="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"> </a> <div class="flex items-center gap-2 text-xs mb-3 flex-wrap"> <!-- Category Badge --> <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-brand-accent dark:text-blue-300 border border-blue-200/50 dark:border-blue-800/50"> Optical Sensing System Design </span> <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300"> Wearable Optical Sensing </span> <span class="text-slate-300 dark:text-slate-600 ml-auto">•</span> <time datetime="2026-09-16T00:00:00.000Z" class="text-xs text-slate-500 dark:text-slate-400"> Sep 16, 2026 </time> </div> <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-brand-accent dark:group-hover:text-blue-400 transition-colors mb-2 line-clamp-2"> <a href="/articles/how-wearable-optical-sensors-measure-heart-rate-and-spo2" class="focus:outline-none"> <span class="absolute inset-0" aria-hidden="true"></span> How Wearable Optical Sensors Measure Heart Rate and SpO₂ </a> </h3> <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 line-clamp-3"> Why wearables use green light for pulse tracking and red and infrared light for oxygen-saturation estimates—and what the photodiode actually measures. </p> <div class="mt-auto flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700/40 text-xs text-slate-500 dark:text-slate-400"> <span class="flex items-center gap-1"> <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path> </svg> 3 min read </span> <span class="inline-flex items-center font-medium text-brand-accent dark:text-blue-400 group-hover:translate-x-1 transition-transform">
+Read
+<svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path> </svg> </span> </div> </article><article class="group relative flex flex-col bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-xl p-6 shadow-sm hover:shadow-md hover:border-brand-accent/50 dark:hover:border-brand-accent/50 transition-all duration-200 focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2 dark:focus-within:ring-offset-slate-950" data-category="optical-sensing-system-design" data-subcategory="Agricultural Sensing" data-title="seeing beyond the surface: nir sensing for fruit quality and harvest timing" data-description="how near-infrared light can help estimate fruit quality without cutting the fruit open—and why wavelength selection, calibration and signal quality matter in the field."> <a href="/articles/near-infrared-optical-sensing-for-fruit-quality-and-harvest-timing" tabindex="-1" class="mb-5 block aspect-[1200/627] overflow-hidden rounded-lg bg-slate-950" aria-label="Read Seeing Beyond the Surface: NIR Sensing for Fruit Quality and Harvest Timing"> <img src="/images/articles/nir-fruit-quality-linkedin.jpg" alt="" loading="lazy" class="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"> </a> <div class="flex items-center gap-2 text-xs mb-3 flex-wrap"> <!-- Category Badge --> <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-brand-accent dark:text-blue-300 border border-blue-200/50 dark:border-blue-800/50"> Optical Sensing System Design </span> <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300"> Agricultural Sensing </span> <span class="text-slate-300 dark:text-slate-600 ml-auto">•</span> <time datetime="2026-09-16T00:00:00.000Z" class="text-xs text-slate-500 dark:text-slate-400"> Sep 16, 2026 </time> </div> <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-brand-accent dark:group-hover:text-blue-400 transition-colors mb-2 line-clamp-2"> <a href="/articles/near-infrared-optical-sensing-for-fruit-quality-and-harvest-timing" class="focus:outline-none"> <span class="absolute inset-0" aria-hidden="true"></span> Seeing Beyond the Surface: NIR Sensing for Fruit Quality and Harvest Timing </a> </h3> <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 line-clamp-3"> How near-infrared light can help estimate fruit quality without cutting the fruit open—and why wavelength selection, calibration and signal quality matter in the field. </p> <div class="mt-auto flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700/40 text-xs text-slate-500 dark:text-slate-400"> <span class="flex items-center gap-1"> <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path> </svg> 4 min read </span> <span class="inline-flex items-center font-medium text-brand-accent dark:text-blue-400 group-hover:translate-x-1 transition-transform">
+Read
+<svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path> </svg> </span> </div> </article> </div> </section> </article>  </main> <footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 py-12 transition-colors"> <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8"> <!-- Column 1: Bio --> <div class="md:col-span-2 space-y-3"> <a href="/" class="text-lg font-bold text-slate-900 dark:text-white hover:text-brand-accent transition-colors">
+Gönül Demir
+</a> <p class="text-xs font-semibold text-brand-accent dark:text-blue-400">
+Senior Electronics R&D & Product Engineer
+</p> <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm"> With over 15 years of Electronics R&amp;D experience, I develop high-performance solutions and innovative products specializing in hardware design, sensor systems, optoelectronics, and EMC/EMI noise management. </p> </div> <!-- Column 2: Quick Links --> <div class="space-y-2"> <h3 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+Quick Links
+</h3> <ul class="space-y-1.5 text-xs text-slate-600 dark:text-slate-400"> <li><a href="/" class="hover:text-brand-accent transition-colors">Home</a></li> <li><a href="/about" class="hover:text-brand-accent transition-colors">About</a></li> <li><a href="/articles" class="hover:text-brand-accent transition-colors">Articles</a></li> <li><a href="/projects" class="hover:text-brand-accent transition-colors">Projects</a></li> <li><a href="/free-zone" class="hover:text-amber-500 transition-colors">Free Zone</a></li> <li><a href="/contact" class="hover:text-brand-accent transition-colors">Contact</a></li> </ul> </div> <!-- Column 3: Social & Contact --> <div class="space-y-2"> <h3 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+Connect
+</h3> <div class="flex flex-col space-y-2 text-xs text-slate-600 dark:text-slate-400"> <a href="https://www.linkedin.com/in/gonul-demir-49413433/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 hover:text-brand-accent transition-colors"> <svg class="w-4 h-4 fill-current text-[#0a66c2]" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.74a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24z"></path></svg> <span>LinkedIn</span> </a> <a href="https://github.com/gonuldemir" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 hover:text-brand-accent transition-colors"> <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg> <span>GitHub</span> </a> <a href="mailto:gonuldemir.en@gmail.com" class="inline-flex items-center gap-2 hover:text-brand-accent transition-colors"> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg> <span>gonuldemir.en@gmail.com</span> </a> </div> </div> </div> <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 dark:text-slate-400"> <p>© 2026 Gönül Demir. All Rights Reserved.</p> <p class="mt-2 md:mt-0 font-mono text-[11px]">
+Built with Astro & Tailwind CSS
+</p> </div> </div> </footer> </body></html>
