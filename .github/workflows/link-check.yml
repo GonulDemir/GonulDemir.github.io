@@ -1,0 +1,37 @@
+
+name: Daily Link Checker
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Install LinkChecker
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y linkchecker
+
+      - name: Check website links
+        run: |
+          linkchecker \
+            --check-extern \
+            --no-warnings \
+            --file-output=html/link-report.html \
+            https://gonuldemir.github.io/
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: link-check-report
+          path: link-report.html
+          if-no-files-found: ignore
