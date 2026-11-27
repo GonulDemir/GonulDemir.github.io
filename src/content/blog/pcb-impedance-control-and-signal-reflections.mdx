@@ -1,0 +1,505 @@
+Warning: fs was declared with const; use let for reassignable variables.
+---
+title: 'Impedance Control and Signal Reflections in PCB Design'
+description: 'A practical guide to transmission-line impedance, reflections, return-current paths, PCB stackup, and a 1.3 kW RF switch example.'
+pubDate: '2026-11-27'
+createdDate: '2026-11-27'
+author: Gönül Demir
+category: electromagnetic-compatibility
+language: en
+draft: false
+---
+
+Impedance is a fundamental quantity in electronics because it affects power transfer, signal integrity, and electromagnetic compatibility (EMC). The impedance of a circuit component and the characteristic impedance of a transmission line share the same unit, but describe different physical properties.
+
+This article explains the main types of impedance in transmission lines, how impedance discontinuities create reflections, and how controlled-impedance PCB design depends on stackup geometry and return-current paths. A 1.3 kW, 1–30 MHz RF switch provides a practical example of the electrical, thermal, and manufacturing trade-offs.
+
+## 1. Impedance
+
+In sinusoidal steady state, impedance is the complex quantity that describes the magnitude and phase relationship between voltage and current:
+
+$$
+Z = R + jX
+$$
+
+Here, $R$ is the real component and $X$ is the reactive component. The real component is associated with average power consumption or transfer. The reactive component is associated with energy stored in electric and magnetic fields.
+
+| Component | Impedance | Effect of increasing frequency |
+|---|---|---|
+| Resistor | $R$ | Remains constant in the ideal model |
+| Capacitor | $1/(j\omega C)$ | Impedance magnitude decreases |
+| Inductor | $j\omega L$ | Impedance magnitude increases |
+
+Real components also contain parasitic capacitance and inductance. A PCB trace, its reference plane, and the dielectric between them form a distributed electromagnetic structure. PCB interconnects should be treated as transmission lines when propagation delay is significant relative to the signal period or rise time.
+
+## 2. Impedance in Transmission Lines
+
+Eric Bogatin discusses the confusion caused by using the word *impedance* for several different physical quantities [1]. The distinction between characteristic impedance and input impedance is especially important when analyzing reflections.
+
+### 2.1 Characteristic impedance
+
+The characteristic impedance, $Z_0$, is the ratio of voltage to current for a wave traveling in one direction along a transmission line.
+
+A transmission line is modeled using four distributed parameters per unit length:
+
+| Parameter | Physical meaning | Unit |
+|---|---|---|
+| $R'$ | Series resistance | Ω/m |
+| $L'$ | Series inductance | H/m |
+| $C'$ | Shunt capacitance | F/m |
+| $G'$ | Shunt conductance | S/m |
+
+For a real transmission line,
+
+$$
+Z_0 = \sqrt{\frac{R' + j\omega L'}{G' + j\omega C'}}.
+$$
+
+For an ideal lossless line, this simplifies to
+
+$$
+Z_0 = \sqrt{\frac{L'}{C'}}.
+$$
+
+Trace width, distance to the reference plane, and dielectric properties determine the distributed inductance and capacitance, and therefore the characteristic impedance [2]. Characteristic impedance is not the DC resistance of a trace: a PCB trace can measure only a few milliohms from end to end while having a characteristic impedance of 50 Ω.
+
+![Equivalent circuit model and characteristic impedance of a transmission line](/images/articles/pcb-impedance-control-signal-reflections/figure-01-transmission-line-equivalent.png)
+
+*Figure 1. Equivalent circuit model and characteristic impedance of a transmission line. Source: [2].*
+
+### 2.2 Input impedance
+
+Input impedance is the impedance seen when looking into a circuit or transmission line from a particular connection point. Unlike characteristic impedance, it depends on the load impedance, line length, operating frequency, and characteristic impedance.
+
+For a lossless line terminated in its characteristic impedance, the input impedance is also equal to the characteristic impedance:
+
+$$
+Z_L = Z_0 \quad\Rightarrow\quad Z_{in} = Z_0.
+$$
+
+### 2.3 Characteristic impedance and input impedance over time
+
+In Bogatin's example, a driver with a 100 Ω source resistance drives a 1 kΩ load through a 50 Ω transmission line with a one-way propagation delay of 1 ns [1].
+
+![Propagation of a signal wavefront along a transmission line](/images/articles/pcb-impedance-control-signal-reflections/figure-02-wavefront-propagation.png)
+
+*Figure 2. Propagation of a signal wavefront along a transmission line. Source: [1].*
+
+When the source applies a voltage step, the initial voltage-to-current ratio at the input is the line's characteristic impedance. The 1 kΩ load at the far end has no immediate effect at the source because the electromagnetic wave takes finite time to travel along the line.
+
+The wave reaches the load after 1 ns. The load mismatch creates a reflection that returns to the source another 1 ns later. After a round-trip delay of $2T_d$, the voltage-to-current ratio seen at the input begins to change.
+
+| Time | Nominal line $Z_0$ | Instantaneous input $V/I$ |
+|---|---:|---:|
+| Initially | 50 Ω | 50 Ω |
+| 1 ns | 50 Ω | 50 Ω |
+| After 2 ns | 50 Ω | Depends on the reflections |
+| DC steady state | 50 Ω | 1 kΩ |
+
+After reflections have settled, the voltage-to-current ratio at the input of an ideal lossless line is equal to the load resistance.
+
+![Time-domain variation of voltage, current, and input impedance at a transmission-line input](/images/articles/pcb-impedance-control-signal-reflections/figure-03-time-domain-waveforms.png)
+
+*Figure 3. Time-domain variation of voltage, current, and input impedance at the input of a transmission line. Source: [1].*
+
+The line's characteristic impedance stays constant in this example, even though the instantaneous voltage-to-current ratio at its input changes. This time-domain ratio should be distinguished from input impedance in the frequency domain. In real lines, characteristic impedance can also vary with frequency.
+
+### 2.4 Other transmission-line impedances
+
+Capacitive and inductive coupling between nearby traces leads to modal impedances [2].
+
+| Impedance type | Definition |
+|---|---|
+| Even mode | Modal impedance of one of two traces driven with the same polarity |
+| Odd mode | Modal impedance of one of two traces driven with opposite polarities |
+| Differential | Impedance between two traces under differential excitation |
+| Common mode | Equivalent impedance of the pair to the reference under common-mode excitation |
+
+For a symmetric differential pair,
+
+$$
+Z_{diff} = 2Z_{odd}, \qquad Z_{common} = \frac{Z_{even}}{2}.
+$$
+
+Therefore, placing two traces that each have a 50 Ω characteristic impedance next to one another does not automatically produce a 100 Ω differential pair. Coupling between the traces matters.
+
+## 3. Why 50 Ω Is Common in RF Systems
+
+50 Ω is not a universal value required by electromagnetic theory. Its use is related to the physical trade-offs of coaxial transmission lines and to industrial standardization.
+
+For an air-dielectric coaxial line with fixed outer-conductor diameter and conductor material, approximately 30 Ω provides maximum power handling limited by dielectric breakdown, while approximately 77 Ω minimizes conductor loss. 50 Ω is a practical compromise between those objectives [3, 4].
+
+| Application | Nominal impedance |
+|---|---:|
+| RF and microwave systems | 50 Ω |
+| Coaxial video systems | 75 Ω |
+| Ethernet | 100 Ω differential |
+| USB 2.0 | 90 Ω differential |
+| LVDS | 100 Ω differential |
+
+Not every component or circuit node in a 50 Ω RF system must itself be 50 Ω. Matching networks can transform components with different impedances to the system's reference impedance. The aim is to minimize reflections at the required interfaces.
+
+## 4. Impedance Mismatch and Signal Reflections
+
+When an electromagnetic wave encounters an impedance discontinuity, some of its energy may be reflected. The voltage reflection coefficient is the ratio of the reflected voltage wave to the incident voltage wave:
+
+$$
+\Gamma = \frac{Z_L-Z_0}{Z_L+Z_0}.
+$$
+
+For a line with real characteristic impedance, the reflected-power ratio is
+
+$$
+\frac{P_{ref}}{P_{inc}} = |\Gamma|^2.
+$$
+
+| Line $Z_0$ | Load $Z_L$ | Reflection coefficient | Reflected power |
+|---:|---:|---:|---:|
+| 50 Ω | 0 Ω | −1 | 100% |
+| 50 Ω | 25 Ω | −0.333 | 11.11% |
+| 50 Ω | 50 Ω | 0 | 0% |
+| 50 Ω | 75 Ω | +0.200 | 4% |
+| 50 Ω | 100 Ω | +0.333 | 11.11% |
+| 50 Ω | Open circuit | +1 | 100% |
+
+Reflections do not occur only at source and load connections. Changes in trace width, reference-plane geometry, or dielectric height can create impedance discontinuities along a PCB trace.
+
+For a transition from a 50 Ω line into a 30 Ω section,
+
+$$
+\Gamma_1 = \frac{30-50}{30+50} = -0.25.
+$$
+
+At the transition back from 30 Ω to 50 Ω,
+
+$$
+\Gamma_2 = \frac{50-30}{50+30} = +0.25.
+$$
+
+Both transitions create reflections. The total response is not simply the sum of the two coefficients; the electrical length between discontinuities and the phase of the traveling waves also matter.
+
+### 4.1 A Texas Instruments transmission-line example
+
+Texas Instruments' *PCB Trace Impedance Matching* study examines the effects of impedance mismatch on signal integrity using calculations and PCB measurements [5]. In its example, a 5 V driver with a 20 Ω source resistance drives a 50 Ω transmission line. The receiver at the far end has a high input impedance.
+
+The initial voltage wave launched onto the line is
+
+$$
+V^+ = 5\,\mathrm{V}\times\frac{50}{20+50}=3.57\,\mathrm{V}.
+$$
+
+With the receiver approximated as an open circuit, its reflection coefficient approaches +1. The first voltage at the receiver is therefore
+
+$$
+V_L = 3.57(1+1)=7.14\,\mathrm{V}.
+$$
+
+When the reflected wave returns to the source, the source impedance is not equal to the characteristic impedance, so another reflection occurs:
+
+$$
+\Gamma_S = \frac{20-50}{20+50}=-0.429.
+$$
+
+Successive reflections bring the receiver voltage through 7.14 V, 4.08 V, 5.39 V, and 4.83 V as it approaches the 5 V steady-state value. In digital systems, this behavior appears as overshoot, undershoot, and ringing.
+
+![Transmission-line reflection example](/images/articles/pcb-impedance-control-signal-reflections/figure-04-transmission-line-reflections.png)
+
+*Figure 4. Transmission-line reflection example. Source: [5].*
+
+A source-series termination can ideally prevent a wave returning to the source from reflecting again when
+
+$$
+R_{driver}+R_{termination}=Z_0.
+$$
+
+![Measured effect of series termination on signal integrity](/images/articles/pcb-impedance-control-signal-reflections/figure-05-series-termination-results.png)
+
+*Figure 5. Measured effect of series termination on signal integrity. Source: [5].*
+
+TI's measurements show that suitable series termination can reduce overshoot, ringing, crosstalk, and electromagnetic emissions. The effect of the termination resistor on signal rise time must also be considered.
+
+### 4.2 Reflections in high-power RF systems
+
+In digital systems, reflections are often assessed by looking at the signal waveform. In high-power RF systems, reflected power and standing waves are also critical.
+
+For a 50 Ω line carrying 1.3 kW of forward power into a 75 Ω load,
+
+$$
+\Gamma = \frac{75-50}{75+50}=0.2,
+\qquad
+P_{ref}=1300\times0.2^2=52\,\mathrm{W}.
+$$
+
+The superposition of incident and reflected waves creates voltage and current maxima along the line. These can increase electrical stress on components, connectors, and PCB insulation.
+
+## 5. Reducing Reflections in PCB Design
+
+Reducing reflections requires attention to more than trace impedance. Stackup, return paths, via and connector transitions, parasitic elements, termination, and manufacturing tolerances all matter. Henry W. Ott emphasizes that the return path and current-loop area are as important as the signal conductor in EMC design [6].
+
+This article focuses on stackup, microstrip geometry, and return-current distribution, then applies those ideas to an RF circuit.
+
+### 5.1 Layer count and return-current distribution
+
+Layer count depends on component and routing density, board size, power distribution, frequency content, impedance, and EMC requirements. Regardless of layer count, a signal trace should have a nearby, continuous return reference plane.
+
+At low frequencies, conductor resistance has a stronger influence on return-current distribution. As frequency increases, inductive reactance becomes more important. At low frequencies, return current can spread over a wider area of the plane. At higher frequencies, it concentrates beneath the signal trace, where the loop inductance is lower.
+
+![Normalized high-frequency return-current density in an ideal microstrip model](/images/articles/pcb-impedance-control-signal-reflections/figure-06-return-current-density.png)
+
+*Figure 6. Normalized high-frequency return-current density in the ideal microstrip model. The analytical curve corresponds to the equation below.*
+
+For an ideal microstrip with a very narrow signal trace and an infinitely wide reference plane, the high-frequency surface-current density is
+
+$$
+J(x)=\frac{I}{\pi h}\,\frac{1}{1+(x/h)^2},
+$$
+
+where $h$ is the distance between the signal trace and reference plane, and $x$ is the lateral distance from the trace center. The fraction of total return current within a distance $x$ of the center is
+
+$$
+\frac{I_{[-x,+x]}}{I}=\frac{2}{\pi}\tan^{-1}\left(\frac{x}{h}\right).
+$$
+
+| Region around trace center | Fraction of total return current |
+|---:|---:|
+| ±$h$ | 50% |
+| ±$2h$ | 70.5% |
+| ±$3h$ | 79.5% |
+| ±$5h$ | 87.4% |
+| ±$10h$ | 93.7% |
+
+Bringing the reference plane closer reduces loop area and inductance, which helps control emissions and coupling. Breaks in the plane force return current to find another path.
+
+![Illustrative electric and magnetic field paths around a microstrip trace](/images/articles/pcb-impedance-control-signal-reflections/figure-07-microstrip-fields.svg)
+
+*Figure 7. Illustrative electric and magnetic fields around a microstrip transmission line. The drawing shows a trace width of 1.20 mm and dielectric height of 0.80 mm; field-line shapes are not to scale.*
+
+#### Two-layer PCBs
+
+For low component and routing density, a two-layer board may be sufficient. One layer can carry signals and components, while the other is reserved as a continuous return plane.
+
+| Layer | Function |
+|---|---|
+| L1 | Signal and components |
+| L2 | Return reference plane |
+
+Dense routing on both layers can interrupt return paths and increase loop inductance, reflections, crosstalk, and emissions. If a continuous plane cannot be maintained, adding layers may be appropriate.
+
+#### Four-layer PCBs and return reference planes
+
+A common four-layer stackup is Signal / GND / Power / Signal, which places a reference plane next to each signal layer.
+
+![Microstrip configuration in a four-layer PCB](/images/articles/pcb-impedance-control-signal-reflections/figure-08-four-layer-microstrip.png)
+
+*Figure 8. Microstrip configuration in a four-layer PCB. Source: Bogdan Adamczyk, In Compliance Magazine [9].*
+
+High-frequency switching-current components are superimposed on the functional DC or AC currents. These components can flow on a GND or power plane independently of its DC potential [9]. When copper thickness is several skin depths or more, high-frequency return current concentrates on the plane surface facing the signal trace and decays exponentially with depth. Skin depth decreases as frequency increases; in thinner copper, current is distributed through a larger part of the copper thickness.
+
+![High-frequency return currents on the reference plane](/images/articles/pcb-impedance-control-signal-reflections/figure-09-high-frequency-return-current.png)
+
+*Figure 9. High-frequency return currents on the reference plane. Source: Bogdan Adamczyk [9].*
+
+A power plane can carry return current, but the loop needs a low-impedance AC path between power and GND. The dielectric between two planes forms a capacitance:
+
+$$
+C=\varepsilon_0\varepsilon_r\frac{A}{d}.
+$$
+
+The approximately 1 mm or greater separation between power and GND in Figure 8 limits plane-to-plane capacitance. Decoupling-capacitor placement, connection inductance, and frequency-dependent impedance therefore matter. Splitting a power plane for different supply voltages can also interrupt return-current continuity.
+
+When a separate power plane is not required, two continuous GND reference planes can be used:
+
+| Layer | Function |
+|---|---|
+| L1 | Signal |
+| L2 | Return reference plane |
+| L3 | Return reference plane |
+| L4 | Signal |
+
+Stitching vias can connect the two reference planes when they share the same GND potential, helping maintain return-path continuity.
+
+#### Placement of analog and digital circuits
+
+Separating analog and digital circuit blocks on a mixed-signal PCB does not necessarily require splitting the reference plane. Placing the blocks in separate functional regions on a continuous GND plane, and routing signals within those regions, can reduce shared-impedance coupling.
+
+Except where requirements such as galvanic isolation apply, avoid splitting the reference plane and routing signal traces across the split. See [Mixed-Signal PCB Design: Conflicts Between EMC Theory and Reference Designs](https://gonuldemir.github.io/articles/mixed-signal-pcb-design-conflicts-between-emc-theory-and-reference-designs/) for a related discussion.
+
+## 6. Designing a PCB Stackup
+
+After selecting the layer count, assign layer functions and choose the materials, board and copper thicknesses, and dielectric spacing. These decisions depend on electrical, thermal, mechanical, and manufacturing requirements.
+
+### 6.1 Assigning layer functions
+
+When arranging signal, return-reference, and power layers, consider the proximity of critical traces to their reference planes, return-path continuity, and coupling between layers.
+
+### 6.2 Selecting PCB material
+
+Material selection depends on operating frequency, temperature, dielectric loss, mechanical requirements, and cost.
+
+| Material | Typical applications |
+|---|---|
+| FR-4 | General-purpose digital, analog, and many RF applications |
+| High-Tg FR-4 | Higher-temperature and thermal-cycling requirements |
+| Rogers / PTFE-based laminates | Low dielectric loss and high-frequency RF applications |
+| Metal-core PCB | Applications where thermal management is the priority, including power and LED boards |
+| Polyimide | Flexible PCBs |
+
+Key material properties include dielectric constant ($D_k$), dissipation factor ($D_f$), glass-transition temperature ($T_g$), coefficient of thermal expansion (CTE), and thermal conductivity. For impedance calculations, use the fabricator's core and prepreg data rather than generic FR-4 values [13].
+
+### 6.3 Selecting board thickness
+
+Board thickness depends on the mounting method, connectors, board dimensions, and mechanical loads. Long, thin boards are more prone to bending during fabrication and assembly. Thickness also affects stiffness and via aspect ratio, so the common 1.6 mm board thickness is not optimal for every design.
+
+### 6.4 Selecting copper thickness
+
+PCB copper thickness is commonly specified by copper weight per unit area (oz/ft²).
+
+| Copper weight | Nominal thickness |
+|---:|---:|
+| 0.5 oz | 17.5 µm |
+| 1 oz | 35 µm |
+| 2 oz | 70 µm |
+| 3 oz | 105 µm |
+
+Copper thickness depends on current, allowed temperature rise, losses, frequency, and cooling. Under DC conditions, the trace resistance is
+
+$$
+R=\rho\frac{l}{wt},
+$$
+
+where $l$ is trace length, $w$ is trace width, and $t$ is copper thickness. Thicker copper reduces DC resistance. In RF applications, skin and proximity effects change the current distribution, so DC current capacity alone is not enough to select copper thickness. Copper thickness also affects impedance and the minimum trace-width and spacing limits offered by the fabricator.
+
+IPC-2152 [11] can be used for a preliminary thermal estimate. For RF traces, also evaluate AC losses and cooling, then verify the design with prototype measurements. Use the finished copper thickness in the calculation.
+
+### 6.5 Stackup symmetry and thermomechanical stress
+
+Multilayer PCBs are laminated from copper foil, core, and prepreg under heat and pressure. Core is cured laminate; prepreg is partially cured resin-impregnated glass fabric used to bond layers. Differences in thermal expansion and mechanical properties create internal stress during lamination and cooling.
+
+Asymmetric material and copper distributions can cause board bow or twist during fabrication and soldering. A stackup balanced around its center plane is therefore preferred. For one four-layer example, the top and bottom dielectric heights and copper thicknesses are matched:
+
+$$
+h_{L1-L2}=h_{L3-L4},\qquad t_{L1}=t_{L4},\qquad t_{L2}=t_{L3}.
+$$
+
+Symmetry does not require every dielectric spacing to be equal; it requires the opposing layers to be balanced in thickness, material, and copper distribution.
+
+### 6.6 Selecting dielectric spacing
+
+Dielectric spacing depends on return-current distribution, plane-to-plane capacitance, impedance, insulation, and fabrication tolerances. Bringing the reference plane closer concentrates return current; maintaining the same impedance generally requires a narrower trace. In high-power RF applications, this creates a trade-off among impedance, current capacity, and thermal performance. The following design example shows how these factors interact.
+
+## 7. Engineering Example: A 1.3 kW RF Switch PCB
+
+This section uses our solid-state SP2T RF switch project, which operates from 1 to 30 MHz and is designed for up to 1.3 kW, to explain the controlled-impedance and stackup decisions. More project details are available in [Part I of the RF switch design notes](https://gonuldemir.github.io/articles/engineering-notes-1-30-mhz-1-3-kw-solid-state-sp2t-rf-switch-part-1/).
+
+### 7.1 Electrical and thermal requirements
+
+Before selecting the PCB layer structure, estimate the current, voltage, and thermal load carried by the transmission line.
+
+| Design parameter | Value |
+|---|---:|
+| Maximum RF power | 1,300 W |
+| Operating frequency | 1–30 MHz |
+| Characteristic impedance | 50 Ω |
+| Maximum ambient temperature | 55 °C |
+
+For a matched load,
+
+$$
+I_{RMS}=\sqrt{\frac{P}{Z_0}}=5.10\,\mathrm{A},
+\qquad
+V_{RMS}=\sqrt{PZ_0}=254.95\,\mathrm{V}\approx255\,\mathrm{V},
+$$
+
+$$
+V_{peak}=\sqrt{2}\,V_{RMS}\approx360.6\,\mathrm{V}.
+$$
+
+The target maximum MOSFET junction temperature was set to 100 °C. Thermal analysis was used to select an appropriate heatsink and insulation material; the power-loss and heatsink calculations are described in Part II of the RF switch article series.
+
+For the PCB transmission line, the design target is an operating temperature of 85 °C, leaving a 5 °C margin below the chosen limit. The allowed temperature rise is 30 °C.
+
+### 7.2 Copper thickness and trace width
+
+Using the IPC-2221 approach, the approximate trace widths for 5.1 A and a 30 °C temperature rise are:
+
+| Copper weight | Copper thickness | Approximate trace width |
+|---:|---:|---:|
+| 0.5 oz | 17.5 µm | 2.92 mm |
+| 1 oz | 35 µm | 1.46 mm |
+| 2 oz | 70 µm | 0.73 mm |
+
+These are preliminary values based on DC current-carrying capacity. RF design also requires considering skin depth:
+
+$$
+\delta\,(\mu\mathrm{m})\approx\frac{66}{\sqrt{f\,(\mathrm{MHz})}}.
+$$
+
+At 30 MHz,
+
+$$
+\delta\approx12.05\,\mu\mathrm{m}.
+$$
+
+One-ounce copper is about three skin depths thick at 30 MHz. Increasing copper thickness may therefore provide less benefit at the top of the frequency band than it would under DC conditions. Increasing trace width also helps reduce RF losses. The skin-depth comparison is frequency-dependent; it does not describe the full 1–30 MHz band with one value.
+
+### 7.3 Selecting the PCB stackup
+
+After the electrical and thermal estimates, stackup options were compared against the design requirements and manufacturing cost. To limit cost, the design considered a JLCPCB four-layer, 1.6 mm board with 1 oz outer layers and nominal 0.5 oz inner layers. No additional PCB fabrication charge was expected for the selected option; the economical-assembly restriction shown in the figure should be checked separately.
+
+![JLCPCB four-layer stackup selection for JLC04161H-7628F](/images/articles/pcb-impedance-control-signal-reflections/figure-10-jlcpcb-stackup.png)
+
+*Figure 10. JLCPCB stackup selection (JLC04161H-7628F). Source: [10].*
+
+### 7.4 Calculating the microstrip trace
+
+The stackup's physical and dielectric parameters were entered into the KiCad Transmission Line Calculator to find the trace width for a 50 Ω characteristic impedance.
+
+![KiCad transmission-line calculator for the selected microstrip geometry](/images/articles/pcb-impedance-control-signal-reflections/figure-11-kicad-microstrip-calculator.png)
+
+*Figure 11. Microstrip calculation in KiCad's Transmission Line Calculator.*
+
+The model used a relative permittivity $\varepsilon_r=4.4$, a loss tangent $\tan\delta=0.02$, and copper resistivity $\rho=1.72\times10^{-8}\,\Omega\cdot\mathrm{m}$ at 20 °C. These are typical FR-4 and copper values.
+
+### 7.5 Evaluating the design
+
+The KiCad model calculated a 1.21 mm trace width for 50 Ω, below the 1.46 mm width from the preliminary thermal estimate. The result depends on the assumed FR-4 parameters and idealized microstrip geometry.
+
+The design retained the 1 oz copper stackup to meet the manufacturing-cost target. Thermal adequacy is to be verified with RF power and temperature tests on the prototype. If the expected temperature limit is exceeded, additional cooling will be applied or the maximum operating power will be limited.
+
+This example shows that controlled-impedance design is not only about reaching a target impedance. Current capacity, skin effect, thermal requirements, return-current paths, and manufacturing cost must be considered together.
+
+## 8. Conclusion
+
+Impedance mismatch creates reflections, while controlled-impedance PCB design depends on the complete electromagnetic structure formed by the trace, dielectric, and return reference plane. Stackup geometry and return-current continuity affect both signal behavior and EMC.
+
+The 1.3 kW RF switch example also shows why an impedance calculation is only one part of the design. Current capacity, RF losses, insulation, thermal performance, and manufacturing constraints need to be evaluated together and verified on the prototype.
+
+## References
+
+[1] E. Bogatin, “Impedance: The Most Confusing Term in Signal Integrity,” *Signal Integrity Journal*.
+
+[2] Z. Peterson, “Transmission Line Impedance: The Six Important Values,” Altium Resources.
+
+[3] S. W. Ellingson, “Electromagnetics II – Section 7.5: Why 50 Ohms?,” Virginia Tech Publishing.
+
+[4] D. M. Pozar, *Microwave Engineering*, 4th ed., John Wiley & Sons, 2012.
+
+[5] A. Kay, “PCB Trace Impedance Matching,” TI Precision Labs, Texas Instruments.
+
+[6] H. W. Ott, *Electromagnetic Compatibility Engineering*, John Wiley & Sons, 2009.
+
+[7] E. Bogatin, *Signal and Power Integrity – Simplified*, 3rd ed., Pearson, 2018.
+
+[8] JLCPCB, “Base Material,” https://jlcpcb.com/help/article/jlcpcb-base-material.
+
+[9] In Compliance Magazine, “PCB Return Current Distribution in a Microstrip Line,” November 2020.
+
+[10] JLCPCB, “PCB Manufacturing and Material Options.”
+
+[11] IPC-2152, *Standard for Determining Current-Carrying Capacity in Printed Board Design*.
+
+[12] IPC-2221, *Generic Standard on Printed Board Design*.
+
+[13] Z. Peterson, “Impedance Management Through PCB Stackup Design With Reference Planes,” Altium Resources.
+
+[14] Analog Devices, “Avoid PC-Layout Gotchas in ISM-RF Products.”
