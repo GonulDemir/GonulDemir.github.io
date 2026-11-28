@@ -1,0 +1,47 @@
+---
+import { readFileSync } from 'node:fs';
+
+const svg = readFileSync(
+  new URL('../../public/images/articles/pcb-impedance-control-signal-reflections/figure-07-microstrip-fields-v2.svg', import.meta.url),
+  'utf8',
+)
+  .replace('stroke-width="3" marker-end="url(#arrow-blue)"', 'stroke-width="3" marker-end="url(#arrow-blue)" id="electric-field-lines"')
+  .replace('stroke-dasharray="11 8">\n    <ellipse', 'stroke-dasharray="11 8" id="magnetic-field-lines">\n    <ellipse');
+const interactiveSvg = svg.replace(
+  'd="M454 250 C460 222 480 202 505 190"',
+  'id="magnetic-field-arrow" d="M454 250 C460 222 480 202 505 190"',
+);
+---
+
+<figure class="interactive-figure">
+  <div class="controls" aria-label="Field visibility controls">
+    <label><input type="checkbox" data-field-toggle="electric-field-lines" checked /> Electric field (E)</label>
+    <label><input type="checkbox" data-field-toggle="magnetic-field-lines" checked /> Magnetic field (H)</label>
+  </div>
+  <div class="diagram" set:html={interactiveSvg} />
+  <figcaption>Figure 7. Interactive schematic of electric and magnetic fields around a microstrip transmission line. Toggle either field above. The drawing shows a trace width of 1.20 mm and dielectric height of 0.80 mm; field-line shapes are not to scale.</figcaption>
+</figure>
+
+<style>
+  .interactive-figure { margin: 2rem 0; }
+  .controls { display: flex; flex-wrap: wrap; gap: 1rem; margin: 0 0 .75rem; }
+  .controls label { display: inline-flex; align-items: center; gap: .45rem; cursor: pointer; }
+  .diagram :global(svg) { display: block; width: 100%; height: auto; }
+  figcaption { margin-top: .65rem; font-size: .92rem; color: var(--muted-color, #526273); }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLInputElement>('[data-field-toggle]').forEach((input) => {
+    const groupId = input.dataset.fieldToggle;
+    const group = groupId ? document.getElementById(groupId) : null;
+    const extra = groupId === 'magnetic-field-lines' ? document.getElementById('magnetic-field-arrow') : null;
+    if (!group) return;
+    const update = () => {
+      group.style.display = input.checked ? '' : 'none';
+      if (extra) extra.style.display = input.checked ? '' : 'none';
+    };
+    input.addEventListener('change', update);
+    update();
+  });
+</script>
+
