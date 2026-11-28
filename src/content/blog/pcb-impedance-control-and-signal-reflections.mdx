@@ -11,6 +11,8 @@ heroImage: /images/articles/pcb-impedance-control-signal-reflections/cover.webp
 draft: false
 ---
 
+import InteractiveMicrostripFigure from '../../components/InteractiveMicrostripFigure.astro';
+
 Impedance is a fundamental quantity in electronics because it affects power transfer, signal integrity, and electromagnetic compatibility (EMC). The impedance of a circuit component and the characteristic impedance of a transmission line share the same unit, but describe different physical properties.
 
 This article explains the main types of impedance in transmission lines, how impedance discontinuities create reflections, and how controlled-impedance PCB design depends on stackup geometry and return-current paths. A 1.3 kW, 1–30 MHz RF switch provides a practical example of the electrical, thermal, and manufacturing trade-offs.
@@ -247,7 +249,7 @@ At low frequencies, conductor resistance has a stronger influence on return-curr
 
 ![Normalized high-frequency return-current density in an ideal microstrip model](/images/articles/pcb-impedance-control-signal-reflections/figure-06-return-current-density-v2.png)
 
-*Figure 6. Normalized high-frequency return-current density in the ideal microstrip model. The analytical curve corresponds to the equation below.*
+*Figure 6. Normalized high-frequency return-current density in the ideal microstrip model. Redrawn from Adamczyk [9], using the analytical model attributed there to Ott [4].*
 
 For an ideal microstrip with a very narrow signal trace and an infinitely wide reference plane, the high-frequency surface-current density is
 
@@ -271,9 +273,7 @@ $$
 
 Bringing the reference plane closer reduces loop area and inductance, which helps control emissions and coupling. Breaks in the plane force return current to find another path.
 
-![Illustrative electric and magnetic field paths around a microstrip trace](/images/articles/pcb-impedance-control-signal-reflections/figure-07-microstrip-fields-v2.svg)
-
-*Figure 7. Illustrative electric and magnetic fields around a microstrip transmission line. The drawing shows a trace width of 1.20 mm and dielectric height of 0.80 mm; field-line shapes are not to scale.*
+<InteractiveMicrostripFigure />
 
 #### Two-layer PCBs
 
@@ -493,7 +493,7 @@ The 1.3 kW RF switch example also shows why an impedance calculation is only one
 
 [8] JLCPCB, “Base Material,” https://jlcpcb.com/help/article/jlcpcb-base-material.
 
-[9] In Compliance Magazine, “PCB Return Current Distribution in a Microstrip Line,” November 2020.
+[9] B. Adamczyk, “PCB Return-Current Distribution in a Microstrip Line,” *In Compliance Magazine*, November 2020. [Article](https://digital.incompliancemag.com/issue/november-2020/pcb-return-current-distribution-in-a-microstrip-line/).
 
 [10] JLCPCB, “PCB Manufacturing and Material Options.”
 
@@ -504,3 +504,4 @@ The 1.3 kW RF switch example also shows why an impedance calculation is only one
 [13] Z. Peterson, “Impedance Management Through PCB Stackup Design With Reference Planes,” Altium Resources.
 
 [14] Analog Devices, “Avoid PC-Layout Gotchas in ISM-RF Products.”
+
