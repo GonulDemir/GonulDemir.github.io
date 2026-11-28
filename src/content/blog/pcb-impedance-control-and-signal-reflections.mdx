@@ -1,4 +1,3 @@
-Warning: fs was declared with const; use let for reassignable variables.
 ---
 title: 'Impedance Control and Signal Reflections in PCB Design'
 description: 'A practical guide to transmission-line impedance, reflections, return-current paths, PCB stackup, and a 1.3 kW RF switch example.'
@@ -7,6 +6,7 @@ createdDate: '2026-11-27'
 author: Gönül Demir
 category: electromagnetic-compatibility
 language: en
+heroImage: /images/articles/pcb-impedance-control-signal-reflections/cover.webp
 draft: false
 ---
 
@@ -63,7 +63,7 @@ $$
 
 Trace width, distance to the reference plane, and dielectric properties determine the distributed inductance and capacitance, and therefore the characteristic impedance [2]. Characteristic impedance is not the DC resistance of a trace: a PCB trace can measure only a few milliohms from end to end while having a characteristic impedance of 50 Ω.
 
-![Equivalent circuit model and characteristic impedance of a transmission line](/images/articles/pcb-impedance-control-signal-reflections/figure-01-transmission-line-equivalent.png)
+![Equivalent circuit model and characteristic impedance of a transmission line](/images/articles/pcb-impedance-control-signal-reflections/figure-01-transmission-line-equivalent.png?v=20261128)
 
 *Figure 1. Equivalent circuit model and characteristic impedance of a transmission line. Source: [2].*
 
@@ -81,7 +81,7 @@ $$
 
 In Bogatin's example, a driver with a 100 Ω source resistance drives a 1 kΩ load through a 50 Ω transmission line with a one-way propagation delay of 1 ns [1].
 
-![Propagation of a signal wavefront along a transmission line](/images/articles/pcb-impedance-control-signal-reflections/figure-02-wavefront-propagation.png)
+![Propagation of a signal wavefront along a transmission line](/images/articles/pcb-impedance-control-signal-reflections/figure-02-wavefront-propagation.png?v=20261128)
 
 *Figure 2. Propagation of a signal wavefront along a transmission line. Source: [1].*
 
@@ -98,7 +98,7 @@ The wave reaches the load after 1 ns. The load mismatch creates a reflection tha
 
 After reflections have settled, the voltage-to-current ratio at the input of an ideal lossless line is equal to the load resistance.
 
-![Time-domain variation of voltage, current, and input impedance at a transmission-line input](/images/articles/pcb-impedance-control-signal-reflections/figure-03-time-domain-waveforms.png)
+![Time-domain variation of voltage, current, and input impedance at a transmission-line input](/images/articles/pcb-impedance-control-signal-reflections/figure-03-time-domain-waveforms.png?v=20261128)
 
 *Figure 3. Time-domain variation of voltage, current, and input impedance at the input of a transmission line. Source: [1].*
 
@@ -202,7 +202,7 @@ $$
 
 Successive reflections bring the receiver voltage through 7.14 V, 4.08 V, 5.39 V, and 4.83 V as it approaches the 5 V steady-state value. In digital systems, this behavior appears as overshoot, undershoot, and ringing.
 
-![Transmission-line reflection example](/images/articles/pcb-impedance-control-signal-reflections/figure-04-transmission-line-reflections.png)
+![Transmission-line reflection example](/images/articles/pcb-impedance-control-signal-reflections/figure-04-transmission-line-reflections.png?v=20261128)
 
 *Figure 4. Transmission-line reflection example. Source: [5].*
 
@@ -212,7 +212,7 @@ $$
 R_{driver}+R_{termination}=Z_0.
 $$
 
-![Measured effect of series termination on signal integrity](/images/articles/pcb-impedance-control-signal-reflections/figure-05-series-termination-results.png)
+![Measured effect of series termination on signal integrity](/images/articles/pcb-impedance-control-signal-reflections/figure-05-series-termination-results.png?v=20261128)
 
 *Figure 5. Measured effect of series termination on signal integrity. Source: [5].*
 
@@ -244,7 +244,7 @@ Layer count depends on component and routing density, board size, power distribu
 
 At low frequencies, conductor resistance has a stronger influence on return-current distribution. As frequency increases, inductive reactance becomes more important. At low frequencies, return current can spread over a wider area of the plane. At higher frequencies, it concentrates beneath the signal trace, where the loop inductance is lower.
 
-![Normalized high-frequency return-current density in an ideal microstrip model](/images/articles/pcb-impedance-control-signal-reflections/figure-06-return-current-density.png)
+![Normalized high-frequency return-current density in an ideal microstrip model](/images/articles/pcb-impedance-control-signal-reflections/figure-06-return-current-density.png?v=20261128)
 
 *Figure 6. Normalized high-frequency return-current density in the ideal microstrip model. The analytical curve corresponds to the equation below.*
 
@@ -270,7 +270,7 @@ $$
 
 Bringing the reference plane closer reduces loop area and inductance, which helps control emissions and coupling. Breaks in the plane force return current to find another path.
 
-![Illustrative electric and magnetic field paths around a microstrip trace](/images/articles/pcb-impedance-control-signal-reflections/figure-07-microstrip-fields.svg)
+![Illustrative electric and magnetic field paths around a microstrip trace](/images/articles/pcb-impedance-control-signal-reflections/figure-07-microstrip-fields.svg?v=20261128)
 
 *Figure 7. Illustrative electric and magnetic fields around a microstrip transmission line. The drawing shows a trace width of 1.20 mm and dielectric height of 0.80 mm; field-line shapes are not to scale.*
 
@@ -289,13 +289,13 @@ Dense routing on both layers can interrupt return paths and increase loop induct
 
 A common four-layer stackup is Signal / GND / Power / Signal, which places a reference plane next to each signal layer.
 
-![Microstrip configuration in a four-layer PCB](/images/articles/pcb-impedance-control-signal-reflections/figure-08-four-layer-microstrip.png)
+![Microstrip configuration in a four-layer PCB](/images/articles/pcb-impedance-control-signal-reflections/figure-08-four-layer-microstrip.png?v=20261128)
 
 *Figure 8. Microstrip configuration in a four-layer PCB. Source: Bogdan Adamczyk, In Compliance Magazine [9].*
 
 High-frequency switching-current components are superimposed on the functional DC or AC currents. These components can flow on a GND or power plane independently of its DC potential [9]. When copper thickness is several skin depths or more, high-frequency return current concentrates on the plane surface facing the signal trace and decays exponentially with depth. Skin depth decreases as frequency increases; in thinner copper, current is distributed through a larger part of the copper thickness.
 
-![High-frequency return currents on the reference plane](/images/articles/pcb-impedance-control-signal-reflections/figure-09-high-frequency-return-current.png)
+![High-frequency return currents on the reference plane](/images/articles/pcb-impedance-control-signal-reflections/figure-09-high-frequency-return-current.png?v=20261128)
 
 *Figure 9. High-frequency return currents on the reference plane. Source: Bogdan Adamczyk [9].*
 
@@ -446,7 +446,7 @@ One-ounce copper is about three skin depths thick at 30 MHz. Increasing copper t
 
 After the electrical and thermal estimates, stackup options were compared against the design requirements and manufacturing cost. To limit cost, the design considered a JLCPCB four-layer, 1.6 mm board with 1 oz outer layers and nominal 0.5 oz inner layers. No additional PCB fabrication charge was expected for the selected option; the economical-assembly restriction shown in the figure should be checked separately.
 
-![JLCPCB four-layer stackup selection for JLC04161H-7628F](/images/articles/pcb-impedance-control-signal-reflections/figure-10-jlcpcb-stackup.png)
+![JLCPCB four-layer stackup selection for JLC04161H-7628F](/images/articles/pcb-impedance-control-signal-reflections/figure-10-jlcpcb-stackup.png?v=20261128)
 
 *Figure 10. JLCPCB stackup selection (JLC04161H-7628F). Source: [10].*
 
@@ -454,7 +454,7 @@ After the electrical and thermal estimates, stackup options were compared agains
 
 The stackup's physical and dielectric parameters were entered into the KiCad Transmission Line Calculator to find the trace width for a 50 Ω characteristic impedance.
 
-![KiCad transmission-line calculator for the selected microstrip geometry](/images/articles/pcb-impedance-control-signal-reflections/figure-11-kicad-microstrip-calculator.png)
+![KiCad transmission-line calculator for the selected microstrip geometry](/images/articles/pcb-impedance-control-signal-reflections/figure-11-kicad-microstrip-calculator.png?v=20261128)
 
 *Figure 11. Microstrip calculation in KiCad's Transmission Line Calculator.*
 
