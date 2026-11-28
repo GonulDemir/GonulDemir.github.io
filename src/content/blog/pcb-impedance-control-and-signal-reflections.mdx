@@ -37,7 +37,7 @@ Real components also contain parasitic capacitance and inductance. A PCB trace, 
 
 ## 2. Impedance in Transmission Lines
 
-Eric Bogatin discusses the confusion caused by using the word *impedance* for several different physical quantities [1](#ref-1). The distinction between characteristic impedance and input impedance is especially important when analyzing reflections.
+Eric Bogatin discusses the confusion caused by using the word *impedance* for several different physical quantities [1](https://www.signalintegrityjournal.com/blogs/12-fundamentals/post/904-impedance-the-most-confusing-term-in-signal-integrity). The distinction between characteristic impedance and input impedance is especially important when analyzing reflections.
 
 ### 2.1 Characteristic impedance
 
@@ -64,11 +64,11 @@ $$
 Z_0 = \sqrt{\frac{L'}{C'}}.
 $$
 
-Trace width, distance to the reference plane, and dielectric properties determine the distributed inductance and capacitance, and therefore the characteristic impedance [2](#ref-2). Characteristic impedance is not the DC resistance of a trace: a PCB trace can measure only a few milliohms from end to end while having a characteristic impedance of 50 Ω.
+Trace width, distance to the reference plane, and dielectric properties determine the distributed inductance and capacitance, and therefore the characteristic impedance [2](https://resources.altium.com/p/transmission-line-impedance-six-important-values). Characteristic impedance is not the DC resistance of a trace: a PCB trace can measure only a few milliohms from end to end while having a characteristic impedance of 50 Ω.
 
 ![Equivalent circuit model and characteristic impedance of a transmission line](/images/articles/pcb-impedance-control-signal-reflections/figure-01-transmission-line-equivalent-v2.png)
 
-*Figure 1. Equivalent circuit model and characteristic impedance of a transmission line. Source: [2](#ref-2).*
+*Figure 1. Equivalent circuit model and characteristic impedance of a transmission line. Source: [2](https://resources.altium.com/p/transmission-line-impedance-six-important-values).*
 
 ### 2.2 Input impedance
 
@@ -82,11 +82,11 @@ $$
 
 ### 2.3 Characteristic impedance and input impedance over time
 
-In Bogatin's example, a driver with a 100 Ω source resistance drives a 1 kΩ load through a 50 Ω transmission line with a one-way propagation delay of 1 ns [1](#ref-1).
+In Bogatin's example, a driver with a 100 Ω source resistance drives a 1 kΩ load through a 50 Ω transmission line with a one-way propagation delay of 1 ns [1](https://www.signalintegrityjournal.com/blogs/12-fundamentals/post/904-impedance-the-most-confusing-term-in-signal-integrity).
 
 ![Propagation of a signal wavefront along a transmission line](/images/articles/pcb-impedance-control-signal-reflections/figure-02-wavefront-propagation-v2.png)
 
-*Figure 2. Propagation of a signal wavefront along a transmission line. Source: [1](#ref-1).*
+*Figure 2. Propagation of a signal wavefront along a transmission line. Source: [1](https://www.signalintegrityjournal.com/blogs/12-fundamentals/post/904-impedance-the-most-confusing-term-in-signal-integrity).*
 
 When the source applies a voltage step, the initial voltage-to-current ratio at the input is the line's characteristic impedance. The 1 kΩ load at the far end has no immediate effect at the source because the electromagnetic wave takes finite time to travel along the line.
 
@@ -103,13 +103,13 @@ After reflections have settled, the voltage-to-current ratio at the input of an 
 
 ![Time-domain variation of voltage, current, and input impedance at a transmission-line input](/images/articles/pcb-impedance-control-signal-reflections/figure-03-time-domain-waveforms-v2.png)
 
-*Figure 3. Time-domain variation of voltage, current, and input impedance at the input of a transmission line. Source: [1](#ref-1).*
+*Figure 3. Time-domain variation of voltage, current, and input impedance at the input of a transmission line. Source: [1](https://www.signalintegrityjournal.com/blogs/12-fundamentals/post/904-impedance-the-most-confusing-term-in-signal-integrity).*
 
 The line's characteristic impedance stays constant in this example, even though the instantaneous voltage-to-current ratio at its input changes. This time-domain ratio should be distinguished from input impedance in the frequency domain. In real lines, characteristic impedance can also vary with frequency.
 
 ### 2.4 Other transmission-line impedances
 
-Capacitive and inductive coupling between nearby traces leads to modal impedances [2](#ref-2).
+Capacitive and inductive coupling between nearby traces leads to modal impedances [2](https://resources.altium.com/p/transmission-line-impedance-six-important-values).
 
 | Impedance type | Definition |
 |---|---|
@@ -183,7 +183,7 @@ Both transitions create reflections. The total response is not simply the sum of
 
 ### 4.1 A Texas Instruments transmission-line example
 
-Texas Instruments' *PCB Trace Impedance Matching* study examines the effects of impedance mismatch on signal integrity using calculations and PCB measurements [5](#ref-5). In its example, a 5 V driver with a 20 Ω source resistance drives a 50 Ω transmission line. The receiver at the far end has a high input impedance.
+Texas Instruments' *PCB Trace Impedance Matching* study examines the effects of impedance mismatch on signal integrity using calculations and PCB measurements [5](https://www.ti.com/en-us/design-development/educational-resources/video/6307564100112). In its example, a 5 V driver with a 20 Ω source resistance drives a 50 Ω transmission line. The receiver at the far end has a high input impedance.
 
 The initial voltage wave launched onto the line is
 
@@ -207,7 +207,7 @@ Successive reflections bring the receiver voltage through 7.14 V, 4.08 V, 5.39 V
 
 ![Transmission-line reflection example](/images/articles/pcb-impedance-control-signal-reflections/figure-04-transmission-line-reflections-v2.png)
 
-*Figure 4. Transmission-line reflection example. Source: [5](#ref-5).*
+*Figure 4. Transmission-line reflection example. Source: [5](https://www.ti.com/en-us/design-development/educational-resources/video/6307564100112).*
 
 A source-series termination can ideally prevent a wave returning to the source from reflecting again when
 
@@ -217,7 +217,7 @@ $$
 
 ![Measured effect of series termination on signal integrity](/images/articles/pcb-impedance-control-signal-reflections/figure-05-series-termination-results-v2.png)
 
-*Figure 5. Measured effect of series termination on signal integrity. Source: [5](#ref-5).*
+*Figure 5. Measured effect of series termination on signal integrity. Source: [5](https://www.ti.com/en-us/design-development/educational-resources/video/6307564100112).*
 
 TI's measurements show that suitable series termination can reduce overshoot, ringing, crosstalk, and electromagnetic emissions. The effect of the termination resistor on signal rise time must also be considered.
 
@@ -237,7 +237,7 @@ The superposition of incident and reflected waves creates voltage and current ma
 
 ## 5. Reducing Reflections in PCB Design
 
-Reducing reflections requires attention to more than trace impedance. Stackup, return paths, via and connector transitions, parasitic elements, termination, and manufacturing tolerances all matter. Henry W. Ott emphasizes that the return path and current-loop area are as important as the signal conductor in EMC design [6](#ref-6).
+Reducing reflections requires attention to more than trace impedance. Stackup, return paths, via and connector transitions, parasitic elements, termination, and manufacturing tolerances all matter. Henry W. Ott emphasizes that the return path and current-loop area are as important as the signal conductor in EMC design [6](https://onlinelibrary.wiley.com/doi/book/10.1002/9780470508510).
 
 This article focuses on stackup, microstrip geometry, and return-current distribution, then applies those ideas to an RF circuit.
 
@@ -249,7 +249,7 @@ At low frequencies, conductor resistance has a stronger influence on return-curr
 
 ![Normalized high-frequency return-current density in an ideal microstrip model](/images/articles/pcb-impedance-control-signal-reflections/figure-06-return-current-density-v2.png)
 
-*Figure 6. Normalized high-frequency return-current density in the ideal microstrip model. Redrawn from Adamczyk [9](#ref-9), using the analytical model attributed there to Ott [4](#ref-4).*
+*Figure 6. Normalized high-frequency return-current density in the ideal microstrip model. Redrawn from Adamczyk [9](https://digital.incompliancemag.com/issue/november-2020/pcb-return-current-distribution-in-a-microstrip-line/), using the analytical model attributed there to Ott [4](https://www.wiley.com/en-us/Microwave%20Engineering%2C%204th%20Edition-p-9781118213636).*
 
 For an ideal microstrip with a very narrow signal trace and an infinitely wide reference plane, the high-frequency surface-current density is
 
@@ -292,13 +292,13 @@ A common four-layer stackup is Signal / GND / Power / Signal, which places a ref
 
 ![Microstrip configuration in a four-layer PCB](/images/articles/pcb-impedance-control-signal-reflections/figure-08-four-layer-microstrip-v2.png)
 
-*Figure 8. Microstrip configuration in a four-layer PCB. Source: Bogdan Adamczyk, In Compliance Magazine [9](#ref-9).*
+*Figure 8. Microstrip configuration in a four-layer PCB. Source: Bogdan Adamczyk, In Compliance Magazine [9](https://digital.incompliancemag.com/issue/november-2020/pcb-return-current-distribution-in-a-microstrip-line/).*
 
-High-frequency switching-current components are superimposed on the functional DC or AC currents. These components can flow on a GND or power plane independently of its DC potential [9](#ref-9). When copper thickness is several skin depths or more, high-frequency return current concentrates on the plane surface facing the signal trace and decays exponentially with depth. Skin depth decreases as frequency increases; in thinner copper, current is distributed through a larger part of the copper thickness.
+High-frequency switching-current components are superimposed on the functional DC or AC currents. These components can flow on a GND or power plane independently of its DC potential [9](https://digital.incompliancemag.com/issue/november-2020/pcb-return-current-distribution-in-a-microstrip-line/). When copper thickness is several skin depths or more, high-frequency return current concentrates on the plane surface facing the signal trace and decays exponentially with depth. Skin depth decreases as frequency increases; in thinner copper, current is distributed through a larger part of the copper thickness.
 
 ![High-frequency return currents on the reference plane](/images/articles/pcb-impedance-control-signal-reflections/figure-09-high-frequency-return-current-v2.png)
 
-*Figure 9. High-frequency return currents on the reference plane. Source: Bogdan Adamczyk [9](#ref-9).*
+*Figure 9. High-frequency return currents on the reference plane. Source: Bogdan Adamczyk [9](https://digital.incompliancemag.com/issue/november-2020/pcb-return-current-distribution-in-a-microstrip-line/).*
 
 A power plane can carry return current, but the loop needs a low-impedance AC path between power and GND. The dielectric between two planes forms a capacitance:
 
@@ -345,7 +345,7 @@ Material selection depends on operating frequency, temperature, dielectric loss,
 | Metal-core PCB | Applications where thermal management is the priority, including power and LED boards |
 | Polyimide | Flexible PCBs |
 
-Key material properties include dielectric constant ($D_k$), dissipation factor ($D_f$), glass-transition temperature ($T_g$), coefficient of thermal expansion (CTE), and thermal conductivity. For impedance calculations, use the fabricator's core and prepreg data rather than generic FR-4 values [13](#ref-13).
+Key material properties include dielectric constant ($D_k$), dissipation factor ($D_f$), glass-transition temperature ($T_g$), coefficient of thermal expansion (CTE), and thermal conductivity. For impedance calculations, use the fabricator's core and prepreg data rather than generic FR-4 values [13](https://resources.altium.com/p/impedance-management-through-pcb-stackup-design-reference-planes).
 
 ### 6.3 Selecting board thickness
 
@@ -370,7 +370,7 @@ $$
 
 where $l$ is trace length, $w$ is trace width, and $t$ is copper thickness. Thicker copper reduces DC resistance. In RF applications, skin and proximity effects change the current distribution, so DC current capacity alone is not enough to select copper thickness. Copper thickness also affects impedance and the minimum trace-width and spacing limits offered by the fabricator.
 
-IPC-2152 [11](#ref-11) can be used for a preliminary thermal estimate. For RF traces, also evaluate AC losses and cooling, then verify the design with prototype measurements. Use the finished copper thickness in the calculation.
+IPC-2152 [11](https://www.ipc.org/TOC/IPC-2152.pdf) can be used for a preliminary thermal estimate. For RF traces, also evaluate AC losses and cooling, then verify the design with prototype measurements. Use the finished copper thickness in the calculation.
 
 ### 6.5 Stackup symmetry and thermomechanical stress
 
@@ -449,7 +449,7 @@ After the electrical and thermal estimates, stackup options were compared agains
 
 ![JLCPCB four-layer stackup selection for JLC04161H-7628F](/images/articles/pcb-impedance-control-signal-reflections/figure-10-jlcpcb-stackup-v2.png)
 
-*Figure 10. JLCPCB stackup selection (JLC04161H-7628F). Source: [10](#ref-10).*
+*Figure 10. JLCPCB stackup selection (JLC04161H-7628F). Source: [10](https://jlcpcb.com/capabilities/pcb-capabilities).*
 
 ### 7.4 Calculating the microstrip trace
 
@@ -459,7 +459,7 @@ The stackup's physical and dielectric parameters were entered into the KiCad Tra
 
 *Figure 11. Microstrip calculation in KiCad's Transmission Line Calculator.*
 
-The KiCad model used the selected JLC04161H-7628F stackup. JLCPCB specifies a dielectric constant of 4.4 for its 7628 prepreg; the selected stackup places three 7628 prepreg plies, totaling 0.6464 mm, between the outer signal layer and its reference plane. The model used copper resistivity $\rho=1.72\times10^{-8}\,\Omega\cdot\mathrm{m}$ at 20 °C. JLCPCB's published stackup and material parameters are available in [15](#ref-15).
+The KiCad model used the selected JLC04161H-7628F stackup. JLCPCB specifies a dielectric constant of 4.4 for its 7628 prepreg; the selected stackup places three 7628 prepreg plies, totaling 0.6464 mm, between the outer signal layer and its reference plane. The model used copper resistivity $\rho=1.72\times10^{-8}\,\Omega\cdot\mathrm{m}$ at 20 °C. JLCPCB's published stackup and material parameters are available in [15](https://jlcpcb.com/impedance).
 
 ### 7.5 Evaluating the design
 
@@ -471,33 +471,33 @@ This example shows that controlled-impedance design is not only about reaching a
 
 ## References
 
-<a id="ref-1"></a>[1] E. Bogatin, [“Impedance: The Most Confusing Term in Signal Integrity,”](https://www.signalintegrityjournal.com/blogs/12-fundamentals/post/904-impedance-the-most-confusing-term-in-signal-integrity) *Signal Integrity Journal*.
+<a id="ref-1"></a>[1](https://www.signalintegrityjournal.com/blogs/12-fundamentals/post/904-impedance-the-most-confusing-term-in-signal-integrity) E. Bogatin, [“Impedance: The Most Confusing Term in Signal Integrity,”](https://www.signalintegrityjournal.com/blogs/12-fundamentals/post/904-impedance-the-most-confusing-term-in-signal-integrity) *Signal Integrity Journal*.
 
-<a id="ref-2"></a>[2] Z. Peterson, [“Transmission Line Impedance: The Six Important Values,”](https://resources.altium.com/p/transmission-line-impedance-six-important-values) Altium Resources.
+<a id="ref-2"></a>[2](https://resources.altium.com/p/transmission-line-impedance-six-important-values) Z. Peterson, [“Transmission Line Impedance: The Six Important Values,”](https://resources.altium.com/p/transmission-line-impedance-six-important-values) Altium Resources.
 
-<a id="ref-3"></a>[3] S. W. Ellingson, [“7.5: Why 50 Ohms?,”](https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Electro-Optics/Book%3A_Electromagnetics_II_%28Ellingson%29/07%3A_Transmission_Lines_Redux/7.05%3A_Why_50_Ohms) *Electromagnetics II*, Virginia Tech Publishing.
+<a id="ref-3"></a>[3](https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Electro-Optics/Book%3A_Electromagnetics_II_%28Ellingson%29/07%3A_Transmission_Lines_Redux/7.05%3A_Why_50_Ohms) S. W. Ellingson, [“7.5: Why 50 Ohms?,”](https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Electro-Optics/Book%3A_Electromagnetics_II_%28Ellingson%29/07%3A_Transmission_Lines_Redux/7.05%3A_Why_50_Ohms) *Electromagnetics II*, Virginia Tech Publishing.
 
-<a id="ref-4"></a>[4] D. M. Pozar, [*Microwave Engineering*, 4th ed.](https://www.wiley.com/en-us/Microwave%20Engineering%2C%204th%20Edition-p-9781118213636), John Wiley & Sons, 2012.
+<a id="ref-4"></a>[4](https://www.wiley.com/en-us/Microwave%20Engineering%2C%204th%20Edition-p-9781118213636) D. M. Pozar, [*Microwave Engineering*, 4th ed.](https://www.wiley.com/en-us/Microwave%20Engineering%2C%204th%20Edition-p-9781118213636), John Wiley & Sons, 2012.
 
-<a id="ref-5"></a>[5] A. Kay, [“PCB Trace Impedance Matching,”](https://www.ti.com/en-us/design-development/educational-resources/video/6307564100112) TI Precision Labs, Texas Instruments.
+<a id="ref-5"></a>[5](https://www.ti.com/en-us/design-development/educational-resources/video/6307564100112) A. Kay, [“PCB Trace Impedance Matching,”](https://www.ti.com/en-us/design-development/educational-resources/video/6307564100112) TI Precision Labs, Texas Instruments.
 
-<a id="ref-6"></a>[6] H. W. Ott, [*Electromagnetic Compatibility Engineering*](https://onlinelibrary.wiley.com/doi/book/10.1002/9780470508510), John Wiley & Sons, 2009.
+<a id="ref-6"></a>[6](https://onlinelibrary.wiley.com/doi/book/10.1002/9780470508510) H. W. Ott, [*Electromagnetic Compatibility Engineering*](https://onlinelibrary.wiley.com/doi/book/10.1002/9780470508510), John Wiley & Sons, 2009.
 
-<a id="ref-7"></a>[7] E. Bogatin, [*Signal and Power Integrity—Simplified*, 3rd ed.](https://www.pearson.com/en-us/subject-catalog/p/signal-and-power-integrity-simplified/P200000000140), Pearson, 2018.
+<a id="ref-7"></a>[7](https://www.pearson.com/en-us/subject-catalog/p/signal-and-power-integrity-simplified/P200000000140) E. Bogatin, [*Signal and Power Integrity—Simplified*, 3rd ed.](https://www.pearson.com/en-us/subject-catalog/p/signal-and-power-integrity-simplified/P200000000140), Pearson, 2018.
 
-<a id="ref-8"></a>[8] JLCPCB, [“What Base Materials Does JLCPCB Offer for PCB Manufacturing?”](https://jlcpcb.com/help/article/jlcpcb-base-material).
+<a id="ref-8"></a>[8](https://jlcpcb.com/help/article/jlcpcb-base-material) JLCPCB, [“What Base Materials Does JLCPCB Offer for PCB Manufacturing?”](https://jlcpcb.com/help/article/jlcpcb-base-material).
 
-<a id="ref-9"></a>[9] B. Adamczyk, [“PCB Return-Current Distribution in a Microstrip Line,”](https://digital.incompliancemag.com/issue/november-2020/pcb-return-current-distribution-in-a-microstrip-line/) *In Compliance Magazine*, November 2020.
+<a id="ref-9"></a>[9](https://digital.incompliancemag.com/issue/november-2020/pcb-return-current-distribution-in-a-microstrip-line/) B. Adamczyk, [“PCB Return-Current Distribution in a Microstrip Line,”](https://digital.incompliancemag.com/issue/november-2020/pcb-return-current-distribution-in-a-microstrip-line/) *In Compliance Magazine*, November 2020.
 
-<a id="ref-10"></a>[10] JLCPCB, [PCB manufacturing capabilities](https://jlcpcb.com/capabilities/pcb-capabilities).
+<a id="ref-10"></a>[10](https://jlcpcb.com/capabilities/pcb-capabilities) JLCPCB, [PCB manufacturing capabilities](https://jlcpcb.com/capabilities/pcb-capabilities).
 
-<a id="ref-11"></a>[11] IPC, [IPC-2152: *Standard for Determining Current-Carrying Capacity in Printed Board Design*](https://www.ipc.org/TOC/IPC-2152.pdf).
+<a id="ref-11"></a>[11](https://www.ipc.org/TOC/IPC-2152.pdf) IPC, [IPC-2152: *Standard for Determining Current-Carrying Capacity in Printed Board Design*](https://www.ipc.org/TOC/IPC-2152.pdf).
 
-<a id="ref-12"></a>[12] IPC, [IPC-2221: *Generic Standard on Printed Board Design*](https://quicksearch.dla.mil/qsDocDetails.aspx?ident_number=214898).
+<a id="ref-12"></a>[12](https://quicksearch.dla.mil/qsDocDetails.aspx?ident_number=214898) IPC, [IPC-2221: *Generic Standard on Printed Board Design*](https://quicksearch.dla.mil/qsDocDetails.aspx?ident_number=214898).
 
-<a id="ref-13"></a>[13] Z. Peterson, [“Impedance Management Through PCB Stackup Design With Reference Planes,”](https://resources.altium.com/p/impedance-management-through-pcb-stackup-design-reference-planes) Altium Resources.
+<a id="ref-13"></a>[13](https://resources.altium.com/p/impedance-management-through-pcb-stackup-design-reference-planes) Z. Peterson, [“Impedance Management Through PCB Stackup Design With Reference Planes,”](https://resources.altium.com/p/impedance-management-through-pcb-stackup-design-reference-planes) Altium Resources.
 
-<a id="ref-14"></a>[14] Analog Devices, [“Avoid PC-Layout ‘Gotchas’ in ISM-RF Products”](https://www.analog.com/en/resources/technical-articles/avoid-pclayout-gotchas-in-ismrf-products.html).
+<a id="ref-14"></a>[14](https://www.analog.com/en/resources/technical-articles/avoid-pclayout-gotchas-in-ismrf-products.html) Analog Devices, [“Avoid PC-Layout ‘Gotchas’ in ISM-RF Products”](https://www.analog.com/en/resources/technical-articles/avoid-pclayout-gotchas-in-ismrf-products.html).
 
-<a id="ref-15"></a>[15] JLCPCB, [Controlled Impedance PCB Parameters and Stackup](https://jlcpcb.com/impedance), including the JLC04161H-7628F stackup.
+<a id="ref-15"></a>[15](https://jlcpcb.com/impedance) JLCPCB, [Controlled Impedance PCB Parameters and Stackup](https://jlcpcb.com/impedance), including the JLC04161H-7628F stackup.
 
