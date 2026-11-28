@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Electric and magnetic fields around a microstrip transmission line</title>
+  <desc id="desc">Illustrative microstrip cross-section. A copper trace of width 1.20 millimetres lies above a reference plane with a dielectric height of 0.80 millimetres. Solid blue arrows show electric field lines terminating on the reference plane. Dashed magenta loops show magnetic field lines around the trace.</desc>
+  <defs>
+    <marker id="arrow-blue" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0 L9 4.5 L0 9 Z" fill="#2454AA"/>
+    </marker>
+    <marker id="arrow-magenta" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0 L9 4.5 L0 9 Z" fill="#A53A78"/>
+    </marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; }
+      .label { fill: #243447; font-size: 20px; }
+      .small { fill: #526273; font-size: 17px; }
+      .dim { stroke: #4B5563; stroke-width: 2; fill: none; }
+    </style>
+  </defs>
+  <rect width="1200" height="720" fill="#FFFFFF"/>
+  <text x="70" y="58" fill="#172B4D" font-size="30" font-weight="700">Fields around a microstrip transmission line</text>
+  <text x="70" y="91" class="small">Cross-section shown for a trace width W = 1.20 mm and dielectric height h = 0.80 mm</text>
+
+  <!-- Dielectric and reference plane -->
+  <rect x="120" y="285" width="960" height="235" fill="#EEF4F8" stroke="#C8D5E0" stroke-width="2"/>
+  <rect x="120" y="520" width="960" height="34" fill="#397456"/>
+  <text x="600" y="544" text-anchor="middle" fill="#FFFFFF" font-size="19" font-weight="700">Reference plane</text>
+  <text x="150" y="490" class="small">Dielectric substrate</text>
+
+  <!-- Electric field lines terminate on the reference plane -->
+  <g fill="none" stroke="#2454AA" stroke-width="3" marker-end="url(#arrow-blue)">
+    <path d="M465 285 C420 335 330 390 250 516"/>
+    <path d="M500 285 C480 360 425 430 390 516"/>
+    <path d="M545 285 C535 355 520 430 510 516"/>
+    <path d="M600 285 L600 516"/>
+    <path d="M655 285 C665 355 680 430 690 516"/>
+    <path d="M700 285 C720 360 775 430 810 516"/>
+    <path d="M735 285 C780 335 870 390 950 516"/>
+  </g>
+
+  <!-- Magnetic field loops around the trace current -->
+  <g fill="none" stroke="#A53A78" stroke-width="3" stroke-dasharray="11 8">
+    <ellipse cx="600" cy="276" rx="145" ry="78"/>
+    <ellipse cx="600" cy="276" rx="205" ry="118"/>
+    <ellipse cx="600" cy="276" rx="265" ry="158"/>
+  </g>
+  <path d="M454 250 C460 222 480 202 505 190" fill="none" stroke="#A53A78" stroke-width="3" marker-end="url(#arrow-magenta)"/>
+
+  <!-- Copper trace -->
+  <rect x="465" y="250" width="270" height="35" fill="#B56332" stroke="#87451F" stroke-width="2"/>
+  <text x="600" y="275" text-anchor="middle" fill="#FFFFFF" font-size="18" font-weight="700">Copper trace</text>
+
+  <!-- Width dimension -->
+  <path class="dim" d="M465 224 V207 M735 224 V207 M465 214 H735"/>
+  <path d="M465 214 l12 -6 v12 z M735 214 l-12 -6 v12 z" fill="#4B5563"/>
+  <rect x="535" y="186" width="130" height="28" rx="5" fill="#FFFFFF"/>
+  <text x="600" y="206" text-anchor="middle" class="label" font-size="18">W = 1.20 mm</text>
+
+  <!-- Dielectric height dimension -->
+  <path class="dim" d="M1005 285 H1025 M1005 520 H1025 M1017 285 V520"/>
+  <path d="M1017 285 l-6 12 h12 z M1017 520 l-6 -12 h12 z" fill="#4B5563"/>
+  <rect x="1028" y="383" width="125" height="36" rx="5" fill="#FFFFFF"/>
+  <text x="1035" y="407" class="label" font-size="18">h = 0.80 mm</text>
+
+  <!-- Legend -->
+  <path d="M120 615 H190" stroke="#2454AA" stroke-width="3" marker-end="url(#arrow-blue)"/>
+  <text x="205" y="622" class="label" font-size="18">Electric field E</text>
+  <path d="M430 615 H500" stroke="#A53A78" stroke-width="3" stroke-dasharray="11 8" marker-end="url(#arrow-magenta)"/>
+  <text x="515" y="622" class="label" font-size="18">Magnetic field H</text>
+  <text x="120" y="666" class="small">Schematic illustration; field-line shapes are not to scale.</text>
+</svg>
